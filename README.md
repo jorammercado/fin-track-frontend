@@ -1,6 +1,6 @@
 
 
-# <img src="./public/icapital-logo-full-name.svg" alt="iCapital Logo" style="height: auto; vertical-align: middle;"> <span style="font-size: 1.52em; color:#187cac"> - Budgeter</span>
+# <img src="./public/icapital-logo-full-name.svg" alt="iCapital Logo" style="vertical-align: middle;"> <span style="font-size: 1.51em; color:#187cac;"> - Budgeter</span>
 
 ## Description
 
@@ -20,7 +20,7 @@ The application allows users to track income and expenses, calculate disposable 
 
 ## GitHub Repositories
 - **Frontend**: [https://github.com/jorammercado/icapital-budgeter-frontend](https://github.com/jorammercado/icapital-budgeter-frontend)
-- **Backend**:  [https://github.com/jorammercado/](https://github.com/jorammercado/)
+- **Backend**:  [https://github.com/jorammercado/icapital-budgeter-backend](https://github.com/jorammercado/icapital-budgeter-backend)
 
 ## Getting Started
 
