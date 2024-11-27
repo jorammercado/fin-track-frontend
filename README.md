@@ -1,6 +1,6 @@
 
 
-# <a href="https://www.icapital.com" target="_blank"><img src="./public/icapital-logo-full-name.svg" alt="iCapital Logo" style="max-width: 200px; height: auto; vertical-align: middle;"></a> - <span style="font-size: 1.5em;">Budgeter</span>
+# <img src="./public/icapital-logo-full-name.svg" alt="iCapital Logo" style="height: auto; vertical-align: middle;"> <span style="font-size: 1.52em; color:#187cac"> - Budgeter</span>
 
 ## Description
 
@@ -15,12 +15,12 @@ The application allows users to track income and expenses, calculate disposable 
 - **Database**: PostgreSQL
 
 ## Deployed Application
-- **Frontend hosted on Netlify**: [https://www.netlify.com/](https://www.netlify.com/)
+- **Frontend hosted on Netlify**: [https://icapital-budgeter.netlify.app/](https://icapital-budgeter.netlify.app/)
 - **Backend Server hosted on Render**: [https://render.com/](https://render.com/)
 
 ## GitHub Repositories
-- [Frontend - https://github.com/jorammercado/](https://github.com/jorammercado/)
-- [Backend  - https://github.com/jorammercado/](https://github.com/jorammercado/)
+- **Frontend**: [https://github.com/jorammercado/icapital-budgeter-frontend](https://github.com/jorammercado/icapital-budgeter-frontend)
+- **Backend**:  [https://github.com/jorammercado/](https://github.com/jorammercado/)
 
 ## Getting Started
 
