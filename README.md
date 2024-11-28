@@ -1,6 +1,4 @@
-
-
-# <img src="./public/icapital-logo-full-name.svg" alt="iCapital Logo" style="vertical-align: middle;"> <span style="font-size: 1.51em; color:#187cac;"> - Budgeter</span>
+# <img src="./public/icapital-logo-full-name.svg" alt="iCapital Logo"> -  Budgeter
 
 ## Description
 
