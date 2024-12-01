@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import Login from "./pages/Login"
 import Home from "./pages/Home"
+import Footer from './components/Footer'
 import FourOFour from "./pages/FourOFour"
 import SignUp from "./pages/SignUp"
 import User from "./pages/User"
@@ -23,10 +24,10 @@ function App() {
   return (
     <div className='app'>
       <Router>
-        <div className="nav">
+        <div className="app__nav">
           <NavBar />
         </div>
-        <main className="main">
+        <main className="app__main">
           <Routes>
             <Route path="/"
               element={
@@ -39,6 +40,9 @@ function App() {
             />
           </Routes>
         </main>
+        <div className="app__footer">
+          <Footer />
+        </div>
       </Router>
     </div>
   )
