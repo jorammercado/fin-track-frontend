@@ -6,6 +6,8 @@ The iCapital Budgeter Frontend is part of the Software Engineer Take-Home Exam P
 
 The application allows users to track income and expenses, calculate disposable income, and make informed financial decisions. Additionally, it offers optional investment guidance to help users achieve their financial goals, focusing on low-risk investment opportunities based on their disposable income.
 
+See [backend repository](https://github.com/jorammercado/icapital-budgeter-backend/blob/main/README.md) for security features and backend services.
+
 ## Tech Stack
 
 - **Frontend**: React
@@ -14,7 +16,7 @@ The application allows users to track income and expenses, calculate disposable 
 
 ## Deployed Application
 - **Frontend hosted on Netlify**: [https://icapital-budgeter.netlify.app/](https://icapital-budgeter.netlify.app/)
-- **Backend Server hosted on Render**: [https://render.com/](https://render.com/)
+- **Backend Server hosted on Render**: [https://icapital-budgeter-backend-services.onrender.com/](https://icapital-budgeter-backend-services.onrender.com/)
 
 ## GitHub Repositories
 - **Frontend**: [https://github.com/jorammercado/icapital-budgeter-frontend](https://github.com/jorammercado/icapital-budgeter-frontend)

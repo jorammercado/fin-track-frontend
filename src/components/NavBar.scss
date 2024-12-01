@@ -1,0 +1,218 @@
+.navbar {
+    display: flex;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
+    background-color: white;
+    padding-top: 20px !important;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+        rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+        rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+
+    a {
+        display: flex;
+        padding: 2px 13px;
+        margin: 2px 12px 2px 12px;
+        text-decoration: none;
+        border-radius: 40px;
+        transition: background-color 0.35s ease-in-out;
+
+
+        &:hover {
+            border: 1px solid #E2EBF0;
+            margin: 1px 11px 1px 11px;
+            background-color: #F0F5F8;
+        }
+
+    }
+
+    &__logo {
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+        text-decoration: none;
+
+        &__image {
+            height: 45px;
+            margin: 10px 10px;
+
+            @media (max-width: 1065px) {
+                height: 43px;
+            }
+
+            @media (max-width: 930px) {
+                height: 40px;
+            }
+
+            @media (max-width: 880px) {
+                height: 38px;
+            }
+
+            @media (max-width: 800px) {
+                height: 36px;
+            }
+
+            @media (max-width: 696px) {
+                height: 34px;
+            }
+
+            @media (max-width: 608px) {
+                height: 32px;
+            }
+
+            @media (max-width: 584px) {
+                height: 30px;
+            }
+
+            @media (max-width: 557px) {
+                display: none;
+            }
+        }
+
+        &__text {
+            font-weight: bold;
+            font-size: 2.5rem;
+            color: #07a;
+            margin: 4px 10px 10px -4px;
+
+
+            @media (max-width: 1065px) {
+                font-size: 2.4rem;
+            }
+
+            @media (max-width: 930px) {
+                font-size: 2.3rem;
+            }
+
+            @media (max-width: 880px) {
+                font-size: 2.2rem;
+            }
+
+            @media (max-width: 800px) {
+                font-size: 2.1rem;
+            }
+
+            @media (max-width: 696px) {
+                font-size: 2.0rem;
+            }
+
+            @media (max-width: 608px) {
+                font-size: 1.9rem;
+            }
+
+            @media (max-width: 584px) {
+                font-size: 1.8rem;
+            }
+
+            @media (max-width: 400px) {
+                font-size: 1.7rem;
+            }
+
+            @media (max-width: 386px) {
+                font-size: 1.5rem;
+            }
+
+            @media (max-width: 330px) {
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+    &__links {
+        font-size: 17px;
+        margin-right: 100px;
+        font-family: 'Roboto-Regular';
+
+        @media (max-width: 1180px) {
+            margin-right: 75px;
+        }
+
+        @media (max-width: 688px) {
+            margin-right: 50px;
+        }
+
+        @media (max-width: 639px) {
+            margin-right: 25px;
+        }
+
+        @media (max-width: 594px) {
+            margin-right: 20px;
+        }
+
+        @media (max-width: 567px) {
+            margin-right: 10px;
+        }
+
+        @media (max-width: 378px) {
+            margin-right: 5px;
+            margin-left: -5px;
+        }
+
+        .navbar__link {
+            background-color: #36B5E133;
+            color: #252525;
+            border: none;
+            border-radius: 15px;
+            padding: 2px 20px;
+            margin: 12px 12px;
+            cursor: pointer;
+            transition: background-color 0.45s ease-in-out,
+                color 0.45s ease-in-out;
+                // border-color 0.40s ease-in-out;
+
+            @media (max-width: 370px) {
+                margin: 12px 5px;
+            }
+
+            &:hover {
+                background-color: #07a;
+                color: white;
+                border: 1px solid #07a;
+                padding: 1px 19px;
+            }
+
+            @media (max-width: 1065px) {
+                font-size: 16px;
+            }
+
+            @media (max-width: 930px) {
+                font-size: 15px;
+            }
+
+            @media (max-width: 880px) {
+                font-size: 14px;
+            }
+
+            @media (max-width: 800px) {
+                font-size: 13px;
+            }
+
+            @media (max-width: 630px) {
+                font-size: 12px;
+            }
+
+            @media (max-width: 594px) {
+                font-size: 11px;
+            }
+
+            @media (max-width: 557px) {
+                font-size: 10px;
+            }
+
+            @media (max-width: 485px) {
+                font-size: 9px;
+            }
+
+            @media (max-width: 395px) {
+                font-size: 8px;
+            }
+
+            @media (max-width: 350px) {
+                font-size: 7px;
+            }
+        }
+
+    }
+}

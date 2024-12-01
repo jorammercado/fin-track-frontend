@@ -12,6 +12,15 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Roboto-Thin';
+  src: url('../src/assets/fonts/Roboto-Thin.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
-  font-family: 'AvenirNextLTPro-Medium', 'Roboto-Regular', Helvetica, sans-serif;
+  font-family: 'Roboto-Regular', 'AvenirNextLTPro-Medium', Helvetica, sans-serif;
+  background-color: #F0F5F8;
+  color: #252525;
 }
