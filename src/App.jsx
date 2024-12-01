@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import Login from "./pages/Login"
 import Home from "./pages/Home"
@@ -18,8 +18,51 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import './App.scss'
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem('currentUser')) || null
+  )
   const [token, setToken] = useState(localStorage.getItem('authToken') || null)
+  const timeoutIdRef = useRef(null)
+
+  const handleLogin = (user, jwtToken) => {
+    setCurrentUser(user)
+    localStorage.setItem('currentUser', JSON.stringify(user))
+    setToken(jwtToken)
+    localStorage.setItem('authToken', jwtToken)
+
+    try {
+      const { exp } = jwtDecode(jwtToken)
+      const expirationTime = exp * 1000 - Date.now()
+
+      timeoutIdRef.current = setTimeout(() => {
+        handleLogout(true)
+      }, expirationTime)
+    } catch (error) {
+      console.error('Invalid token during login:', error)
+      handleLogout(false)
+    }
+  }
+
+  const handleLogout = (isTimeout = false) => {
+    setCurrentUser(null)
+    setToken(null)
+    localStorage.removeItem('authToken')
+    clearTimeout(timeoutIdRef.current)
+
+    if (isTimeout) {
+      Swal.fire({
+        text: 'Your session has timed out. Please log in again.',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#07a'
+      })
+    } else {
+      Swal.fire({
+        text: 'You have been successfully logged out.',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#07a'
+      })
+    }
+  }
 
   return (
     <div className='app'>
@@ -36,6 +79,17 @@ function App() {
                 />
               }
             />
+
+            <Route path="/signup"
+              element={
+                <PublicRoute
+                  element={SignUp}
+                  currentUser={currentUser}
+                  setCurrentUser={handleLogin}
+                />
+              }
+            />
+
             <Route
               path="*"
               element={
