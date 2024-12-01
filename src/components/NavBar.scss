@@ -16,9 +16,12 @@
         padding: 2px 13px;
         margin: 2px 12px 2px 12px;
         text-decoration: none;
-        border-radius: 40px;
+        border-radius: 10px;
         transition: background-color 0.35s ease-in-out;
 
+        @media (max-width: 608px) {
+            margin-left: -15px;
+        }
 
         &:hover {
             border: 1px solid #E2EBF0;
@@ -58,11 +61,11 @@
                 height: 34px;
             }
 
-            @media (max-width: 608px) {
+            @media (max-width: 650px) {
                 height: 32px;
             }
 
-            @media (max-width: 584px) {
+            @media (max-width: 608px) {
                 height: 30px;
             }
 
@@ -98,11 +101,11 @@
                 font-size: 2.0rem;
             }
 
-            @media (max-width: 608px) {
+            @media (max-width: 650px) {
                 font-size: 1.9rem;
             }
 
-            @media (max-width: 584px) {
+            @media (max-width: 608px) {
                 font-size: 1.8rem;
             }
 
@@ -154,23 +157,19 @@
             background-color: #36B5E133;
             color: #252525;
             border: none;
-            border-radius: 15px;
-            padding: 2px 20px;
+            border-radius: 5px;
+            padding: 5px 27px;
             margin: 12px 12px;
             cursor: pointer;
             transition: background-color 0.45s ease-in-out,
                 color 0.45s ease-in-out;
-                // border-color 0.40s ease-in-out;
 
             @media (max-width: 370px) {
                 margin: 12px 5px;
             }
 
             &:hover {
-                background-color: #07a;
-                color: white;
-                border: 1px solid #07a;
-                padding: 1px 19px;
+                background-color: #94c4dc;
             }
 
             @media (max-width: 1065px) {
@@ -189,7 +188,11 @@
                 font-size: 13px;
             }
 
-            @media (max-width: 630px) {
+            @media (max-width: 722px) {
+                padding: 5px 20px;
+            }
+
+            @media (max-width: 654px) {
                 font-size: 12px;
             }
 

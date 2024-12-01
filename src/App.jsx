@@ -7,6 +7,9 @@ import SignUp from "./pages/SignUp"
 import User from "./pages/User"
 import VeriftOTP from "./pages/VerifyOTP"
 
+import PublicRoute from "./components/PublicRoute"
+import ProtectedRoute from "./components/ProtectedRoute"
+
 import NavBar from './components/NavBar'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -24,7 +27,17 @@ function App() {
           <NavBar />
         </div>
         <main className="main">
-
+          <Routes>
+            <Route path="/"
+              element={
+                <PublicRoute
+                  element={Home}
+                  currentUser={currentUser}
+                  setCurrentUser={setCurrentUser}
+                />
+              }
+            />
+          </Routes>
         </main>
       </Router>
     </div>
