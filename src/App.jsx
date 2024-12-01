@@ -1,8 +1,9 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
+import axios from 'axios'
+
 import Login from "./pages/Login"
 import Home from "./pages/Home"
-import Footer from './components/Footer'
 import FourOFour from "./pages/FourOFour"
 import SignUp from "./pages/SignUp"
 import User from "./pages/User"
@@ -12,6 +13,7 @@ import PublicRoute from "./components/PublicRoute"
 import ProtectedRoute from "./components/ProtectedRoute"
 
 import NavBar from './components/NavBar'
+import Footer from './components/Footer'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
@@ -63,6 +65,34 @@ function App() {
       })
     }
   }
+
+  useEffect(() => {
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+      const { exp } = jwtDecode(token)
+      const expirationTime = exp * 1000 - Date.now()
+
+      if (expirationTime > 0) {
+        timeoutIdRef.current = setTimeout(() => {
+          handleLogout(true)
+        }, expirationTime)
+      } else {
+        handleLogout(true)
+      }
+
+      const storedUser = localStorage.getItem('currentUser')
+      if (storedUser) {
+        setCurrentUser(JSON.parse(storedUser))
+      }
+
+    } else {
+      delete axios.defaults.headers.common['Authorization']
+    }
+
+    return () => {
+      clearTimeout(timeoutIdRef.current)
+    }
+  }, [token])
 
   return (
     <div className='app'>
