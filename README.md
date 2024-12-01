@@ -1,4 +1,4 @@
-# <img src="./public/icapital-logo-full-name.svg" alt="iCapital Logo"> -  Budgeter
+# <img src="./public/logo-icapital.png" height="75px" alt="iCapital Logo">
 
 ## Description
 
