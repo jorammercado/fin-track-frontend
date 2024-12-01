@@ -33,8 +33,14 @@ function App() {
               element={
                 <PublicRoute
                   element={Home}
-                  currentUser={currentUser}
-                  setCurrentUser={setCurrentUser}
+                />
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <PublicRoute
+                  element={FourOFour}
                 />
               }
             />
