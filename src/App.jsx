@@ -14,6 +14,8 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import './App.scss'
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(null)
+  const [token, setToken] = useState(localStorage.getItem('authToken') || null)
 
   return (
     <div className='app'>
