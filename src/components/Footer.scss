@@ -1,5 +1,31 @@
 .footer {
-    margin-top: auto;
-    font-size: 14px;
-    background-color: #09213A !important;
+  margin-top: auto;
+  font-size: 14px;
+  background-color: #09213A !important;
+  position: relative;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+
+  &__text {
+    margin: 0 auto;
+    text-align: center;
   }
+
+  &__social-links {
+    position: absolute; 
+    right: 50px; 
+    display: flex;
+    gap: 15px; 
+
+    &__link {
+      color: #ffffff;
+      font-size: 1.2rem;
+      transition: color 0.45s ease-in-out;
+
+      &:hover {
+        color: #07a; 
+      }
+    }
+  }
+}
