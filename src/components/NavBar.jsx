@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import "./NavBar.scss"
 import logo from "../assets/icapital-logo-full-name.svg"
 
-export default function NavBar({ token, setToken, handleLogout }) {
+export default function NavBar({ token, handleLogout }) {
     const navigate = useNavigate()
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
     useEffect(() => {
@@ -46,7 +46,7 @@ export default function NavBar({ token, setToken, handleLogout }) {
                     <div className="navbar__links navbar__links--private">
                         <button
                             className="navbar__link"
-                            nClick={() => navigate("/accounts/:account_id/profile")}
+                            onClick={() => navigate("/users/:account_id/profile")}
                         >
                             Profile
                         </button>

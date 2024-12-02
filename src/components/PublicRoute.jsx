@@ -15,7 +15,7 @@ const PublicRoute = ({
             setCurrentUser={setCurrentUser}
             currentUser={currentUser} />
         :
-        <Navigate to={`/users/${currentUser?.user_id}/profile`} />
+        <Navigate to={`/users/${currentUser?.account_id}/profile`} />
 }
 
 export default PublicRoute

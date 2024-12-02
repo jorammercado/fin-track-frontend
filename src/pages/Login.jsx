@@ -148,8 +148,8 @@ const Login = ({ setCurrentUser }) => {
                                 </LoginLabel>
                                 <FormInput type="text" value={email} onChange={e => setEmail(e.currentTarget.value)} placeholder="Email" />
                                 <FormInput type="password" value={password} onChange={e => setPassword(e.currentTarget.value)} placeholder="Password" />
-                                <LoginButton >{'Sign In'}</LoginButton>
-                                <button className="guest-login" onClick={guestLogin}> Continue as Guest </button>
+                                <LoginButton type="submit" >{'Sign In'}</LoginButton>
+                                <button className="guest-login" type="button" onClick={guestLogin}> Continue as Guest </button>
                             </> :
                             <>
                                 <BigErrorList>

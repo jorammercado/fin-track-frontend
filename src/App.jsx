@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import axios from 'axios'
+import { jwtDecode } from "jwt-decode"
+import Swal from 'sweetalert2'
 
 import Login from "./pages/Login"
 import Home from "./pages/Home"
@@ -49,6 +51,7 @@ function App() {
     setCurrentUser(null)
     setToken(null)
     localStorage.removeItem('authToken')
+    localStorage.removeItem('currentUser')
     clearTimeout(timeoutIdRef.current)
 
     if (isTimeout) {
@@ -80,11 +83,6 @@ function App() {
         handleLogout(true)
       }
 
-      const storedUser = localStorage.getItem('currentUser')
-      if (storedUser) {
-        setCurrentUser(JSON.parse(storedUser))
-      }
-
     } else {
       delete axios.defaults.headers.common['Authorization']
     }
@@ -98,7 +96,10 @@ function App() {
     <div className='app'>
       <Router>
         <div className="app__nav">
-          <NavBar />
+          <NavBar
+            token={token}
+            handleLogout={handleLogout}
+          />
         </div>
         <main className="app__main">
           <Routes>
@@ -137,6 +138,19 @@ function App() {
                   element={VerifyOTP}
                   currentUser={currentUser}
                   setCurrentUser={handleLogin}
+                />
+              }
+            />
+
+            <Route
+              path="/users/:account_id/profile"
+              element={
+                <ProtectedRoute
+                  element={User}
+                  currentUser={currentUser}
+                  setCurrentUser={setCurrentUser}
+                  setToken={setToken}
+                  handleLogout={handleLogout}
                 />
               }
             />
