@@ -192,6 +192,22 @@ export const LoginHeader = styled.h2`
 `
 
 export const BigErrorList = styled.ul`
+    font-style: normal;
+    font-size: 15px;
+    line-height: 15px;
+    text-align: center;
+    color: #f2f2f2;
+    width:300px;
+    margin-bottom: 50px;
+
+    @media screen and (max-width: 480px) {
+        width: 250px;
+        font-size: 14px;
+    }
+    @media screen and (max-width: 300px) {
+        width: 220px;
+        font-size: 13px;
+    }
 `
 
 export const FormInput = styled.input`
@@ -245,9 +261,35 @@ export const LoginButton = styled.button`
     @media  (max-width: 260px) {
         width: 140px;
     }
-
-
 `
 
 export const OkButton = styled.button`
+    width: 150px;
+    margin-bottom: -5px;
+    height: 35px;
+    background: #07a;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    line-height: 23px;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: background-color 0.45s ease-in-out;
+
+    &:hover {
+        background-color: #36B5E133;
+        border: 1px solid #07a;
+    }
+
+    @media screen and (max-width: 480px) {
+        margin-bottom: -25px;
+    }
+
+    @media  (max-width: 360px) {
+        width: 225px;
+    }
+
+    @media screen and (max-width: 260px) {
+        width: 140px;
+    }
 `

@@ -7,24 +7,41 @@
   display: flex;
   align-items: center;
 
+  @media (max-width: 750px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   &__text {
     margin: 0 auto;
     text-align: center;
   }
 
   &__social-links {
-    position: absolute; 
-    right: 50px; 
+    position: absolute;
+    right: 50px;
     display: flex;
-    gap: 15px; 
+    gap: 15px;
+
+    @media (max-width: 750px) {
+      position: relative;
+      right: auto;
+      justify-content: center;
+      align-items: center;
+    }
 
     &__link {
       color: #ffffff;
-      font-size: 1.2rem;
+      font-size: 1.0rem;
       transition: color 0.45s ease-in-out;
 
+      @media (max-width: 750px) {
+        font-size: 0.8rem;
+      }
+
       &:hover {
-        color: #07a; 
+        color: #07a;
       }
     }
   }
