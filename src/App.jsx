@@ -11,6 +11,7 @@ import SignUp from "./pages/SignUp"
 import User from "./pages/User"
 import VerifyOTP from "./pages/VerifyOTP"
 import UserEdit from "./components/UserEdit"
+import UserPasswordEdit from './components/UserPasswordEdit'
 
 import PublicRoute from "./components/PublicRoute"
 import ProtectedRoute from "./components/ProtectedRoute"
@@ -146,10 +147,21 @@ function App() {
             />
 
             <Route
-              path="/users/:user_id/profile/edit"
+              path="/users/:account_id/profile/edit"
               element={
                 <ProtectedRoute
                   element={UserEdit}
+                  currentUser={currentUser}
+                  setCurrentUser={setCurrentUser}
+                />
+              }
+            />
+
+            <Route
+              path="/users/:account_id/profile/password"
+              element={
+                <ProtectedRoute
+                  element={UserPasswordEdit}
                   currentUser={currentUser}
                   setCurrentUser={setCurrentUser}
                 />
