@@ -10,6 +10,7 @@ import FourOFour from "./pages/FourOFour"
 import SignUp from "./pages/SignUp"
 import User from "./pages/User"
 import VerifyOTP from "./pages/VerifyOTP"
+import UserEdit from "./components/UserEdit"
 
 import PublicRoute from "./components/PublicRoute"
 import ProtectedRoute from "./components/ProtectedRoute"
@@ -140,6 +141,17 @@ function App() {
                   element={VerifyOTP}
                   currentUser={currentUser}
                   setCurrentUser={handleLogin}
+                />
+              }
+            />
+
+            <Route
+              path="/users/:user_id/profile/edit"
+              element={
+                <ProtectedRoute
+                  element={UserEdit}
+                  currentUser={currentUser}
+                  setCurrentUser={setCurrentUser}
                 />
               }
             />
