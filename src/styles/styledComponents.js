@@ -158,6 +158,87 @@ export const LoginBackground = styled.form`
   }
 `
 
+export const VerifyOPTBackground = styled.form`
+  position: absolute;
+  width: 315px;
+  height: 250px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #09213A;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 5px;
+  padding: 0 0 77px 0;
+  box-sizing: border-box;
+
+  @media  (max-width: 480px) {
+    height: 335px;
+  }
+
+  @media  (max-width: 350px) {
+    height: 320px;
+    width: 95%;
+    overflow: hidden;
+  }
+`
+
+export const VerifyOTPButton = styled.button`
+    width: 150px;
+    height: 35px;
+    background: #07a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    margin-top: 25px;
+    margin-bottom: -25px;
+    transition: background-color 0.45s ease-in-out;
+
+    &:hover {
+        background-color: #36B5E133;
+        border: 1px solid #07a;
+    }
+
+    @media  (max-width: 360px) {
+        width: 225px;
+    }
+
+    @media  (max-width: 260px) {
+        width: 140px;
+    }
+`
+
+export const VerifyOTPHeader = styled.h2`
+  width: 277px;
+  height: 30px;
+  font-size: 25px;
+  line-height: 60px;
+  text-align: center;
+  margin-bottom: 45px;
+  color: #f2f2f2;
+
+  @media screen and (max-width: 480px) {
+    width: 299px;
+    font-size: 22px;
+    margin-bottom: 40px;
+    line-height: 35px;
+    text-align: center;
+    color: #FFFFFF;
+  }
+
+  @media  (max-width: 360px) {
+    font-size: 20px;
+  }
+
+  @media  (max-width: 260px) {
+    font-size: 12px;
+  }
+`
+
 export const LoginLabel = styled.div`
   display: flex;
   flex-direction: column;
