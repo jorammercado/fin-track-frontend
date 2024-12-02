@@ -36,6 +36,10 @@
       font-size: 1.0rem;
       transition: color 0.45s ease-in-out;
 
+      img {
+        height: 15px;
+      }
+
       @media (max-width: 750px) {
         font-size: 0.8rem;
       }
