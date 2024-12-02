@@ -1,6 +1,6 @@
 
 import {
-    Navigate
+    Navigate, useLocation
 } from 'react-router-dom'
 
 const PublicRoute = ({
@@ -9,6 +9,15 @@ const PublicRoute = ({
     setCurrentUser }) => {
 
     const token = localStorage.getItem('authToken')
+    const location = useLocation()
+
+    if (location.pathname === "/") {
+        return (
+            <Component
+                setCurrentUser={setCurrentUser}
+                currentUser={currentUser} />
+        )
+    }
 
     return !token ?
         <Component

@@ -107,6 +107,8 @@ function App() {
               element={
                 <PublicRoute
                   element={Home}
+                  currentUser={currentUser}
+                  setCurrentUser={handleLogin}
                 />
               }
             />
