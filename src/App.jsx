@@ -7,7 +7,7 @@ import Home from "./pages/Home"
 import FourOFour from "./pages/FourOFour"
 import SignUp from "./pages/SignUp"
 import User from "./pages/User"
-import VeriftOTP from "./pages/VerifyOTP"
+import VerifyOTP from "./pages/VerifyOTP"
 
 import PublicRoute from "./components/PublicRoute"
 import ProtectedRoute from "./components/ProtectedRoute"
@@ -114,6 +114,27 @@ function App() {
               element={
                 <PublicRoute
                   element={SignUp}
+                  currentUser={currentUser}
+                  setCurrentUser={handleLogin}
+                />
+              }
+            />
+
+            <Route path="/login"
+              element={
+                <PublicRoute
+                  element={Login}
+                  currentUser={currentUser}
+                  setCurrentUser={handleLogin}
+                />
+              }
+            />
+
+            <Route
+              path="/users/:account_id/verify-otp-login"
+              element={
+                <PublicRoute
+                  element={VerifyOTP}
                   currentUser={currentUser}
                   setCurrentUser={handleLogin}
                 />
