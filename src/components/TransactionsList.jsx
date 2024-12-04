@@ -7,7 +7,7 @@ import {
     TransactionsButton,
     TransactionsButtonDisabled
 } from '../styles/styledComponents'
-// import Graph from "./TransactionsGraph"
+import Graph from "./TransactionsGraph"
 
 const API = import.meta.env.VITE_API_URL
 
@@ -107,8 +107,8 @@ export default function TransactionsList({ currentUser }) {
 
     return (
         <div className="transactions">
-            <div>
-                {/* <Graph></Graph> */}
+            <div className="transactions__graph">
+                    <Graph></Graph>
             </div>
             <section className="transactions__container">
                 <table className="table table-hover table-responsive table-dark transactions__container__table ">

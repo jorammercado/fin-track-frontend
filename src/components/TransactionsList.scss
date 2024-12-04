@@ -1,12 +1,32 @@
 .transactions {
     margin-top: 120px;
 
+    &__graph {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        margin-bottom: -35px;
+    }
+
     &__container {
         font-family: 'Roboto-Thin';
         margin: auto;
-        width: 82%;
+        width: 85%;
         overflow-x: auto;
         border-radius: 5px;
+
+        @media (min-width: 1440px) {
+            max-width: 1400px;
+        }
+
+        @media (max-width: 1500px) {
+            width: 88%;
+        }
+
+        @media (max-width: 1320px) {
+            width: 95%;
+        }
 
         &__table {
             background-color: #09213A;
