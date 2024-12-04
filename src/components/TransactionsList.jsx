@@ -95,83 +95,90 @@ export default function TransactionsList({ currentUser }) {
 
     return (
         <div className="transactions">
-            <section className="transactions__container">
-                <table className="table table-hover table-responsive table-dark transactions__container__table ">
-                    <tbody>
-                        <tr className="transactions__container__table__headers">
-                            <td className="transactions__container__table__headers__count">
-                                Transactions: {allTransactions.length}
-                            </td>
-                            <td >
-                                <TransactionsButton onClick={handleSortType}>
-                                    Type
-                                </TransactionsButton>
-                            </td>
-                            <td >
-                                <TransactionsButton onClick={handleSortAmount}>
-                                    Amount
-                                </TransactionsButton>
-                            </td>
-                            <td >
-                                <TransactionsButton onClick={handleSortCategory}>
-                                    Category
-                                </TransactionsButton>
-                            </td>
-                            <td >
-                                <TransactionsButtonDisabled >
-                                    Description
-                                </TransactionsButtonDisabled>
-                            </td>
-                            <td >
-                                <TransactionsButton onClick={handleSortRecurring}>
-                                    Recurring
-                                </TransactionsButton>
-                            </td>
-                            <td >
-                                <TransactionsButton onClick={handleSortRecurringFreq}>
-                                    Recurring Freq.
-                                </TransactionsButton>
-                            </td>
-                            <td >
-                                <TransactionsButton onClick={handleSortRiskLevel}>
-                                    Risk Level
-                                </TransactionsButton>
-                            </td>
-                            <td >
-                                <TransactionsButton onClick={handleSortIsPlanned}>
-                                    Is Planned
-                                </TransactionsButton>
-                            </td>
-                            <td >
-                                <TransactionsButton onClick={handleSortDate}>
-                                    Date Added
-                                </TransactionsButton>
-                            </td>
-                            <td >
-                                <TransactionsButtonDisabled >
-                                    Balance
-                                </TransactionsButtonDisabled>
-                            </td>
-                        </tr>
-                        {currentTableData.map((transaction, index) => {
-                            { transaction.index = itemIndex.indexOf(transaction.transaction_id) + 1 }
-                            return (
-                                <Transaction
-                                    key={transaction.transaction_id}
-                                    transaction={transaction}
-                                />
-                            )
-                        }, itemIndex)}
-                    </tbody>
-                </table>
-                <Pagination
-                    className="transactions__pagination-bar"
-                    currentPage={currentPage}
-                    totalCount={allTransactions.length}
-                    pageSize={PageSize}
-                    onPageChange={page => setCurrentPage(page)}
-                />
-            </section>
+            {allTransactions && allTransactions?.length > 0 ?
+                <section className="transactions__container">
+                    <table className="table table-hover table-responsive table-dark transactions__container__table ">
+                        <tbody>
+                            <tr className="transactions__container__table__headers">
+                                <td className="transactions__container__table__headers__count">
+                                    Transactions: {allTransactions.length}
+                                </td>
+                                <td >
+                                    <TransactionsButton onClick={handleSortType}>
+                                        Type
+                                    </TransactionsButton>
+                                </td>
+                                <td >
+                                    <TransactionsButton onClick={handleSortAmount}>
+                                        Amount
+                                    </TransactionsButton>
+                                </td>
+                                <td >
+                                    <TransactionsButton onClick={handleSortCategory}>
+                                        Category
+                                    </TransactionsButton>
+                                </td>
+                                <td >
+                                    <TransactionsButtonDisabled >
+                                        Description
+                                    </TransactionsButtonDisabled>
+                                </td>
+                                <td >
+                                    <TransactionsButton onClick={handleSortRecurring}>
+                                        Recurring
+                                    </TransactionsButton>
+                                </td>
+                                <td >
+                                    <TransactionsButton onClick={handleSortRecurringFreq}>
+                                        Recurring Freq.
+                                    </TransactionsButton>
+                                </td>
+                                <td >
+                                    <TransactionsButton onClick={handleSortRiskLevel}>
+                                        Risk Level
+                                    </TransactionsButton>
+                                </td>
+                                <td >
+                                    <TransactionsButton onClick={handleSortIsPlanned}>
+                                        Is Planned
+                                    </TransactionsButton>
+                                </td>
+                                <td >
+                                    <TransactionsButton onClick={handleSortDate}>
+                                        Date Added
+                                    </TransactionsButton>
+                                </td>
+                                <td >
+                                    <TransactionsButtonDisabled >
+                                        Balance
+                                    </TransactionsButtonDisabled>
+                                </td>
+                            </tr>
+                            {currentTableData.map((transaction, index) => {
+                                { transaction.index = itemIndex.indexOf(transaction.transaction_id) + 1 }
+                                return (
+                                    <Transaction
+                                        key={transaction.transaction_id}
+                                        transaction={transaction}
+                                    />
+                                )
+                            }, itemIndex)}
+                        </tbody>
+                    </table>
+                    <Pagination
+                        className="transactions__pagination-bar"
+                        currentPage={currentPage}
+                        totalCount={allTransactions.length}
+                        pageSize={PageSize}
+                        onPageChange={page => setCurrentPage(page)}
+                    />
+                </section> :
+                <>
+                    <h1>
+                        No transactions at this time.
+                    </h1>
+                </>
+            }
         </div>
     )
 }
