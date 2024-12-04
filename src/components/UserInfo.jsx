@@ -54,7 +54,7 @@ const UserInfo = ({ currentUser, setCurrentUser, setToken, handleLogout }) => {
     return (
         <div >
             <article className="user">
-                <table className="table user__table table-bordered table-responsive table-hover table-dark table-striped">
+                <table className="table user__table table-bordered table-responsive table-hover table-dark ">
                     <tbody>
 
                         <tr >
