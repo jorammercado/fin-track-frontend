@@ -46,6 +46,12 @@ export default function NavBar({ token, handleLogout }) {
                     <div className="navbar__links navbar__links--private">
                         <button
                             className="navbar__link"
+                            onClick={() => navigate("/users/:account_id/profile/transactions")}
+                        >
+                            Transactions
+                        </button>
+                        <button
+                            className="navbar__link"
                             onClick={() => navigate("/users/:account_id/profile")}
                         >
                             Profile
