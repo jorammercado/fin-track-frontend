@@ -13,6 +13,7 @@ import VerifyOTP from "./pages/VerifyOTP"
 import UserEdit from "./components/UserEdit"
 import UserPasswordEdit from './components/UserPasswordEdit'
 import Transactions from './pages/Transactions'
+import Ivestments from './pages/Investments'
 
 import PublicRoute from "./components/PublicRoute"
 import ProtectedRoute from "./components/ProtectedRoute"
@@ -153,6 +154,16 @@ function App() {
               element={
                 <ProtectedRoute
                   element={Transactions}
+                  currentUser={currentUser}
+                />
+              }
+            />
+
+            <Route
+              path="/users/:account_id/profile/investments"
+              element={
+                <ProtectedRoute
+                  element={Ivestments}
                   currentUser={currentUser}
                 />
               }
