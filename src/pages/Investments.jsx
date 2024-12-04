@@ -3,7 +3,7 @@ import Stocks from '../components/Stocks'
 
 const Ivestments = ({ currentUser }) => {
     return (
-        <div>
+        <div className="investments">
             <Stocks
                 currentUser={currentUser}
             />

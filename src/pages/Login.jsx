@@ -133,7 +133,7 @@ const Login = ({ setCurrentUser }) => {
     }
 
     return (
-        <div >
+        <div className="login">
             <LoginBackground onSubmit={handleSubmit}>
                 {
                     loading ?

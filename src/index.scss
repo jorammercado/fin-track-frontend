@@ -24,3 +24,117 @@ body {
   background-color: #F0F5F8;
   color: #252525;
 }
+
+.error:after,
+.home-page:after,
+.login:after,
+.verify-otp:after,
+.user:after,
+.transactions:after,
+.investments:after,
+.form-password-edit:after,
+.form-edit-user:after,
+.form-new-user:after {
+	-moz-animation: overlay-hide 0.35s ease-in forwards !important;
+	-webkit-animation: overlay-hide 0.35s ease-in forwards !important;
+	-ms-animation: overlay-hide 0.35s ease-in forwards !important;
+	animation: overlay-hide 0.35s ease-in forwards !important;
+	background: #ffffff;
+	content: '';
+	display: block;
+	height: 100%;
+	left: 0;
+	opacity: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+@-moz-keyframes overlay-hide {
+	0% {
+		opacity: 1;
+		z-index: 100000;
+	}
+
+	15% {
+		opacity: 1;
+		z-index: 100000;
+	}
+
+	99% {
+		opacity: 0;
+		z-index: 100000;
+	}
+
+	100% {
+		opacity: 0;
+		z-index: -1;
+	}
+}
+
+@-webkit-keyframes overlay-hide {
+	0% {
+		opacity: 1;
+		z-index: 100000;
+	}
+
+	15% {
+		opacity: 1;
+		z-index: 100000;
+	}
+
+	99% {
+		opacity: 0;
+		z-index: 100000;
+	}
+
+	100% {
+		opacity: 0;
+		z-index: -1;
+	}
+}
+
+@-ms-keyframes overlay-hide {
+	0% {
+		opacity: 1;
+		z-index: 100000;
+	}
+
+	15% {
+		opacity: 1;
+		z-index: 100000;
+	}
+
+	99% {
+		opacity: 0;
+		z-index: 100000;
+	}
+
+	100% {
+		opacity: 0;
+		z-index: -1;
+	}
+}
+
+@keyframes overlay-hide {
+	0% {
+		opacity: 1;
+		z-index: 100000;
+	}
+
+	15% {
+		opacity: 1;
+		z-index: 100000;
+	}
+
+	99% {
+		opacity: 0;
+		z-index: 100000;
+	}
+
+	100% {
+		opacity: 0;
+		z-index: -1;
+	}
+}

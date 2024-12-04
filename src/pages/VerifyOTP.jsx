@@ -82,7 +82,7 @@ const VerifyOTP = ({ setCurrentUser }) => {
     }
 
     return (
-        <div>
+        <div className="verify-otp">
             <VerifyOPTBackground onSubmit={handleSubmit}>
                 {
                     loading ?
