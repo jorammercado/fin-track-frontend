@@ -102,6 +102,7 @@ function App() {
           <NavBar
             token={token}
             handleLogout={handleLogout}
+            currentUser={currentUser}
           />
         </div>
         <main className="app__main">

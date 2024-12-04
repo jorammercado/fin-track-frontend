@@ -1,0 +1,49 @@
+.transactions {
+    margin-top: 120px;
+
+    &__container {
+        font-family: 'Roboto-Thin';
+        margin: auto;
+        width: 82%;
+        overflow-x: auto;
+        border-radius: 5px;
+
+        &__table {
+            background-color: #09213A;
+            width: 100%;
+            table-layout: auto;
+            overflow-x: auto;
+
+            td {
+                background-color: #09213A !important;
+            }
+
+            &__headers {
+                &__count {
+                    font-size: 11px !important;
+                    width: 71px !important;
+                }
+            }
+
+            &__row-values {
+                &__cell {
+                    font-size: 15px;
+                    padding: 1px 10px !important;
+                }
+
+                &__cell--category {
+                    font-size: 12px;
+                    padding: 1px 10px !important;
+                }
+
+                &__cell--description {
+                    font-size: 11px;
+                    padding: 1px 10px !important;
+                }
+            }
+        }
+    }
+    &__pagination-bar {
+        justify-content: center;
+    }
+}
