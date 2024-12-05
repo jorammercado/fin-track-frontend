@@ -32,11 +32,9 @@ const Stocks = ({ currentUser, setStocks, stocks }) => {
                         throw new Error(`HTTP error! Status: ${response.status}`)
                     }
                     const data = await response.json()
-                    // console.log(data)
                     setStocks(data.tickers)
                     localStorage.setItem('stocks', JSON.stringify(data))
                     setStocksData(data.tickers)
-                    // console.log(data)
                 }
             } catch (error) {
                 console.error('Error fetching stock data:', error)
@@ -45,10 +43,6 @@ const Stocks = ({ currentUser, setStocks, stocks }) => {
 
         fetchStockData()
     }, [API, stocks, setStocks])
-    // console.log(stocks)
-    // console.log(stocksData?.tickers?.tickers)
-    // console.log(stocksData?.[0]
-
 
     let PageSize = 5
     const [currentPage, setCurrentPage] = useState(1)
