@@ -63,11 +63,7 @@ const Stocks = ({ currentUser, setStocks, stocks }) => {
         <div>
             {stocksData ? (
                 <div>
-                    <h2>Stock Data</h2>
                     <div className="transactions">
-                        <div className="transactions__graph">
-                            {/* <Graph /> */}
-                        </div>
                         <section className="transactions__container">
                             <table className="table table-hover table-responsive table-dark transactions__container__table">
                                 <tbody>
