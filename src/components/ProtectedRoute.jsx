@@ -7,6 +7,8 @@ const ProtectedRoute = ({
     currentUser,
     setCurrentUser,
     setToken,
+    setStocks,
+    stocks,
     handleLogout }) => {
 
     const token = localStorage.getItem('authToken')
@@ -16,7 +18,10 @@ const ProtectedRoute = ({
             currentUser={currentUser}
             setCurrentUser={setCurrentUser}
             setToken={setToken}
-            handleLogout={handleLogout} /> :
+            handleLogout={handleLogout}
+            setStocks={setStocks}
+            stocks={stocks}
+        /> :
         <Navigate to="/login" />
 }
 

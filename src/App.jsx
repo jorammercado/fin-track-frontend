@@ -30,6 +30,7 @@ function App() {
     JSON.parse(localStorage.getItem('currentUser')) || null
   )
   const [token, setToken] = useState(localStorage.getItem('authToken') || null)
+  const [stocks, setStocks] = useState(localStorage.getItem('stocks') || null)
   const timeoutIdRef = useRef(null)
 
   const handleLogin = (user, jwtToken) => {
@@ -54,8 +55,10 @@ function App() {
   const handleLogout = (isTimeout = false) => {
     setCurrentUser(null)
     setToken(null)
+    setStocks(null)
     localStorage.removeItem('authToken')
     localStorage.removeItem('currentUser')
+    localStorage.removeItem('stocks')
     clearTimeout(timeoutIdRef.current)
 
     if (isTimeout) {
@@ -165,6 +168,8 @@ function App() {
                 <ProtectedRoute
                   element={Ivestments}
                   currentUser={currentUser}
+                  setStocks={setStocks}
+                  stocks={stocks}
                 />
               }
             />
