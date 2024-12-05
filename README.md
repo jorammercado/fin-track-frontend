@@ -1,6 +1,6 @@
 # <img src="./public/logo-icapital.png" height="75px" alt="iCapital Logo">
 
-[<img src="./public/home.png" height="75px" alt="Home Screenshot">](https://icapital-budgeter.netlify.app/)
+[<img src="./public/home.png" height="185px" alt="Home Screenshot">](https://icapital-budgeter.netlify.app/)
 
 ## Description
 
