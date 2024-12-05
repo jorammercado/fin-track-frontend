@@ -22,7 +22,7 @@ See [backend repository](https://github.com/jorammercado/icapital-budgeter-backe
 
 - **Transaction Table**: Users can view their income, expenses, and investment transactions in an interactive table format. The table includes sorting capabilities for different transaction attributes such as type, amount, category, and date.
 
-- **Graphs for Transactions**: Line graph are implemented using D3.js to provide a visual representation of how users checking, saving and investment accounts change over time as a function of individual transactions, helping users make better more informed decisions.
+- **Graphs for Transactions**: Line graph are implemented using D3.js to provide a visual representation of how users checking, saving and investment accounts change over time as a function of individual transactions, helping users make better more informed decisions. Users can select which accounts to view and can zoom in/out on a given transactions group based on how it is ordered/sorted.
 
 - **Stock Price Data Integration**: Real-time stock price data is fetched from Polygon.io API. Users can view the latest data for multiple stocks in a tabular format, including metrics such as open, close, high, low, and volume. This feature provides an overview of the stock market and helps users understand the status of their investments.
 
