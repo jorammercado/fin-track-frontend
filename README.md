@@ -1,18 +1,35 @@
 # <img src="./public/logo-icapital.png" height="75px" alt="iCapital Logo">
 
+[<img src="./public/home.png" height="75px" alt="Home Screenshot">](https://icapital-budgeter.netlify.app/)
+
 ## Description
 
 The iCapital Budgeter Frontend is part of the Software Engineer Take-Home Exam Project, designed to evaluate fellows' analytical, software development, and problem-solving skills by assessing their ability to design and develop a full-stack application. This project aims to provide insight into the candidate's thought processes, research methods, and approach to solving problems, highlighting their adaptability in a rotational program.
 
-The application allows users to track income and expenses, calculate disposable income, and make informed financial decisions. Additionally, it offers optional investment guidance to help users achieve their financial goals, focusing on low-risk investment opportunities based on their disposable income.
+The application allows users to track income and expenses, calculate disposable income, and make informed financial decisions. Additionally, it offers optional investment guidance to help users achieve their financial goals, focusing on low-risk investment opportunities based on their disposable income. The application also allows users to view real-time stock prices and analyze stock performance, helping them make more informed investment decisions.
 
-See [backend repository](https://github.com/jorammercado/icapital-budgeter-backend/blob/main/README.md) for security features and backend services.
+See [backend repository](https://github.com/jorammercado/icapital-budgeter-backend/blob/main/README.md) for full security features and backend services.
 
 ## Tech Stack
 
-- **Frontend**: React
+- **Frontend**: React, SCSS (BEM), D3, Bootstrap, styled-components
 - **Backend**: Node.js, Express
 - **Database**: PostgreSQL
+- **API**: Polygon.io for real-time stock data
+- **Authentication**: JWT (using jwt-decode for session management)
+
+## Features
+
+- **Transaction Table**: Users can view their income, expenses, and investment transactions in an interactive table format. The table includes sorting capabilities for different transaction attributes such as type, amount, category, and date.
+
+- **Graphs for Transactions**: Line graph are implemented using D3.js to provide a visual representation of how users checking, saving and investment accounts change over time as a function of individual transactions, helping users make better more informed decisions.
+
+- **Stock Price Data Integration**: Real-time stock price data is fetched from Polygon.io API. Users can view the latest data for multiple stocks in a tabular format, including metrics such as open, close, high, low, and volume. This feature provides an overview of the stock market and helps users understand the status of their investments.
+
+- **Multi-Factor Authentication (MFA)**: MFA is implemented to add an extra layer of security for user authentication, ensuring only authorized users can access their accounts. 
+
+- **Password Hashing and JWT Tokens**: On the backend, passwords are securely hashed, and JWT tokens are issued for session management, ensuring secure user authentication.
+
 
 ## Deployed Application
 - **Frontend hosted on Netlify**: [https://icapital-budgeter.netlify.app/](https://icapital-budgeter.netlify.app/)
@@ -44,6 +61,7 @@ To run this project, you will need:
 3. Create a `.env` file in the root of the project directory with the following content (replace `4001` with the port your backend server is running on if different):
    ```
    VITE_API_URL=http://localhost:4001
+   VITE_POLYGON_API_KEY=your_polygon_api_key_here
    ``` 
 4. Install dependencies:
    ```bash
