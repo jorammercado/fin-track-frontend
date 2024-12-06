@@ -1,5 +1,5 @@
 
-function Transaction({ transaction }) {
+function Transaction({ transaction, index, checking, savings, investment }) {
     const createdAt = new Date(transaction.created_at)
     const options = { timeZone: "America/New_York" }
     const estDate = createdAt.toLocaleDateString("en-US", options)
@@ -17,11 +17,11 @@ function Transaction({ transaction }) {
             <td className="transactions__container__table__row-values__cell">{String(transaction.is_planned)}</td>
             <td className="transactions__container__table__row-values__cell">{estDate} <br></br> {estTime} EST</td>
             <td className="transactions__container__table__row-values__cell">
-                {`checking`}
+                {checking?.[index + 1]}
                 <br></br>
-                {`saving`}
+                {savings?.[index + 1]}
                 <br></br>
-                {`investments`}
+                {investment?.[index + 1]}
             </td>
         </tr>
     )

@@ -222,11 +222,15 @@ export default function TransactionsList({ currentUser }) {
                             </td>
                         </tr>
                         {currentTableData.map((transaction, index) => {
-                            { transaction.index = itemIndex.indexOf(transaction.transaction_id) + 1 }
+                            const globalIndex = (currentPage - 1) * PageSize + index
                             return (
                                 <Transaction
                                     key={transaction.transaction_id}
                                     transaction={transaction}
+                                    checking={checkingBalance}
+                                    savings={savingsBalance}
+                                    investment={investmentBalance}
+                                    index={globalIndex}
                                 />
                             )
                         }, itemIndex)}
