@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 
-const Graph = ({ checking = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1], savings = [1, 2, 3, 4, 5, 6, 7, 8 ,9 , 10],
-    investments = [5, 5, 5, 5, 5, 5, 5, 5, 5, 5] }) => {
+const Graph = ({ checking = [0], savings = [0],
+    investments = [0] }) => {
 
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     useEffect(() => {
@@ -80,6 +80,11 @@ const Graph = ({ checking = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1], savings = [1, 2, 3,
         //////////
         // GENERAL //
         //////////
+
+        if (data.length === 0) {
+            console.error("No data available to display.");
+            return;
+        }
 
         // List of groups
         var keys = Object.keys(data[0]).filter(key => key !== 'x');
@@ -171,7 +176,7 @@ const Graph = ({ checking = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1], savings = [1, 2, 3,
             .x(function (d) { return x(d.x); })
             .y0(function () { return y(0); }) // Fix y0 position
             .y1(function (d) { return y(d.value); })
-            .curve(d3.curveCardinal);
+            .curve(d3.curveLinear);
 
         // Show the areas
         keys.forEach(key => {
