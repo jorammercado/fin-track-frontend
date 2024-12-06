@@ -1,24 +1,8 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import Pagination from '../components/Pagination'
-
+import Stock from './Stock'
+import "./Stocks.scss"
 const API = import.meta.env.VITE_POLYGON_API_KEY
-
-function Stock({ stock }) {
-    return (
-        <tr className="transactions__container__table__row-values">
-            <td className="transactions__container__table__row-values__cell">{stock.ticker}</td>
-            <td className="transactions__container__table__row-values__cell">{stock.todaysChange}</td>
-            <td className="transactions__container__table__row-values__cell">{stock.todaysChangePerc}</td>
-            <td className="transactions__container__table__row-values__cell">{stock.prevDay.o}</td>
-            <td className="transactions__container__table__row-values__cell">{stock.prevDay.h}</td>
-            <td className="transactions__container__table__row-values__cell">{stock.prevDay.l}</td>
-            <td className="transactions__container__table__row-values__cell">{stock.prevDay.c}</td>
-            <td className="transactions__container__table__row-values__cell">{stock.prevDay.v}</td>
-            <td className="transactions__container__table__row-values__cell">{stock.prevDay.vw}</td>
-
-        </tr>
-    )
-}
 
 const Stocks = ({ currentUser, setStocks, stocks }) => {
     const [stocksData, setStocksData] = useState(null)
@@ -33,7 +17,7 @@ const Stocks = ({ currentUser, setStocks, stocks }) => {
                     }
                     const data = await response.json()
                     setStocks(data.tickers)
-                    localStorage.setItem('stocks', JSON.stringify(data))
+                    localStorage.setItem('stocks', JSON.stringify(data.tickers))
                     setStocksData(data.tickers)
                 }
             } catch (error) {
@@ -44,7 +28,7 @@ const Stocks = ({ currentUser, setStocks, stocks }) => {
         fetchStockData()
     }, [API, stocks, setStocks])
 
-    let PageSize = 5
+    let PageSize = 15
     const [currentPage, setCurrentPage] = useState(1)
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * PageSize
@@ -52,27 +36,35 @@ const Stocks = ({ currentUser, setStocks, stocks }) => {
         return stocksData?.slice(firstPageIndex, lastPageIndex)
     }, [currentPage, stocksData])
 
-
     return (
         <div>
             {stocksData ? (
-                <div>
+                <div className='stocks'>
                     <div className="transactions">
                         <section className="transactions__container">
                             <table className="table table-hover table-responsive table-dark transactions__container__table">
                                 <tbody>
                                     <tr className="transactions__container__table__headers">
-                                        <td className="transactions__container__table__headers__count">
-                                            Stocks: {stocksData?.length}
-                                        </td>
-                                        <td>Change</td>
-                                        <td>Change %</td>
-                                        <td>Open</td>
-                                        <td>High</td>
-                                        <td>Low</td>
-                                        <td>Close</td>
-                                        <td>Volume</td>
-                                        <td>VWAP</td>
+                                        <td className="transactions__container__table__headers__count">Stocks: {stocksData?.length}</td>
+                                        <td colSpan="8" style={{ textAlign: "center" }}>Today</td>
+                                        <td colSpan="6" style={{ textAlign: "center" }}>Previous Day</td>
+                                    </tr>
+                                    <tr className="transactions__container__table__headers">
+                                        <td className="transactions__container__table__headers__count"></td>
+                                        <td>Today's Change</td>
+                                        <td>Today's Change %</td>
+                                        <td>Open </td>
+                                        <td>High </td>
+                                        <td>Low </td>
+                                        <td>Close </td>
+                                        <td>Volume </td>
+                                        <td>VWAP </td>
+                                        <td>Open </td>
+                                        <td>High </td>
+                                        <td>Low </td>
+                                        <td>Close </td>
+                                        <td>Volume </td>
+                                        <td>VWAP </td>
                                     </tr>
                                     {currentTableData?.map((stock) => (
                                         <Stock key={stock.ticker} stock={stock} />

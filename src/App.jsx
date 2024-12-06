@@ -30,7 +30,7 @@ function App() {
     JSON.parse(localStorage.getItem('currentUser')) || null
   )
   const [token, setToken] = useState(localStorage.getItem('authToken') || null)
-  const [stocks, setStocks] = useState(localStorage.getItem('stocks') || null)
+  const [stocks, setStocks] = useState(localStorage.getItem('stocks') || [])
   const timeoutIdRef = useRef(null)
 
   const handleLogin = (user, jwtToken) => {
