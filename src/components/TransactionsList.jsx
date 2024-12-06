@@ -234,6 +234,13 @@ export default function TransactionsList({ currentUser }) {
                                 />
                             )
                         }, itemIndex)}
+                        <tr className="transactions__container__table__headers--bottom">
+                            <td colSpan="11">
+                                <TransactionsButton>
+                                    Add Transaction
+                                </TransactionsButton>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 <Pagination
