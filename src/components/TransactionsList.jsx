@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import Transaction from "./Transaction"
 import "./TransactionsList.scss"
 import Pagination from "./Pagination"
@@ -17,6 +17,7 @@ export default function TransactionsList({ currentUser }) {
     const [checkingBalance, setCheckingBalance] = useState([])
     const [savingsBalance, setSavingsBalance] = useState([])
     const [investmentBalance, setInvestmentBalance] = useState([])
+    const navigate = useNavigate()
 
     const [allTransactions, setAllTransactions] = useState([{
         transaction_id: 0,
@@ -236,7 +237,7 @@ export default function TransactionsList({ currentUser }) {
                         }, itemIndex)}
                         <tr className="transactions__container__table__headers--bottom">
                             <td colSpan="11">
-                                <TransactionsButton>
+                                <TransactionsButton type="button" onClick={() => navigate(`/users/${currentUser?.account_id}/profile/transactions/editlist`)} >
                                     Add Transaction
                                 </TransactionsButton>
                             </td>

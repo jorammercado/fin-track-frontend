@@ -14,6 +14,7 @@ import UserEdit from "./components/UserEdit"
 import UserPasswordEdit from './components/UserPasswordEdit'
 import Transactions from './pages/Transactions'
 import Ivestments from './pages/Investments'
+import TransactionsEdit from './pages/TransactionsEdit'
 
 import PublicRoute from "./components/PublicRoute"
 import ProtectedRoute from "./components/ProtectedRoute"
@@ -148,6 +149,16 @@ function App() {
                   element={VerifyOTP}
                   currentUser={currentUser}
                   setCurrentUser={handleLogin}
+                />
+              }
+            />
+
+            <Route
+              path="/users/:account_id/profile/transactions/editlist"
+              element={
+                <ProtectedRoute
+                  element={TransactionsEdit}
+                  currentUser={currentUser}
                 />
               }
             />
