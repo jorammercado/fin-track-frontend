@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 
-const Graph = ({ checking = [0], savings = [0],
-    investments = [0] }) => {
-
+const Graph = ({ checking = [], savings = [],
+    investments = [] }) => {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     useEffect(() => {
         const handleResize = () => {
@@ -69,7 +68,7 @@ const Graph = ({ checking = [0], savings = [0],
         if (checking.length > 0) {
             for (let i = 0; i < checking.length; i++) {
                 data.push({
-                    x: i + 1,
+                    x: i,
                     checking: checking[i],
                     savings: savings[i],
                     investments: investments[i]
@@ -82,7 +81,6 @@ const Graph = ({ checking = [0], savings = [0],
         //////////
 
         if (data.length === 0) {
-            console.error("No data available to display.");
             return;
         }
 

@@ -1,12 +1,12 @@
 
-function Transaction({ transaction, index, checking, savings, investment }) {
+function Transaction({ transaction, index, checking, savings, investment, length }) {
     const createdAt = new Date(transaction.created_at)
     const options = { timeZone: "America/New_York" }
     const estDate = createdAt.toLocaleDateString("en-US", options)
     const estTime = createdAt.toLocaleTimeString("en-US", options)
     return (
         <tr className="transactions__container__table__row-values">
-            <td className="transactions__container__table__row-values__cell">{transaction.transaction_id}</td>
+            <td className="transactions__container__table__row-values__cell">{index + 1}</td>
             <td className="transactions__container__table__row-values__cell">{transaction.transaction_type}</td>
             <td className="transactions__container__table__row-values__cell">{transaction.amount}</td>
             <td className="transactions__container__table__row-values__cell--category">{transaction.category}</td>

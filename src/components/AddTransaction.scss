@@ -1,0 +1,22 @@
+.form-add-transaction {
+    padding-top: 300px;
+
+    .mb-3__group {
+        display: flex;
+        flex-direction: column;
+
+        .form-label {
+            margin-bottom: -1px;
+            font-size: 1.0rem;
+        }
+
+        .mb-3__group__input {
+            margin-top: 0;
+        }
+    }
+
+    .mb-3__group--recurring{
+        margin-bottom: -5px;
+        margin-top: 10px;
+    }
+}

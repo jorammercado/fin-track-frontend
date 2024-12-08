@@ -1,10 +1,12 @@
 import React from 'react'
 import AddTransaction from '../components/AddTransaction'
 
-const TransactionsEdit = () => {
+const TransactionsEdit = ({ currentUser }) => {
     return (
         <div>
-            <AddTransaction/>
+            <AddTransaction
+                currentUser={currentUser}
+            />
         </div>
     )
 }
