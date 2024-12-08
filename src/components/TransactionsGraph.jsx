@@ -12,12 +12,12 @@ const Graph = ({ checking = [], savings = [],
 
         return () => window.removeEventListener('resize', handleResize);
     }, []);
-    // console.log(screenWidth)
+
     const graphRef = useRef(null);
 
     useEffect(() => {
         d3.select("#my_dataviz svg").remove();
-        var margin = { top: 60, right: 115, bottom: 50, left: 50 },
+        let margin = { top: 60, right: 115, bottom: 50, left: 50 },
             width = ((
                 screenWidth > 1660 ? 1400 :
                 screenWidth <= 1660 && screenWidth > 1560 ? 1350 :
@@ -51,7 +51,7 @@ const Graph = ({ checking = [], savings = [],
             ) - margin.left - margin.right),
             height = 275 - margin.top - margin.bottom;
 
-        var svg = d3.select("#my_dataviz")
+        let svg = d3.select("#my_dataviz")
             .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -85,10 +85,10 @@ const Graph = ({ checking = [], savings = [],
         }
 
         // List of groups
-        var keys = Object.keys(data[0]).filter(key => key !== 'x');
+        let keys = Object.keys(data[0]).filter(key => key !== 'x');
 
         // Color palette
-        var color = d3.scaleOrdinal()
+        let color = d3.scaleOrdinal()
             .domain(keys)
             .range([
                 "#07a",
@@ -97,7 +97,7 @@ const Graph = ({ checking = [], savings = [],
             ].reverse());
 
         // Store visibility status of each group
-        var visible = {
+        let visible = {
             checking: true,
             savings: true,
             investments: true,
@@ -108,10 +108,10 @@ const Graph = ({ checking = [], savings = [],
         //////////
 
         // Add X axis
-        var x = d3.scaleLinear()
+        let x = d3.scaleLinear()
             .domain(d3.extent(data, function (d) { return d.x; }))
             .range([0, width]);
-        var xAxis = svg.append("g")
+        let xAxis = svg.append("g")
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(x).ticks(15));
 
@@ -140,15 +140,15 @@ const Graph = ({ checking = [], savings = [],
             .attr("text-anchor", "start");
 
         // Add Y axis
-        var y = d3.scaleLinear()
+        let y = d3.scaleLinear()
             .domain([d3.min(data, d => d3.min(keys, key => d[key])),
             d3.max(data, d => d3.max(keys, key => d[key]))])
             .range([height, 0]);
         svg.append("g")
             .call(d3.axisLeft(y).ticks(10));
 
-        // Add Y axis and save the selection to a variable
-        var yAxis = svg.append("g")
+        // Add Y axis and save the selection to a letiable
+        let yAxis = svg.append("g")
             .call(d3.axisLeft(y).ticks(10));
 
         // Apply white color styles to Y axis
@@ -162,7 +162,7 @@ const Graph = ({ checking = [], savings = [],
         //////////
 
         // Create clip path
-        // var clipPath = svg.append("defs")
+        // let clipPath = svg.append("defs")
         //   .append("clipPath")
         //   .attr("id", "clip")
         //   .append("rect")
@@ -170,7 +170,7 @@ const Graph = ({ checking = [], savings = [],
         //   .attr("height", height);
 
         // Area generator with curve interpolation
-        var area = d3.area()
+        let area = d3.area()
             .x(function (d) { return x(d.x); })
             .y0(function () { return y(0); }) // Fix y0 position
             .y1(function (d) { return y(d.value); })
@@ -208,7 +208,7 @@ const Graph = ({ checking = [], savings = [],
         //////////
 
         // Add legend dots
-        var legend = svg.selectAll(".legend")
+        let legend = svg.selectAll(".legend")
             .data(keys)
             .enter().append("g")
             .attr("class", "legend")
@@ -280,7 +280,7 @@ const Graph = ({ checking = [], savings = [],
         //////////
 
         // Add brushing
-        var brush = d3.brushX()
+        let brush = d3.brushX()
             .extent([[0, 0], [width, height]])
             .on("end", updateChart);
 
@@ -289,12 +289,12 @@ const Graph = ({ checking = [], savings = [],
             .call(brush)
             .call(brush.move, [0, width]); // Initially show the full chart
 
-        var idleTimeout;
+        let idleTimeout;
         function idled() { idleTimeout = null; }
 
         // A function that updates the chart for given boundaries
         function updateChart(event) {
-            var extent = event.selection;
+            let extent = event.selection;
 
             // If no selection, back to initial coordinate. Otherwise, update X axis domain
             if (!extent) {
