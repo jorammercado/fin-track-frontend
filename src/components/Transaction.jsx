@@ -16,12 +16,12 @@ function Transaction({ transaction, index, checking, savings, investment, length
             <td className="transactions__container__table__row-values__cell">{transaction.risk_level}</td>
             <td className="transactions__container__table__row-values__cell">{String(transaction.is_planned)}</td>
             <td className="transactions__container__table__row-values__cell">{estDate} <br></br> {estTime} EST</td>
-            <td className="transactions__container__table__row-values__cell">
-                {checking?.[index + 1]}
+            <td className="transactions__container__table__row-values__cell--balances">
+                checking: &nbsp; {checking?.[index + 1]}
                 <br></br>
-                {savings?.[index + 1]}
+                savings: &nbsp; {savings?.[index + 1]}
                 <br></br>
-                {investment?.[index + 1]}
+                investment: &nbsp; {investment?.[index + 1]}
             </td>
         </tr>
     )

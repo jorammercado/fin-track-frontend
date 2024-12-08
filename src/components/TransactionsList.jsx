@@ -218,7 +218,7 @@ export default function TransactionsList({ currentUser }) {
                             </td>
                             <td >
                                 <TransactionsButtonDisabled >
-                                    Balance
+                                    Balances
                                 </TransactionsButtonDisabled>
                             </td>
                         </tr>
