@@ -11,44 +11,62 @@ const UserInfo = ({ currentUser, setCurrentUser, setToken, handleLogout }) => {
     const navigate = useNavigate()
 
     const handleDelete = () => {
-        const token = localStorage.getItem('authToken')
-        const httpOptions = {
-            method: "DELETE",
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        }
-        fetch(`${API}/accounts/${currentUser.account_id}`, httpOptions)
-            .then((res) => res.json())
-            .then(data => {
-                if (data?.error)
-                    throw new Error(data?.error)
-                else if (data?.err)
-                    throw new Error(data?.err)
-                else {
-                    Swal.fire({
-                        text: 'Your account has been deleted!',
-                        confirmButtonText: 'OK',
-                        confirmButtonColor: '#07a'
-                    }).then(() => {
-                        localStorage.removeItem('authToken')
-                        localStorage.removeItem('currentUser')
-                        setCurrentUser(null)
-                        setToken(null)
-                        navigate("/login")
-                    })
+        Swal.fire({
+            text: "Are you sure you want to delete your account? This action cannot be undone.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, keep it",
+            confirmButtonColor: "#e74c3c",
+            cancelButtonColor: "#07a",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const token = localStorage.getItem('authToken')
+                const httpOptions = {
+                    method: "DELETE",
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
                 }
-            })
-            .catch((error) => {
-                console.error(error)
+                fetch(`${API}/accounts/${currentUser.account_id}`, httpOptions)
+                    .then((res) => res.json())
+                    .then(data => {
+                        if (data?.error)
+                            throw new Error(data?.error)
+                        else if (data?.err)
+                            throw new Error(data?.err)
+                        else {
+                            Swal.fire({
+                                text: 'Your account has been deleted!',
+                                confirmButtonText: 'OK',
+                                confirmButtonColor: '#07a'
+                            }).then(() => {
+                                localStorage.removeItem('authToken')
+                                localStorage.removeItem('currentUser')
+                                setCurrentUser(null)
+                                setToken(null)
+                                navigate("/login")
+                            })
+                        }
+                    })
+                    .catch((error) => {
+                        console.error(error)
+                        Swal.fire({
+                            text: 'Guest account cannot be deleted!',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#07a'
+                        }).then(() => {
+                            console.error("Guest account cannot be deleted!")
+                        })
+                    })
+            } else {
                 Swal.fire({
-                    text: 'Guest account cannot be deleted!',
-                    confirmButtonText: 'OK',
-                    confirmButtonColor: '#07a'
-                }).then(() => {
-                    navigate("/")
+                    text: "Your account was not deleted.",
+                    confirmButtonText: "OK",
+                    confirmButtonColor: "#07a",
                 })
-            })
+            }
+        })
     }
 
     return (
@@ -81,7 +99,7 @@ const UserInfo = ({ currentUser, setCurrentUser, setToken, handleLogout }) => {
                                 </div>
                             </th>
                         </tr>
-                        <tr > 
+                        <tr >
                             <th colSpan="4" className="user__table__even">
                                 <div className="user__table__row-content">
                                     <span className="user__table__row-content__label">DOB:</span>
