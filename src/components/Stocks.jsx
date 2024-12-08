@@ -55,8 +55,8 @@ const Stocks = ({ currentUser, setStocks, stocks }) => {
                                     </tr>
                                     <tr className="transactions__container__table__headers">
                                         <td > <SortStocksButton>  {` \u21f3`} </SortStocksButton></td>
-                                        <td>Today's Change</td>
-                                        <td>Today's Change %</td>
+                                        <td>Change</td>
+                                        <td>Change %</td>
                                         <td>Open </td>
                                         <td>High </td>
                                         <td>Low </td>
