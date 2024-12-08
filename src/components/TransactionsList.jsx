@@ -165,11 +165,11 @@ export default function TransactionsList({ currentUser }) {
                 />
             </div>
             <section className="transactions__container">
-                <table className="table table-hover table-responsive table-dark transactions__container__table ">
+                <table className="table table-hover table-responsive table-dark transactions__container__table table-bordered ">
                     <tbody>
                         <tr className="transactions__container__table__headers">
                             <td className="transactions__container__table__headers__count">
-                                Transactions: {allTransactions.length}
+                                Total-Txn: {allTransactions.length}
                             </td>
                             <td >
                                 <TransactionsButton onClick={handleSortType}>
