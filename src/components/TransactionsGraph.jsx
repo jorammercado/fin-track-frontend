@@ -125,10 +125,10 @@ const Graph = ({ checking = [], savings = [],
         // Add X axis label:
         svg.append("text")
             .attr("text-anchor", "end")
-            .attr("x", width - 25)
+            .attr("x", width + 20)
             .attr("y", height + 41)
             .style("fill", "white")
-            .text("transaction");
+            .text("transaction (date added)");
 
         // Add Y axis label:
         svg.append("text")

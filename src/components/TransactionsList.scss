@@ -1,6 +1,29 @@
 .transactions {
     margin-top: 120px;
     text-align: right;
+    position: relative;
+
+    &__header {
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        margin-top: -70px;
+        &__title {
+            font-size: 30px;
+            font-family: 'Roboto-Thin';
+            color: white;
+            z-index: 1;
+
+            @media (max-width: 345px) {
+                font-size: 25px;
+            }
+
+            @media (max-width: 300px) {
+                font-size: 20px;
+            }
+
+        }
+    }
 
     &__graph {
         display: flex;
@@ -73,6 +96,7 @@
             }
         }
     }
+
     &__pagination-bar {
         justify-content: center;
         font-family: 'Roboto-Regular';

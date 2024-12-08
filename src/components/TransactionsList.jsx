@@ -157,6 +157,9 @@ export default function TransactionsList({ currentUser }) {
 
     return (
         <div className="transactions">
+            <div className="transactions__header">
+                <h1 className="transactions__header__title"> Balances per Transaction</h1>
+            </div>
             <div className="transactions__graph">
                 <Graph
                     checking={checkingBalance}
