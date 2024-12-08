@@ -23,7 +23,7 @@ export default function NavBar({ token, handleLogout, currentUser }) {
                 <div className="navbar__logo">
                     <Link to="/">
                         <img src={logo} alt="Logo" className="navbar__logo__image" />
-                        <span className="navbar__logo__text">{screenWidth > 557 ? " - Budgeter" : "Budgeter"}</span>
+                        <span className="navbar__logo__text">{screenWidth > 610 ? " - Budgeter" : "Budgeter"}</span>
                     </Link>
                 </div>
 

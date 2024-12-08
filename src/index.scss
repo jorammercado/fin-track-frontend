@@ -34,7 +34,8 @@ body {
 .investments:after,
 .form-password-edit:after,
 .form-edit-user:after,
-.form-new-user:after {
+.form-new-user:after,
+.dashboard:after {
 	-moz-animation: overlay-hide 0.35s ease-in forwards !important;
 	-webkit-animation: overlay-hide 0.35s ease-in forwards !important;
 	-ms-animation: overlay-hide 0.35s ease-in forwards !important;
