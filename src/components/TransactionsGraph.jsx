@@ -279,6 +279,7 @@ const Graph = ({ checking = [], savings = [],
         // BRUSHING AND CHART //
         //////////
 
+        let idleTimeout;
         // Add brushing
         let brush = d3.brushX()
             .extent([[0, 0], [width, height]])
@@ -289,7 +290,6 @@ const Graph = ({ checking = [], savings = [],
             .call(brush)
             .call(brush.move, [0, width]); // Initially show the full chart
 
-        let idleTimeout;
         function idled() { idleTimeout = null; }
 
         // A function that updates the chart for given boundaries
