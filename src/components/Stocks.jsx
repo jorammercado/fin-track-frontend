@@ -10,6 +10,7 @@ const API = import.meta.env.VITE_POLYGON_API_KEY
 
 const Stocks = ({ currentUser, setStocks, stocks }) => {
     const [stocksData, setStocksData] = useState(null)
+    const [sortOrder, setSortOrder] = useState('asc')
 
     useEffect(() => {
         const fetchStockData = async () => {
@@ -31,6 +32,19 @@ const Stocks = ({ currentUser, setStocks, stocks }) => {
 
         fetchStockData()
     }, [API, stocks, setStocks])
+
+    const handleSort = event => {
+        event.preventDefault()
+
+        const newSortOrder = sortOrder === 'asc' ? 'desc' : 'asc'
+        setSortOrder(newSortOrder)
+
+        const sortedData = [...stocksData].sort((a, b) =>
+            newSortOrder === 'asc' ? a.ticker.localeCompare(b.ticker) : b.ticker.localeCompare(a.ticker)
+        )
+
+        setStocksData(sortedData)
+    }
 
     let PageSize = 15
     const [currentPage, setCurrentPage] = useState(1)
@@ -54,7 +68,11 @@ const Stocks = ({ currentUser, setStocks, stocks }) => {
                                         <td colSpan="6" style={{ textAlign: "center" }}>Previous Day</td>
                                     </tr>
                                     <tr className="transactions__container__table__headers">
-                                        <td > <SortStocksButton>  {` \u21f3`} </SortStocksButton></td>
+                                        <td >
+                                            <SortStocksButton onClick={handleSort} type='button'>
+                                                {sortOrder === 'asc' ? '\u2191' : '\u2193'}
+                                            </SortStocksButton>
+                                        </td>
                                         <td>Change</td>
                                         <td>Change %</td>
                                         <td>Open </td>
