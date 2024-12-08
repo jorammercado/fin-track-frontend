@@ -15,6 +15,7 @@ import UserPasswordEdit from './components/UserPasswordEdit'
 import Transactions from './pages/Transactions'
 import Ivestments from './pages/Investments'
 import TransactionsEdit from './pages/TransactionsEdit'
+import Dashboard from './pages/Dashboard'
 
 import PublicRoute from "./components/PublicRoute"
 import ProtectedRoute from "./components/ProtectedRoute"
@@ -181,6 +182,16 @@ function App() {
                   currentUser={currentUser}
                   setStocks={setStocks}
                   stocks={stocks}
+                />
+              }
+            />
+
+            <Route
+              path="/users/:account_id/profile/dashboard"
+              element={
+                <ProtectedRoute
+                  element={Dashboard}
+                  currentUser={currentUser}
                 />
               }
             />
