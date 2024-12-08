@@ -2,6 +2,10 @@ import React, { useEffect, useState, useMemo } from 'react'
 import Pagination from '../components/Pagination'
 import Stock from './Stock'
 import "./Stocks.scss"
+import {
+    SortStocksButton
+} from '../styles/styledComponents'
+
 const API = import.meta.env.VITE_POLYGON_API_KEY
 
 const Stocks = ({ currentUser, setStocks, stocks }) => {
@@ -50,7 +54,7 @@ const Stocks = ({ currentUser, setStocks, stocks }) => {
                                         <td colSpan="6" style={{ textAlign: "center" }}>Previous Day</td>
                                     </tr>
                                     <tr className="transactions__container__table__headers">
-                                        <td className="transactions__container__table__headers__count"></td>
+                                        <td > <SortStocksButton>  {` \u21f3`} </SortStocksButton></td>
                                         <td>Today's Change</td>
                                         <td>Today's Change %</td>
                                         <td>Open </td>
@@ -82,7 +86,7 @@ const Stocks = ({ currentUser, setStocks, stocks }) => {
                     </div>
                 </div>
             ) : (
-                <p>unable to retrieve stock data...</p>
+                <></>
             )}
         </div>
     )
