@@ -36,11 +36,11 @@ export default function TransactionsList({ currentUser }) {
     const [allTransactionsDateOrder, setAllTransactionsDateOrder] = useState([])
     const [typeOrder, setTypeOrder] = useState(false)
     const [amountOrder, setAmountOrder] = useState(false)
-    // const [categoryOrder, setCategoryOrder] = useState(false)
-    // const [recurringOrder, setRecurringOrder] = useState(false)
-    // const [recurringOrderFreq, setRecurringFreqOrder] = useState(false)
-    // const [riskLevelOrder, setRiskLevelOrder] = useState(false)
-    // const [isPlannedOrder, setIsPlannedOrder] = useState(false)
+    const [categoryOrder, setCategoryOrder] = useState(false)
+    const [recurringOrder, setRecurringOrder] = useState(false)
+    const [recurringOrderFreq, setRecurringOrderFreq] = useState(false)
+    const [riskLevelOrder, setRiskLevelOrder] = useState(false)
+    const [isPlannedOrder, setIsPlannedOrder] = useState(false)
     const [dateOrder, setDateOrder] = useState(false)
 
     const handleSortType = event => {
@@ -71,26 +71,67 @@ export default function TransactionsList({ currentUser }) {
 
     const handleSortCategory = event => {
         event.preventDefault()
+        const sortedTransactions = [...allTransactions].sort((a, b) => {
+            if (categoryOrder) {
+                return b.category.localeCompare(a.category)
+            }
+            return a.category.localeCompare(b.category)
+        })
 
+        setAllTransactions(sortedTransactions)
+        setCategoryOrder(!categoryOrder)
     }
 
     const handleSortRecurring = event => {
         event.preventDefault()
+        const sortedTransactions = [...allTransactions].sort((a, b) => {
+            if (recurringOrder) {
+                return b.recurring - a.recurring
+            }
+            return a.recurring - b.recurring
+        })
 
+        setAllTransactions(sortedTransactions)
+        setRecurringOrder(!recurringOrder)
     }
 
     const handleSortRecurringFreq = event => {
         event.preventDefault()
+        const sortedTransactions = [...allTransactions].sort((a, b) => {
+            if (recurringOrderFreq) {
+                return b.recurring_frequency.localeCompare(a.recurring_frequency)
+            }
+            return a.recurring_frequency.localeCompare(b.recurring_frequency)
+        })
 
+        setAllTransactions(sortedTransactions)
+        setRecurringOrderFreq(!recurringOrderFreq)
     }
 
     const handleSortRiskLevel = event => {
         event.preventDefault()
+        const sortedTransactions = [...allTransactions].sort((a, b) => {
+            if (riskLevelOrder) {
+                return b.risk_level.localeCompare(a.risk_level)
+            }
+            return a.risk_level.localeCompare(b.risk_level)
+        })
 
+        setAllTransactions(sortedTransactions)
+        setRiskLevelOrder(!riskLevelOrder)
     }
 
     const handleSortIsPlanned = event => {
         event.preventDefault()
+        const sortedTransactions = [...allTransactions].sort((a, b) => {
+            if (isPlannedOrder) {
+                return b.is_planned - a.is_planned
+            }
+            return a.is_planned - b.is_planned
+        })
+
+        setAllTransactions(sortedTransactions)
+        setIsPlannedOrder(!isPlannedOrder)
 
     }
 
