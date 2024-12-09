@@ -41,7 +41,7 @@ export default function TransactionsList({ currentUser }) {
     // const [recurringOrderFreq, setRecurringFreqOrder] = useState(false)
     // const [riskLevelOrder, setRiskLevelOrder] = useState(false)
     // const [isPlannedOrder, setIsPlannedOrder] = useState(false)
-    // const [dateOrder, setDateOrder] = useState(false)
+    const [dateOrder, setDateOrder] = useState(false)
 
     const handleSortType = event => {
         event.preventDefault()
@@ -88,7 +88,11 @@ export default function TransactionsList({ currentUser }) {
 
     const handleSortDate = event => {
         event.preventDefault()
-
+        if (dateOrder)
+            setAllTransactions([...allTransactionsDateOrder])
+        else
+            setAllTransactions([...allTransactionsDateOrder].reverse())
+        setDateOrder(!dateOrder)
     }
 
     useEffect(() => {
