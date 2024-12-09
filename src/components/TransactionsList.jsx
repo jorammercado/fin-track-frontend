@@ -24,7 +24,7 @@ export default function TransactionsList({ currentUser }) {
         transaction_id: 0,
         account_id: account_id,
         transaction_type: 'income',
-        ammount: 0,
+        amount: 0,
         category: 'other',
         description: '',
         recurring: false,
@@ -35,7 +35,7 @@ export default function TransactionsList({ currentUser }) {
     }])
     const [allTransactionsDateOrder, setAllTransactionsDateOrder] = useState([])
     const [typeOrder, setTypeOrder] = useState(false)
-    // const [amountOrder, setAmountOrder] = useState(false)
+    const [amountOrder, setAmountOrder] = useState(false)
     // const [categoryOrder, setCategoryOrder] = useState(false)
     // const [recurringOrder, setRecurringOrder] = useState(false)
     // const [recurringOrderFreq, setRecurringFreqOrder] = useState(false)
@@ -58,7 +58,15 @@ export default function TransactionsList({ currentUser }) {
 
     const handleSortAmount = event => {
         event.preventDefault()
+        const sortedTransactions = [...allTransactions].sort((a, b) => {
+            if (amountOrder) {
+                return b.amount - a.amount
+            }
+            return a.amount - b.amount
+        })
 
+        setAllTransactions(sortedTransactions)
+        setAmountOrder(!amountOrder)
     }
 
     const handleSortCategory = event => {
