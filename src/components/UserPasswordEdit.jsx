@@ -80,7 +80,7 @@ export default function UserInfoEditForm({ setCurrentUser, currentUser }) {
                 text: 'New password and confirm password do not match.',
                 confirmButtonText: 'OK',
                 confirmButtonColor: '#07a'
-            });
+            })
         } else {
             editUser()
         }

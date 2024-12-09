@@ -1,28 +1,28 @@
 @font-face {
-  font-family: 'AvenirNextLTPro-Medium';
-  src: url('../src/assets/fonts/AvenirNextLTPro-Medium.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
+	font-family: 'AvenirNextLTPro-Medium';
+	src: url('../src/assets/fonts/AvenirNextLTPro-Medium.otf') format('opentype');
+	font-weight: normal;
+	font-style: normal;
 }
 
 @font-face {
-  font-family: 'Roboto-Regular';
-  src: url('../src/assets/fonts/Roboto-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+	font-family: 'Roboto-Regular';
+	src: url('../src/assets/fonts/Roboto-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
 }
 
 @font-face {
-  font-family: 'Roboto-Thin';
-  src: url('../src/assets/fonts/Roboto-Thin.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+	font-family: 'Roboto-Thin';
+	src: url('../src/assets/fonts/Roboto-Thin.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
 }
 
 body {
-  font-family: 'Roboto-Regular', 'AvenirNextLTPro-Medium', Helvetica, sans-serif;
-  background-color: #F0F5F8;
-  color: #252525;
+	font-family: 'Roboto-Regular', 'AvenirNextLTPro-Medium', Helvetica, sans-serif;
+	background-color: #F0F5F8;
+	color: #252525;
 }
 
 .error:after,

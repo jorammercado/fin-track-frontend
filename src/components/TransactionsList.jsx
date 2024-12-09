@@ -5,7 +5,9 @@ import "./TransactionsList.scss"
 import Pagination from "./Pagination"
 import {
     TransactionsButton,
-    TransactionsButtonDisabled
+    TransactionsButtonDisabled,
+    TransactionsButtonDisabledBalances,
+    TransactionsButtonDate
 } from '../styles/styledComponents'
 import Graph from "./TransactionsGraph"
 
@@ -13,7 +15,6 @@ const API = import.meta.env.VITE_API_URL
 
 export default function TransactionsList({ currentUser }) {
     let { account_id } = useParams()
-    const [itemIndex, setItemIndex] = useState([])
     const [checkingBalance, setCheckingBalance] = useState([])
     const [savingsBalance, setSavingsBalance] = useState([])
     const [investmentBalance, setInvestmentBalance] = useState([])
@@ -22,6 +23,7 @@ export default function TransactionsList({ currentUser }) {
     const [allTransactions, setAllTransactions] = useState([{
         transaction_id: 0,
         account_id: account_id,
+        transaction_type: 'income',
         ammount: 0,
         category: 'other',
         description: '',
@@ -31,7 +33,8 @@ export default function TransactionsList({ currentUser }) {
         is_planned: false,
         created: new Date()
     }])
-    // const [typeOrder, setTypeOrder] = useState(false)
+    const [allTransactionsDateOrder, setAllTransactionsDateOrder] = useState([])
+    const [typeOrder, setTypeOrder] = useState(false)
     // const [amountOrder, setAmountOrder] = useState(false)
     // const [categoryOrder, setCategoryOrder] = useState(false)
     // const [recurringOrder, setRecurringOrder] = useState(false)
@@ -42,7 +45,15 @@ export default function TransactionsList({ currentUser }) {
 
     const handleSortType = event => {
         event.preventDefault()
+        const sortedTransactions = [...allTransactions].sort((a, b) => {
+            if (typeOrder) {
+                return b.transaction_type.localeCompare(a.transaction_type)
+            }
+            return a.transaction_type.localeCompare(b.transaction_type)
+        })
 
+        setAllTransactions(sortedTransactions)
+        setTypeOrder(!typeOrder)
     }
 
     const handleSortAmount = event => {
@@ -93,7 +104,7 @@ export default function TransactionsList({ currentUser }) {
             .then((response) => response.json())
             .then((data) => {
                 setAllTransactions(data)
-                setItemIndex(data.map((elem, index) => elem.transaction_id))
+                setAllTransactionsDateOrder(data)
 
                 let checking = [0]
                 let savings = [0]
@@ -172,7 +183,9 @@ export default function TransactionsList({ currentUser }) {
                     <tbody>
                         <tr className="transactions__container__table__headers">
                             <td className="transactions__container__table__headers__count">
-                                Total-Txn: {allTransactions.length}
+                                Tot: {allTransactions.length}
+                                <br></br>
+                                TXN ID:
                             </td>
                             <td >
                                 <TransactionsButton onClick={handleSortType}>
@@ -215,18 +228,20 @@ export default function TransactionsList({ currentUser }) {
                                 </TransactionsButton>
                             </td>
                             <td >
-                                <TransactionsButton onClick={handleSortDate}>
-                                    Date Added
-                                </TransactionsButton>
+                                <TransactionsButtonDate onClick={handleSortDate}>
+                                    Date/Time Added
+                                </TransactionsButtonDate>
                             </td>
-                            <td >
-                                <TransactionsButtonDisabled >
-                                    Balances
-                                </TransactionsButtonDisabled>
+                            <td className="transactions__container__table__headers__balances">
+                                <TransactionsButtonDisabledBalances >
+                                    Balances (as of txn. complete)
+                                </TransactionsButtonDisabledBalances>
                             </td>
                         </tr>
                         {currentTableData.map((transaction, index) => {
-                            const globalIndex = (currentPage - 1) * PageSize + index
+                            const correctIndex = allTransactionsDateOrder.findIndex(
+                                (t) => t.transaction_id === transaction.transaction_id
+                            )
                             return (
                                 <Transaction
                                     key={transaction.transaction_id}
@@ -234,10 +249,10 @@ export default function TransactionsList({ currentUser }) {
                                     checking={checkingBalance}
                                     savings={savingsBalance}
                                     investment={investmentBalance}
-                                    index={globalIndex}
+                                    index={correctIndex}
                                 />
                             )
-                        }, itemIndex)}
+                        })}
                         <tr className="transactions__container__table__headers--bottom">
                             <td colSpan="11">
                                 <TransactionsButton type="button" onClick={() => navigate(`/users/${currentUser?.account_id}/profile/transactions/editlist`)} >

@@ -15,7 +15,7 @@ function Transaction({ transaction, index, checking, savings, investment, length
             <td className="transactions__container__table__row-values__cell">{transaction.recurring_frequency}</td>
             <td className="transactions__container__table__row-values__cell">{transaction.risk_level}</td>
             <td className="transactions__container__table__row-values__cell">{String(transaction.is_planned)}</td>
-            <td className="transactions__container__table__row-values__cell">{estDate} <br></br> {estTime} EST</td>
+            <td className="transactions__container__table__row-values__cell--date">{estDate} <br></br> {estTime} EST</td>
             <td className="transactions__container__table__row-values__cell--balances">
                 checking: &nbsp; {checking?.[index + 1]}
                 <br></br>
