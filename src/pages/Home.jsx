@@ -36,7 +36,7 @@ const Home = () => {
                             <div className="card feature-card-home">
                                 <div className="card-body">
                                     <i className="bi bi-graph-up-arrow home-icon"></i>
-                                    <h5 className="card-title mt-3">AI Investment Recommendations</h5>
+                                    <h5 className="card-title mt-3">AI Recommendations (comming soon)</h5>
                                     <p className="card-text">Receive personalized, low-risk stock recommendations based on your financial profile.</p>
                                 </div>
                             </div>
@@ -47,7 +47,7 @@ const Home = () => {
                                 <div className="card-body">
                                     <i className="bi bi-bar-chart-line home-icon"></i>
                                     <h5 className="card-title mt-3">Projected Earnings</h5>
-                                    <p className="card-text">Visualize potential earnings over time based on historical stock data and your investments.</p>
+                                    <p className="card-text">Visualize potential earnings over time based on your data investments.</p>
                                 </div>
                             </div>
                         </div>
