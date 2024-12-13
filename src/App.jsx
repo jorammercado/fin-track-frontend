@@ -16,6 +16,7 @@ import Transactions from './pages/Transactions'
 import Ivestments from './pages/Investments'
 import TransactionsEdit from './pages/TransactionsEdit'
 import Dashboard from './pages/Dashboard'
+import MarketNews from './pages/MarketNews'
 
 import PublicRoute from "./components/PublicRoute"
 import ProtectedRoute from "./components/ProtectedRoute"
@@ -179,6 +180,18 @@ function App() {
               element={
                 <ProtectedRoute
                   element={Ivestments}
+                  currentUser={currentUser}
+                  setStocks={setStocks}
+                  stocks={stocks}
+                />
+              }
+            />
+
+            <Route
+              path="/users/:account_id/profile/marketnews"
+              element={
+                <ProtectedRoute
+                  element={MarketNews}
                   currentUser={currentUser}
                   setStocks={setStocks}
                   stocks={stocks}
