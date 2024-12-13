@@ -188,6 +188,14 @@ export default function TransactionsList({ currentUser }) {
                         } else {
                             balanceColumn = 'checking_account'
                         }
+                    } else if (transaction_type === 'income') {
+                        if (category === 'savings') {
+                            balanceColumn = 'savings_account'
+                        } else if (category === 'investment') {
+                            balanceColumn = 'investments'
+                        } else {
+                            balanceColumn = 'checking_account'
+                        }
                     }
 
                     if (balanceColumn) {
