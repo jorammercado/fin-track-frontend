@@ -166,8 +166,14 @@ export default function TransactionsList({ currentUser }) {
                 data.forEach(transaction => {
                     let balanceColumn
                     const { transaction_type, category, amount } = transaction
-                    if (transaction_type === 'income' || transaction_type === 'expense') {
-                        balanceColumn = 'checking_account'
+                    if (transaction_type === 'expense') {
+                        if (category === 'investment') {
+                            balanceColumn = 'investments'
+                        } else if (category === 'savings') {
+                            balanceColumn = 'savings_account'
+                        } else {
+                            balanceColumn = 'checking_account'
+                        }
                     } else if (transaction_type === 'investment') {
                         if (['retirement', 'savings', 'emergency fund'].includes(category)) {
                             balanceColumn = 'savings_account'
