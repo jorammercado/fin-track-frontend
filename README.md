@@ -41,7 +41,7 @@ See [backend repository](https://github.com/jorammercado/icapital-budgeter-backe
 
 - **Multi-Factor Authentication (MFA)**: MFA is implemented to add an extra layer of security for user authentication, ensuring only authorized users can access their accounts. 
 
-- **Session Security**: Session management is handled by saving and decoding the JWT token sent from the backend after verifying user credentials through security checks. The token is securely stored in local storage and includes an expiration time. When the token expires or the user logs out, the token and user data are automatically removed from local storage, ensuring a secure session lifecycle. Expiration from login set to thirty minutes.
+- **Session Security**: Session management on the frontend is implemented using a JWT (JSON Web Token) issued by the backend after verifying user credentials. The JWT is securely stored in local storage with an expiration time of 30 minutes. Upon expiration or user logout, the token and general login data are automatically removed from local storage to maintain session security. Sensitive user data, such as financial transactions, is not stored on the frontend. Instead, it is retrieved from the backend after verifying the token in the request header.
 
 ## Guest Login
 
