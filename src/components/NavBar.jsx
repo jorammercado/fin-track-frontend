@@ -44,12 +44,7 @@ export default function NavBar({ token, handleLogout, currentUser }) {
                     </div>
                 ) : (
                     <div className="navbar__links navbar__links--private">
-                        <button
-                            className="navbar__link"
-                            onClick={() => navigate(`/users/${currentUser.account_id}/profile/marketnews`)}
-                        >
-                            Market News
-                        </button>
+
                         <button
                             className="navbar__link"
                             onClick={() => navigate(`/users/${currentUser.account_id}/profile/dashboard`)}
@@ -58,15 +53,21 @@ export default function NavBar({ token, handleLogout, currentUser }) {
                         </button>
                         <button
                             className="navbar__link"
-                            onClick={() => navigate(`/users/${currentUser.account_id}/profile/investments`)}
-                        >
-                            Investments
-                        </button>
-                        <button
-                            className="navbar__link"
                             onClick={() => navigate(`/users/${currentUser.account_id}/profile/transactions`)}
                         >
                             Transactions
+                        </button>
+                        <button
+                            className="navbar__link"
+                            onClick={() => navigate(`/users/${currentUser.account_id}/profile/marketnews`)}
+                        >
+                            Market News
+                        </button>
+                        <button
+                            className="navbar__link"
+                            onClick={() => navigate(`/users/${currentUser.account_id}/profile/investments`)}
+                        >
+                            Investments
                         </button>
                         <button
                             className="navbar__link"
