@@ -317,6 +317,7 @@ export default function TransactionsList({ currentUser }) {
                                     savings={savingsBalance}
                                     investment={investmentBalance}
                                     index={correctIndex}
+                                    currentUser={currentUser}
                                 />
                             )
                         })}

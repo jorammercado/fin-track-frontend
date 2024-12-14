@@ -1,11 +1,15 @@
+import { useNavigate } from 'react-router-dom'
 
-function Transaction({ transaction, index, checking, savings, investment, length }) {
+function Transaction({ transaction, index, checking, savings, investment, currentUser }) {
+    const navigate = useNavigate()
     const createdAt = new Date(transaction.created_at)
     const options = { timeZone: "America/New_York" }
     const estDate = createdAt.toLocaleDateString("en-US", options)
     const estTime = createdAt.toLocaleTimeString("en-US", options)
     return (
-        <tr className="transactions__container__table__row-values">
+        <tr className="transactions__container__table__row-values"
+            onClick={() => navigate(`/users/${currentUser.account_id}/profile/transactions/edit`)}
+        >
             <td className="transactions__container__table__row-values__cell">{index + 1}</td>
             <td className="transactions__container__table__row-values__cell">{transaction.transaction_type}</td>
             <td className="transactions__container__table__row-values__cell">{transaction.amount}</td>

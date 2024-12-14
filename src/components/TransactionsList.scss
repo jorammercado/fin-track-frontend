@@ -78,6 +78,7 @@
             }
 
             &__row-values {
+                cursor: pointer;
                 &__cell--description {
                     font-size: 11px;
                     padding: 1px 10px !important;
