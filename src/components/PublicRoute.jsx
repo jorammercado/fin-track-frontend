@@ -2,6 +2,7 @@
 import {
     Navigate, useLocation
 } from 'react-router-dom'
+import FourOFour from '../pages/FourOFour'
 
 const PublicRoute = ({
     element: Component,
@@ -10,6 +11,10 @@ const PublicRoute = ({
 
     const token = localStorage.getItem('authToken')
     const location = useLocation()
+
+    if (Component === FourOFour) {
+        return <Component />
+    }
 
     if (location.pathname === "/") {
         return (

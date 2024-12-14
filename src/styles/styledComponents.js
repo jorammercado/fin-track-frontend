@@ -446,6 +446,63 @@ export const EditButton = styled.button`
     }
 `
 
+export const SmallEditButton = styled.button`  
+    width: 88px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    color: white;
+    cursor: pointer;
+    background-color: #07a;
+    font-family: 'Roboto-Thin';
+    margin-right: 6px;
+    margin-left: 6px;
+    transition: background-color 0.45s ease-in-out;
+
+    &:hover {
+        background-color: #36B5E133;
+        border: 1px solid #07a;
+    }
+
+    @media screen and (max-width: 350px) {
+        width: 75%;
+    }
+`
+
+export const EditTransactionBackground = styled.div`
+    position: absolute;
+    width: 345px;
+    height: 555px;
+    top: 52.5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #09213A;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    font-family: "Roboto-Thin";
+    color: white;
+
+    border-radius: 5px;
+    padding: 0 0 40px 0;
+    box-sizing: border-box;
+
+    @media screen and (max-width: 480px) {
+        position: fixed;
+        width: 65%;
+        height: 60%;
+        padding-bottom: 45px;
+        box-shadow: none;
+    }
+
+    @media screen and (max-width: 400px) {
+        width: 80%;
+    }
+`
+
 export const EditBackground = styled.div`
   position: absolute;
   width: 315px;

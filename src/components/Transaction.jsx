@@ -6,11 +6,12 @@ function Transaction({ transaction, index, checking, savings, investment, curren
     const options = { timeZone: "America/New_York" }
     const estDate = createdAt.toLocaleDateString("en-US", options)
     const estTime = createdAt.toLocaleTimeString("en-US", options)
+    const enhancedTransaction = { ...transaction, index: index + 1 }
     return (
         <tr className="transactions__container__table__row-values"
-            onClick={() => navigate(`/users/${currentUser.account_id}/profile/transactions/edit`, 
+            onClick={() => navigate(`/users/${currentUser.account_id}/profile/transactions/edit`,
                 {
-                    state: { transaction }
+                    state: { transaction: enhancedTransaction }
                 }
             )}
         >

@@ -6,15 +6,14 @@ import Row from "react-bootstrap/Row"
 import InputGroup from "react-bootstrap/InputGroup"
 import Swal from "sweetalert2"
 import "./EditTransaction.scss"
-import { AddTransactionBackground, EditButton } from "../styles/styledComponents"
+import { EditTransactionBackground, SmallEditButton } from "../styles/styledComponents"
 
 const API = import.meta.env.VITE_API_URL
 
 const EditTransaction = ({ currentUser }) => {
     const location = useLocation()
     const navigate = useNavigate()
-    const [ transaction, setTransaction ] = useState(location?.state?.transaction || {})
-
+    const [transaction, setTransaction] = useState(location?.state?.transaction || {})
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target
         setTransaction({
@@ -75,13 +74,78 @@ const EditTransaction = ({ currentUser }) => {
         navigate(-1)
     }
 
+    const handleDelete = (e) => {
+        e.preventDefault()
+        const token = localStorage.getItem("authToken")
+        const httpOptions = {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }
+        Swal.fire({
+            text: "Are you sure you want to delete this transaction? This action cannot be undone.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, keep it",
+            confirmButtonColor: "#e74c3c",
+            cancelButtonColor: "#07a",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`${API}/accounts/${currentUser.account_id}/transactions/${transaction.transaction_id}`, httpOptions)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.error) {
+                            throw new Error(data.error)
+                        }
+                        else if (data.err) {
+                            throw new Error(data.err)
+                        }
+                        else {
+                            Swal.fire({
+                                text: "Transaction successfully deleted!",
+                                confirmButtonText: "OK",
+                                confirmButtonColor: "#07a",
+                            }).then(() => {
+                                navigate(`/users/${currentUser.account_id}/profile/transactions`)
+                            })
+                        }
+                    })
+                    .catch((err) => {
+                        Swal.fire({
+                            text: `Server error: ${err}. Cannot delete Transaction.`,
+                            confirmButtonText: "OK",
+                            confirmButtonColor: "#07a",
+                        })
+                        console.error(err)
+                    })
+            } else {
+                Swal.fire({
+                    text: "Transaction not deleted.",
+                    confirmButtonText: "OK",
+                    confirmButtonColor: "#07a",
+                })
+            }
+        })
+    }
+
     return (
         <div className="form-add-transaction">
-            <AddTransactionBackground>
+            <EditTransactionBackground>
                 <Form className="form" noValidate onSubmit={handleSubmit}>
+                    <Row className="mb-3" style={{ color: "red" }}>
+                        <Form.Group as={Col} className="mb-3__group">
+                            <Form.Label>
+                                Updating TXN ID: &nbsp; {transaction.index}
+                            </Form.Label>
+                        </Form.Group>
+                    </Row>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="transaction_type" className="mb-3__group">
-                            <Form.Label>Transaction Type</Form.Label>
+                            <Form.Label>
+                                Transaction Type
+                            </Form.Label>
                             <Form.Select
                                 className="mb-3__group__input"
                                 name="transaction_type"
@@ -233,13 +297,16 @@ const EditTransaction = ({ currentUser }) => {
                     </Row>
 
                     <div className="button-container">
-                        <EditButton type="submit">Update </EditButton>
-                        <EditButton onClick={handleBack} type="button">
+                        <SmallEditButton type="submit">Update </SmallEditButton>
+                        <SmallEditButton onClick={handleBack} type="button">
                             Back
-                        </EditButton>
+                        </SmallEditButton>
+                        <SmallEditButton onClick={handleDelete} type="button">
+                            Delete
+                        </SmallEditButton>
                     </div>
                 </Form>
-            </AddTransactionBackground>
+            </EditTransactionBackground>
         </div>
     )
 }
