@@ -31,7 +31,7 @@
         justify-content: center;
         align-items: center;
         margin: auto;
-        margin-bottom: -35px;
+        margin-bottom: -37px;
     }
 
     &__container {
@@ -65,11 +65,18 @@
 
             &__headers {
                 &__count {
-                    font-size: 13px !important;
-                    width: 71px !important;
+                    font-size: 13px;
                     padding: 7px 5px !important;
                     text-align: center;
                     font-family: 'Roboto-Regular';
+                }
+            }
+
+            &__transactioncount {
+                &__count {
+                    font-size: 10px;
+                    text-align: left;
+                    font-family: 'AvenirNextLTPro-Medium';
                 }
             }
 
@@ -79,6 +86,7 @@
 
             &__row-values {
                 cursor: pointer;
+
                 &__cell--description {
                     font-size: 11px;
                     padding: 1px 10px !important;
@@ -96,11 +104,6 @@
 
                 &__cell--category {
                     font-size: 12px;
-                    padding: 1px 10px !important;
-                }
-
-                &__cell--description {
-                    font-size: 11px;
                     padding: 1px 10px !important;
                 }
             }
