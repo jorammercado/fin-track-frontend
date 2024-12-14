@@ -17,6 +17,7 @@ import Ivestments from './pages/Investments'
 import TransactionsAdd from './pages/TransactionsAdd'
 import Dashboard from './pages/Dashboard'
 import MarketNews from './pages/MarketNews'
+import TransactionsEdit from './pages/TransactionsEdit'
 
 import PublicRoute from "./components/PublicRoute"
 import ProtectedRoute from "./components/ProtectedRoute"
@@ -156,10 +157,20 @@ function App() {
             />
 
             <Route
-              path="/users/:account_id/profile/transactions/editlist"
+              path="/users/:account_id/profile/transactions/add"
               element={
                 <ProtectedRoute
                   element={TransactionsAdd}
+                  currentUser={currentUser}
+                />
+              }
+            />
+
+            <Route
+              path="/users/:account_id/profile/transactions/edit"
+              element={
+                <ProtectedRoute
+                  element={TransactionsEdit}
                   currentUser={currentUser}
                 />
               }

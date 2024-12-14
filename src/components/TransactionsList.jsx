@@ -322,7 +322,7 @@ export default function TransactionsList({ currentUser }) {
                         })}
                         <tr className="transactions__container__table__headers--bottom">
                             <td colSpan="11">
-                                <TransactionsButton type="button" onClick={() => navigate(`/users/${currentUser?.account_id}/profile/transactions/editlist`)} >
+                                <TransactionsButton type="button" onClick={() => navigate(`/users/${currentUser?.account_id}/profile/transactions/add`)} >
                                     Add Transaction
                                 </TransactionsButton>
                             </td>
