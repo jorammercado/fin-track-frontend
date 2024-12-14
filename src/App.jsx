@@ -14,7 +14,7 @@ import UserEdit from "./components/UserEdit"
 import UserPasswordEdit from './components/UserPasswordEdit'
 import Transactions from './pages/Transactions'
 import Ivestments from './pages/Investments'
-import TransactionsEdit from './pages/TransactionsEdit'
+import TransactionsAdd from './pages/TransactionsAdd'
 import Dashboard from './pages/Dashboard'
 import MarketNews from './pages/MarketNews'
 
@@ -159,7 +159,7 @@ function App() {
               path="/users/:account_id/profile/transactions/editlist"
               element={
                 <ProtectedRoute
-                  element={TransactionsEdit}
+                  element={TransactionsAdd}
                   currentUser={currentUser}
                 />
               }

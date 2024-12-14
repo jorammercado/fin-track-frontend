@@ -1,7 +1,7 @@
 import React from 'react'
 import AddTransaction from '../components/AddTransaction'
 
-const TransactionsEdit = ({ currentUser }) => {
+const TransactionsAdd = ({ currentUser }) => {
     return (
         <div>
             <AddTransaction
@@ -11,4 +11,4 @@ const TransactionsEdit = ({ currentUser }) => {
     )
 }
 
-export default TransactionsEdit
+export default TransactionsAdd
