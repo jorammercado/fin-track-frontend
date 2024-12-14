@@ -156,8 +156,8 @@ export default function TransactionsList({ currentUser }) {
         })
             .then((response) => response.json())
             .then((data) => {
-                setAllTransactions(data)
-                setAllTransactionsDateOrder(data)
+                setAllTransactions(data?.sort((a, b) => a?.transaction_id - b?.transaction_id))
+                setAllTransactionsDateOrder(data?.sort((a, b) => a?.transaction_id - b?.transaction_id))
 
                 let checking = [0]
                 let savings = [0]

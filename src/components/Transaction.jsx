@@ -8,7 +8,11 @@ function Transaction({ transaction, index, checking, savings, investment, curren
     const estTime = createdAt.toLocaleTimeString("en-US", options)
     return (
         <tr className="transactions__container__table__row-values"
-            onClick={() => navigate(`/users/${currentUser.account_id}/profile/transactions/edit`)}
+            onClick={() => navigate(`/users/${currentUser.account_id}/profile/transactions/edit`, 
+                {
+                    state: { transaction }
+                }
+            )}
         >
             <td className="transactions__container__table__row-values__cell">{index + 1}</td>
             <td className="transactions__container__table__row-values__cell">{transaction.transaction_type}</td>
