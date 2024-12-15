@@ -24,6 +24,12 @@ See [backend repository](https://github.com/jorammercado/icapital-budgeter-backe
          - [User Logout and Timeout Cleanup](#user-logout-and-timeout-cleanup)
    - [B. Transaction Management](#b-transaction-management)
       - [Transactions Table](#transactions-table)
+         - [General Attributes](#general-attributes)
+         - [Table Styling](#table-styling)
+         - [Sorting Functionality](#sorting-functionality)
+         - [Adding Transactions](#adding-transactions)
+         - [Editing & Deleting Transactions](#editing--deleting-transactions)
+         - [Balance Updates](#balance-updates)
       - [Transactions Graph](#transactions-graph)
    - [C. Stock Price Data Integration](#c-stock-price-data-integration)
    - [D. Market News](#d-market-news)
@@ -53,10 +59,10 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
 
 1. #### **Route Access Control**
 
-   Access to routes on the frontend is controlled by wrapping them in either a **Public Route** or a **Protected Route** component:
-      - **Public Routes**: Routes such as login and signup pages, accessible only when a user is **not logged in**, example code snippet from main app.jsx:
-         ```javascript
-            <Routes>
+   Access to routes on the frontend is controlled by wrapping them in either a **Public Route** or a **Protected Route** component. Example code snippet:
+
+      ```javascript
+         <Routes>
                <Route path="/"
                   element={
                      <PublicRoute
@@ -66,7 +72,9 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
                      />
                   }
                />
-         ```
+      ```
+
+      - **Public Routes**: Routes such as login and signup pages, accessible only when a user is **not logged in**. 
       - **Protected Routes**: Similarly, routes such as the user profile page among others, accessible only when a user is **logged in**.
       - **Exceptions**: The Home and 404 page can be accessed while either logged in or not.
 
@@ -84,7 +92,10 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
 
 4. #### **Backend Access**
 
-   For access to sensitive data on the backend, directly or through the frontend application, a JWT token is required in the request header. If present, the server will re-compute the signature of the token using the Secret (stored in the backend .env file), the Header, and Payload of the token. If the recomputed signature does not match the recieved signature (tampered invalid token), or if the token has expired (determined by the exp key), or if the token is not present then access is denied. Furthermore, a user could potentially use a different user's valid unexpired token, this is also accounted for by using:
+   For access to sensitive data on the backend, directly or through the frontend application, a JWT token is required in the request header, if present, the server will:
+      1. Re-compute the signature of the token using the Secret (stored in the backend .env file), Header and Payload of the token. 
+      2. If the recomputed signature does not match the recieved signature (tampered invalid token), or if the token has expired (determined by the exp key), or if the token is not present, then access is denied. 
+      3. Furthermore, a user could potentially use a different user's valid unexpired token, this is also accounted for by using:
    ```javascript
       req.account = decoded
       if (req.params.account_id && req.account.account_id !== Number(req.params.account_id))
@@ -160,22 +171,208 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
 ---
 
 ### **B. Transaction Management**
-#### **Transactions Table**
-Users can view their income, expenses, and investment transactions in an interactive table format. The table supports sorting by transaction attributes, such as:
-- Type
-- Amount
-- Category
-- Recurring
-- Recurring Frequency
-- Risk Level
-- Is Planned
-- Date
 
-#### **Transactions Graph**
-Visualize account changes over time using D3.js:
-- Track trends in checking, savings, and investment accounts.
-- Zoom in/out to focus on specific transaction groups.
-- Select which accounts to display for better insights into spending and savings patterns.
+1. ### **Transactions Table**
+   
+   The financial transactions table is a tool that enables users to comprehensively manage, categorize, and analyze their income, expenses, and investments. Presented in an interactive format, the table supports dynamic sorting by key transaction attributes, facilitating in-depth financial analysis and decision-making. 
+
+   Essentially, the table tracks a checking, savings, and investment account and updates these balances based on transaction attributes. Balances start at 0 and adjust dynamically as transactions are added. Below is a detailed breakdown of transaction attributes:
+
+   1. #### **General Attributes**
+
+   - **`transaction_type`**: Denotes the nature of the financial activity and must conform to one of the following enumerated values:
+      - `income`
+      - `expense`
+      - `investment`
+      - `deposit`
+
+   - **`amount`**: Represents the monetary value of the transaction. This value is formatted as a decimal to ensure precision.
+
+   - **`category`**: Assigns the transaction to a predefined classification, allowing users to systematically track and evaluate financial activities. The available categories include but are not limited to:
+      - `salary`, `bonus`, `interest`, `dividend`, `rental income`, `business income`, `investment`, `groceries`, `utilities`, `rent/mortgage`, `transportation`, `education`, `healthcare`, `entertainment`, `subscriptions`, `travel`, `savings`, `emergency fund`, `retirement`, `clothing`, `dining`, `household supplies`, `charity`, `debt repayment`, `other`, `wages`, `account funding`, `loan disbursement`, `checking`
+
+   - **`description`**: An optional text field permitting users to provide additional contextual information or notes pertinent to the transaction.
+
+   - **`recurring`**: A boolean field indicating whether the transaction is periodic. This facilitates tracking of ongoing financial commitments or income streams.
+
+   - **`recurring_frequency`**: Specifies the interval of recurrence for periodic transactions. Valid options include:
+      - `one-time`
+      - `daily`
+      - `weekly`
+      - `monthly`
+      - `yearly`
+
+   - **`risk_level`**: Qualitatively assesses the risk associated with the transaction. This attribute enhances financial planning by categorizing transactions into one of the following tiers:
+      - `n/a`
+      - `low`
+      - `moderate`
+      - `high`
+
+   - **`is_planned`**: A boolean indicator that identifies whether the transaction was anticipated and included in preemptive financial planning.
+
+   - **`created_at`**: A timestamp that records the precise moment the transaction was created. This value defaults to the current system time upon transaction entry.
+
+      These attributes collectively provide users with an unparalleled level of control and insight into their financial activities. By leveraging the table’s extensive sorting and filtering capabilities, users can derive actionable insights and maintain meticulous records tailored to their unique financial objectives.   
+
+   2. #### **Table Styling**
+
+      The table is constructed using Bootstrap classes for style and responsive design, further styling alteration done using custom SCSS. Below is a snippet of the table tag declaration:
+         ```html
+            <section className="transactions__container">
+               <table className="table table-hover table-responsive table-dark transactions__container__table table-bordered">
+                  <tbody>
+                     <tr 
+         ```
+
+         #### **Explanation of Bootstrap Classes**:
+         - **`table`**: Defines a basic table layout.
+         - **`table-hover`**: Adds a hover effect on table rows.
+         - **`table-responsive`**: Ensures the table is scrollable on smaller screens.
+         - **`table-dark`**: Applies a dark theme to the table.
+         - **`table-bordered`**: Adds borders to all table cells.
+
+         #### **Custom Styles**:
+         The table styling was customized to ensure consistency with the application’s theme. Example SCSS snippet of some alterations:
+
+         ```scss
+            &__table {
+               background-color: #09213A;
+               width: 100%;
+               table-layout: auto;
+               overflow-x: auto;
+               td {
+                  background-color: #09213A !important;
+               }
+            }
+         ```
+
+         #### **Notes on customization presented here**:
+         - **`background-color: #09213A;`**: Sets the table and cell background to a custom dark blue.
+         - **`table-layout: auto;`**: Allows the table layout to adjust automatically based on content.
+         - **`overflow-x: auto;`**: Enables horizontal scrolling for better responsiveness.
+         - **`!important`**: Ensures that the custom background color overrides default Bootstrap styling.
+
+
+   3. #### **Sorting Functionality**
+
+      Sorting is accomplished through the enabled buttons at th top of the table (some are disabled as sorting would be non-sensical for some columns).
+
+      Sorting allows users to reorder transactions based on selected attributes (e.g., amount, date). Below is an example of a sorting function for the **Amount** column, other columns are similarly sorted and have its corresponding toggling variable:
+
+      ```javascript
+         const [amountOrder, setAmountOrder] = useState(false)
+         const handleSortAmount = (event) => {
+            event.preventDefault()
+            const sortedTransactions = [...allTransactions].sort((a, b) => {
+               if (amountOrder) {
+                  return b.amount - a.amount // Descending order
+               }
+               return a.amount - b.amount // Ascending order
+            })
+
+            setAllTransactions(sortedTransactions)
+            setAmountOrder(!amountOrder)
+         }
+      ```
+
+      - **Initial State**: The `amountOrder` boolean determines whether sorting is ascending (`false`) or descending (`true`).
+      - **Sorting Logic**: The `sort` method compares `a.amount` and `b.amount` to reorder the array.
+      - **State Update**: After sorting, the updated transactions are saved in `setAllTransactions`, and the sort order toggles.
+      - **Table Remounts**: `allTransactions` is managed as a useState object, and any updates to its state trigger a rerendering of the table component to reflect the updated data.
+
+      
+
+   4. #### **Adding Transactions**
+      Users can add new financial transactions through a form interface. The Add Transaction button is at the bottom middle of the table. The following fields are available:
+      - `transaction_type`: Income, expense, investment, or deposit. Form default set to income.
+      - `amount`: Must be a non-zero value. Form default set to 0.
+      - `category`: Defined categories (e.g., salary, groceries, rent). Form default set to salary
+      - `description`: Optional field for additional transaction details.
+      - `recurring`: Boolean indicating whether the transaction repeats. Form default set to false.
+      - `recurring_frequency`: Frequency of recurrence (e.g., daily, weekly). Form default set to one-time.
+      - `risk_level`: Risk assessment (e.g., low, moderate). Form default set to n/a.
+      - `is_planned`: Indicates if the transaction was pre-planned. Form default set to false.
+
+      The form employs controlled inputs to dynamically update the state as users enter data. State Binding is achieved through the `transaction` object, while Dynamic Updates are implemented using the following function:
+      ```javascript
+         const handleInputChange = (e) => {
+            const { name, value, type, checked } = e.target
+            setTransaction({
+               ...transaction,
+               [name]: type === "checkbox" ? checked : value,
+            })
+         }
+      ```
+
+      #### Explanation of `handleInputChange`:
+      The `handleInputChange` function is a core utility for managing controlled inputs within the form. It dynamically updates the `transaction` state object by:
+
+      - **Destructuring `e.target`**: Extracting the `name`, `value`, `type`, and `checked` properties from the event target to identify the input field and its new value.
+      - **Updating State Dynamically**: Using the `name` property as a key to update the corresponding field in the `transaction` object.
+      - For checkboxes, the `checked` property determines the value (true/false).
+      - For all other input types, the `value` property is used.
+      - **Maintaining Immutability**: By spreading the existing `transaction` object (`...transaction`), only the targeted field is updated, leaving other fields unchanged.
+
+      This ensures the form is responsive and the `transaction` object always reflects the current input values, enabling seamless addition of new transactions.
+
+      A Back button is also provided if user no longer wishes to add a transaction.
+
+   5. #### **Editing & Deleting Transactions**
+
+      Users can edit or delete a transaction by selecting its corresponding row on the table. Clicking anywhere on the row navigates them to the edit transaction page. The general setup of this page is similar to the Add Transaction form, with the following differences:
+
+      - **Pre-filled Fields**: The form fields are pre-populated with the transaction's current values, allowing users to make modifications instead of entering data from scratch.
+      - **API Method Variations**: The API calls to the backend use the `PUT` method for updates and the `DELETE` method for deletions.
+      - **Delete Confirmation**: Deleting a transaction requires user confirmation through a prompt. Users must confirm their intention to delete by pressing a second confirmation button, or they can cancel the operation to avoid accidental deletions.
+
+      This streamlined approach ensures that users can efficiently manage their transactions while maintaining the integrity and accuracy of their financial data. 
+
+
+   6. #### **Balance Updates**
+
+      Balances for checking, savings, and investment accounts are dynamically updated. The update logic operates as follows:
+
+      - **Initial Balances**: All accounts start with a balance of 0. Here’s an example for the checking account (similar logic applies to savings and investments):
+         ```javascript
+            let checking = [0]
+         ```
+
+      - **Transaction Evaluation**: Each transaction is processed to determine which account (‘checking’, ‘savings’, or ‘investments’) will be affected. The decision is based on the `transaction_type` and `category` of the transaction. For example:
+         - Expenses reduce the balance, with the affected account determined by the category (e.g., `investment` decreases `investments`).
+         - Income, investments, and deposits increase the balance.
+         - If transaction type is deposit, then the category will determine which account will be affected, and so on.
+
+         Full logic used provided in TransactionsList.jsx
+
+      - **Dynamic Updates**:
+         - The transaction's `amount` is either added or subtracted, depending on the type of transaction.
+         - Example: For an update to the `checking` account:
+         ```javascript
+            checking.push(checking[checking.length - 1] + updateValue)
+         ```
+         - Non-target accounts retain their prior balances:
+         ```javascript
+            savings.push(savings[savings.length - 1])
+            investments.push(investments[investments.length - 1])
+         ```
+
+      - **Final Account States**: After all transactions are processed, the final state of each account is stored as an array. These arrays track the running balance over time per transaction:
+         ```javascript
+            setCheckingBalance(checking)
+            setSavingsBalance(savings)
+            setInvestmentBalance(investments)
+         ```
+
+      This mechanism ensures accurate and real-time account updates, providing users with immediate insights into their financial standing without requiring backend recalculation. By leveraging dynamic processing and immutability principles, the application delivers both performance and reliability in balance management.
+
+
+
+
+2. ### **Transactions Graph**
+      Visualize account changes over time using D3.js:
+         - Track trends in checking, savings, and investment accounts.
+         - Zoom in/out to focus on specific transaction groups.
+         - Select which accounts to display for better insights into spending and savings patterns.
 
 ---
 
