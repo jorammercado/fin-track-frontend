@@ -304,7 +304,7 @@ export default function TransactionsList({ currentUser }) {
                             </td>
                             <td className="transactions__container__table__headers__balances">
                                 <TransactionsButtonDisabledBalances >
-                                    Balances (as of txn. complete)
+                                    Balances (as of txn. logged)
                                 </TransactionsButtonDisabledBalances>
                             </td>
                         </tr>
