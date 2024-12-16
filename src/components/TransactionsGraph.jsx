@@ -331,7 +331,6 @@ const Graph = ({ checking = [], savings = [],
 
         // Set the graphRef to true so it won't render again
         graphRef.current = true;
-        // }
     }, [checking, savings, investments, screenWidth]);
 
     return (
