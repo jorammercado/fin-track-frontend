@@ -3,7 +3,6 @@
 [<img src="./public/home.png" height="185px" alt="Home Screenshot">](https://icapital-budgeter.netlify.app/)
 
 ## Description
-
 The iCapital Budgeter Frontend is part of the Software Engineer Take-Home Exam Project, designed to evaluate fellows' analytical, software development, and problem-solving skills by assessing their ability to design and develop a full-stack application. This project aims to provide insight into the candidate's thought processes, research methods, and approach to solving problems.
 
 The application allows users to track income and expenses by means of logging financial transactions. Among others, using fields such as transaction type and category, users can track three accounts: checking, savings, and investments, as functions of these financial transactions. The application also allows users to view real-time stock prices and analyze stock performance, helping them make more informed investment decisions. The data for the three accounts is graphed in order for users to see trends in their spending and savings patterns.
@@ -42,16 +41,14 @@ See [backend repository](https://github.com/jorammercado/icapital-budgeter-backe
             - [Legend and Toggling](#legend-and-toggling)
             - [Brushing for Selection](#brushing-for-selection)
          - [Why This Graph Matters](#why-this-graph-matters)
-   - [E. Multi-Factor Authentication](#e-multi-factor-authentication-mfa)
-   - [C. Stock Price Data Integration](#c-stock-price-data-integration)
-   - [D. Market News](#d-market-news)
+   - [C. Multi-Factor Authentication](#c-multi-factor-authentication-mfa)
+   - [D. Stock Price Data Integration](#d-stock-price-data-integration)
+   - [E. Market News](#e-market-news)
 - [Getting Started](#getting-started)
 - [License](#license)
 - [Contact](#contact)
 
-
 ## Tech Stack
-
 - **Frontend**: React, SCSS (BEM), D3, Bootstrap, styled-components
 - **Backend**: Node.js, Express
 - **Database**: PostgreSQL
@@ -68,7 +65,6 @@ See [backend repository](https://github.com/jorammercado/icapital-budgeter-backe
 
 ## Guest Login
 The application includes a **Guest Login** feature, allowing visitors to explore the full functionality of the site without creating an account. This feature provides a seamless way to navigate the platform and interact with all features using pre-seeded "dummy" data. It is ideal for demonstrating the application’s capabilities while ensuring the integrity of real user data.
-
 
 ## Pages
 - **Home**: Provides an overview of the application, welcoming users and highlighting key features.
@@ -88,7 +84,7 @@ The application includes a **Guest Login** feature, allowing visitors to explore
 
 ## Features
 ---
-## **A. Session Security**
+### **A. Session Security**
 Session management on the frontend is implemented using a JWT (JSON Web Token) issued by the backend after verifying user credentials. The JWT is securely stored in local storage with an expiration time of 30 minutes. Upon expiration or user logout, the token and general user data are automatically removed from local storage to maintain session security. Sensitive user data such as financial transactions and password are not stored on the frontend. Instead when access is needed, they are retrieved from the backend after verifying the token attached to the request header.
 
 1. ### **Route Access Control**
@@ -203,16 +199,14 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
             }
          ```
 ---
-
-## **B. Transaction Management**
-
+### **B. Transaction Management**
 1. ### **Transactions Table**
    
    The financial transactions table is a tool that enables users to comprehensively manage, categorize, and analyze their income, expenses, and investments. Presented in an interactive format, the table supports dynamic sorting by key transaction attributes, facilitating in-depth financial analysis and decision-making. 
 
    Essentially, the table tracks a checking, savings, and investment account and updates these balances based on transaction attributes. Balances start at 0 and adjust dynamically as transactions are added. Below is a detailed breakdown of transaction attributes:
 
-   1. ### **General Attributes**
+   1. #### **General Attributes**
 
    - **`transaction_type`**: Denotes the nature of the financial activity and must conform to one of the following enumerated values:
       - `income`
@@ -248,7 +242,7 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
 
       These attributes collectively provide users with an unparalleled level of control and insight into their financial activities. By leveraging the table’s extensive sorting and filtering capabilities, users can derive actionable insights and maintain meticulous records tailored to their unique financial objectives.   
 
-   2. ### **Table Styling**
+   2. #### **Table Styling**
 
       The table is constructed using Bootstrap classes for style and responsive design, further styling alteration done using custom SCSS. Below is a snippet of the table tag declaration:
          ```html
@@ -287,7 +281,7 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
       - **`!important`**: Ensures that the custom background color overrides default Bootstrap styling.
 
 
-   3. ### **Sorting Functionality**
+   3. #### **Sorting Functionality**
 
       Sorting is accomplished through the enabled buttons at th top of the table (some are disabled as sorting would be nonsensical for some columns).
 
@@ -316,7 +310,7 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
 
       
 
-   4. ### **Adding Transactions**
+   4. #### **Adding Transactions**
       Users can add new financial transactions through a form interface. The Add Transaction button is at the bottom middle of the table. The following fields are available:
       - `transaction_type`: Income, expense, investment, or deposit. Form default set to income.
       - `amount`: Must be a non-zero value. Form default set to 0.
@@ -351,7 +345,7 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
 
       A Back button is also provided if user no longer wishes to add a transaction.
 
-   5. ### **Editing & Deleting Transactions**
+   5. #### **Editing & Deleting Transactions**
 
       Users can edit or delete a transaction by selecting its corresponding row on the table. Clicking anywhere on the row navigates them to the edit transaction page. The general setup of this page is similar to the Add Transaction form, with the following differences:
 
@@ -362,7 +356,7 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
       This streamlined approach ensures that users can efficiently manage their transactions while maintaining the integrity and accuracy of their financial data. 
 
 
-   6. ### **Balance Updates**
+   6. #### **Balance Updates**
 
       Balances for checking, savings, and investment accounts are dynamically updated. The update logic operates as follows:
 
@@ -395,18 +389,16 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
 
       This mechanism ensures accurate and real-time account updates, providing users with immediate insights into their financial standing without requiring backend recalculation. By leveraging dynamic processing and immutability principles, the application delivers both performance and reliability in balance management.
 
----
-
 2. ### **Transactions Graph**
       The Transactions Graph provides users with a dynamic visualization of changes in their financial accounts (checking, savings, and investments) over time. Implemented using D3.js, this interactive graph includes the following features:
 
-      1. ### **Core Functionalities**
+      1. #### **Core Functionalities**
          1. **Account Visualization**: Displays the running balances of checking, savings, and investment accounts as line graphs.
          2. **Dynamic Data Updates**: Graph data updates in real-time based on user transactions, reflecting changes immediately.
          3. **Zoom**: Users can zoom in/out to focus on specific time periods or transactions, providing granular insights into account trends.
          4. **Customizable Visibility**: A built-in legend allows users to toggle individual accounts (checking, savings, investments) on or off, enhancing clarity.
 
-      2. ### **Axes & Visualization**
+      2. #### **Axes & Visualization**
          - The X-axis represents transactions by order of time/date - logged into the system. If a given transaction was performed on the savings account for example, then the other two accounts will remain the same for that particular transaction. 
          - The Y-axis scales to the balance for a given account, updating dynamically as data changes.
          - **Styling**
@@ -418,7 +410,7 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
             3. Lines and shaded areas under lines create a visually engaging experience when data changes or users zoom in/out.
             4. Specific data points are plotted as small circles for precise visualization.
 
-      3. ### **Dynamic Scaling**
+      3. #### **Dynamic Scaling**
       - The graph dynamically adjusts to the user's screen size to ensure optimal display across devices. 
       In the following code snippet, an event listener is added to the window object - when screen size changes, it triggers the function handleResize to execute. 
          ```javascript
@@ -439,7 +431,7 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
                      screenWidth <= 1660 && screenWidth > 1560 ? 1350 :
          ```
 
-      4. ### **User Interaction Features**
+      4. #### **User Interaction Features**
          1. #### **Legend and Toggling**:
             - A clickable legend allows users to toggle the visibility of individual accounts.
             - Color-coded boxes indicate whether an account is visible or hidden.
@@ -488,23 +480,23 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
 
 
 
-      5. ### **Why This Graph Matters**
+      5. #### **Why This Graph Matters**
          This interactive graph empowers users to make data-driven financial decisions by offering:
          - A clear, real-time visualization of account trends.
          - Tools to analyze patterns in income, expenses, and investments.
          - The ability to focus on specific data points for deeper insights.
 
          By leveraging D3.js for its robust data visualization capabilities, the Transactions Graph delivers an intuitive and responsive user experience while handling complex financial datasets efficiently.
-
 ---
-
-### **E. Multi-Factor Authentication (MFA)**
+### **C. Multi-Factor Authentication (MFA)**
 MFA is implemented to add an extra layer of security for user authentication, ensuring only authorized users can access their accounts. 
 
-### **C. Stock Price Data Integration**
+---
+### **D. Stock Price Data Integration**
 Real-time stock price data is fetched from Polygon.io API. Users can view the latest data for multiple stocks in a tabular format, including metrics such as open, close, high, low, and volume. This feature provides an overview of the stock market and helps users understand the status of their investments.
 
-### **D. Market News**
+---
+### **E. Market News**
 Real-time Financial News obtained from finnhub.io
 
 
