@@ -42,8 +42,9 @@ See [backend repository](https://github.com/jorammercado/icapital-budgeter-backe
             - [Brushing for Selection](#brushing-for-selection)
          - [Why This Graph Matters](#why-this-graph-matters)
    - [C. Multi-Factor Authentication](#c-multi-factor-authentication-mfa)
-   - [D. Stock Price Data Integration](#d-stock-price-data-integration)
-   - [E. Market News](#e-market-news)
+   - [D. Pagination](#d-pagination)
+   - [E. Stock Price Data Integration](#e-stock-price-data-integration)
+   - [F. Market News](#f-market-news)
 - [Getting Started](#getting-started)
 - [License](#license)
 - [Contact](#contact)
@@ -492,11 +493,65 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
 MFA is implemented to add an extra layer of security for user authentication, ensuring only authorized users can access their accounts. 
 
 ---
-### **D. Stock Price Data Integration**
-Real-time stock price data is fetched from Polygon.io API. Users can view the latest data for multiple stocks in a tabular format, including metrics such as open, close, high, low, and volume. This feature provides an overview of the stock market and helps users understand the status of their investments.
+### **D. Pagination**
+pagination
 
 ---
-### **E. Market News**
+### **E. Stock Price Data Integration**
+The Stock Price Data Integration feature provides users with real-time stock market data to aid in financial decision-making. This feature utilizes the Polygon.io API and presents the data in a tabular format with interactive elements for sorting and pagination.
+
+#### **Core Functionalities**
+
+1. **Real-Time Data Retrieval**:
+   - The application fetches live stock data from the Polygon.io endpoint:
+     ```plaintext
+     https://api.polygon.io/v2/snapshot/locale/us/markets/stocks/tickers
+     ```
+     - This endpoint delivers a snapshot of U.S. stock market tickers, including metrics such as price changes, open, high, low, close, volume, and VWAP (Volume Weighted Average Price).
+     - Documentation reference: [Polygon.io API Documentation](https://polygon.io/docs/stocks/get_v2_snapshot_locale_us_markets_stocks_tickers).
+
+   - Example API integration, fetching and saving data:
+     ```javascript
+     useEffect(() => {
+         const fetchStockData = async () => {
+             try {
+                 if (!stocksData) {
+                     const response = await fetch(`https://api.polygon.io/v2/snapshot/locale/us/markets/stocks/tickers?apiKey=${API}`)
+                     if (!response.ok) {
+                         throw new Error(`HTTP error! Status: ${response.status}`)
+                     }
+                     const data = await response.json()
+                     setStocksData(data.tickers)
+                 }
+             } catch (error) {
+                 console.error('Error fetching stock data:', error)
+             }
+         }
+         fetchStockData()
+     }, [API])
+     ```
+
+2. **Interactive Sorting**:
+   - Users can sort the stock data alphabetically by ticker symbol. Uses same general format for sorting as in the Transactions table see [Sorting Functionality](#sorting-functionality).
+
+   - Clickable sort button toggles between ascending (`↑`) and descending (`↓`) order.
+
+3. **Pagination**:
+   - The data is displayed in a paginated table with a default page size of 15 entries.
+   - Pagination logic ensures efficient rendering of large datasets. See [Pagination](#d-pagination) section for detailed discussion. 
+
+4. **Metrics displayed include**:
+   - Change and Change Percentage
+   - Open, High, Low, Close
+   - Volume and VWAP
+
+#### **Feature Relevance**
+The Stock Price Data Integration feature empowers users by providing access to up-to-date stock metrics and helps users monitor and evaluate their investment portfolios effectively.
+
+This robust implementation highlights the seamless integration of third-party APIs and client-side data management, delivering a valuable tool for financial planning and investment analysis.
+
+---
+### **F. Market News**
 Real-time Financial News obtained from finnhub.io
 
 

@@ -1,5 +1,4 @@
-// import React from 'react'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Stocks from '../components/Stocks'
 
 const Ivestments = ({ currentUser, setStocks, stocks }) => {
