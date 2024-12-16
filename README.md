@@ -12,6 +12,10 @@ See [backend repository](https://github.com/jorammercado/icapital-budgeter-backe
 
 ## Contents
 - [Tech Stack](#tech-stack)
+- [Deployed Application](#deployed-application)
+- [GitHub Repositories](#github-repositories)
+- [Guest Login](#guest-login)
+- [Pages](#pages)
 - [Features](#features)
    - [A. Session Security](#a-session-security)
       - [Route Access Control](#route-access-control)
@@ -38,13 +42,9 @@ See [backend repository](https://github.com/jorammercado/icapital-budgeter-backe
             - [Legend and Toggling](#legend-and-toggling)
             - [Brushing for Selection](#brushing-for-selection)
          - [Why This Graph Matters](#why-this-graph-matters)
+   - [E. Multi-Factor Authentication](#e-multi-factor-authentication-mfa)
    - [C. Stock Price Data Integration](#c-stock-price-data-integration)
    - [D. Market News](#d-market-news)
-   - [E. Multi-Factor Authentication](#e-multi-factor-authentication-mfa)
-- [Guest Login](#guest-login)
-- [Pages](#pages)
-- [Deployed Application](#deployed-application)
-- [GitHub Repositories](#github-repositories)
 - [Getting Started](#getting-started)
 - [License](#license)
 - [Contact](#contact)
@@ -58,9 +58,36 @@ See [backend repository](https://github.com/jorammercado/icapital-budgeter-backe
 - **Third Party API**: Polygon.io for real-time stock data, Finnhub.io for market news
 - **Authentication**: JWT (using jwt-decode for session management & security)
 
+## Deployed Application
+- **Frontend hosted on Netlify**: [icapital-budgeter.netlify.app](https://icapital-budgeter.netlify.app/)
+- **Backend Server hosted on Render**: [icapital-budgeter-backend-services.onrender.com](https://icapital-budgeter-backend-services.onrender.com/)
+
+## GitHub Repositories
+- **Frontend**: [github.com/jorammercado/icapital-budgeter-frontend](https://github.com/jorammercado/icapital-budgeter-frontend)
+- **Backend**:  [github.com/jorammercado/icapital-budgeter-backend](https://github.com/jorammercado/icapital-budgeter-backend)
+
+## Guest Login
+The application includes a **Guest Login** feature, allowing visitors to explore the full functionality of the site without creating an account. This feature provides a seamless way to navigate the platform and interact with all features using pre-seeded "dummy" data. It is ideal for demonstrating the application’s capabilities while ensuring the integrity of real user data.
+
+
+## Pages
+- **Home**: Provides an overview of the application, welcoming users and highlighting key features.
+- **Login**: Allows users to log in using their credentials to access their accounts securely.
+- **Sign-Up**: Enables new users to create an account by providing necessary details.
+- **Verify OTP**: Used during the login process to verify the one-time passcode sent to the user's email.
+- **404**: Displays an error message when a user attempt to navigate to a non-existent page.
+- **Account Details**: Shows detailed information about the user’s account.
+- **Edit Account Details**: Allows users to update their account information.
+- **Edit Account Password**: Enables users to change their account password securely.
+- **Dashboard**: Displays account balances for checking, savings, and investments in a consolidated view.
+- **Investments**: Provides real time stock prices from third party API polygon.io.
+- **Market News**: Provides real time financial news from third party API finnhub.io.
+- **Transactions**: Allows users to view transactions in both table and graph formats, including sorting and filtering options.
+- **Add Transaction**: Enables users to log new financial transactions with details such as type, amount, and category.
+- **Edit Transaction**: Enables users to edt or delete a financial transactions.
 
 ## Features
-
+---
 ## **A. Session Security**
 Session management on the frontend is implemented using a JWT (JSON Web Token) issued by the backend after verifying user credentials. The JWT is securely stored in local storage with an expiration time of 30 minutes. Upon expiration or user logout, the token and general user data are automatically removed from local storage to maintain session security. Sensitive user data such as financial transactions and password are not stored on the frontend. Instead when access is needed, they are retrieved from the backend after verifying the token attached to the request header.
 
@@ -429,8 +456,6 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
                      svg.selectAll("." + d).style("opacity", visible[d] ? 1 : 0);
                   });
                ```
-
-               **Breakdown**:
                - `legend.append("rect")`: Creates a rectangle element for each account type in the legend.
                - `.attr("x", width + 8)`: Positions the legend rectangle to the right of the graph.
                - `.attr("width", 15)` and `.attr("height", 15)`: Define the size of the legend boxes.
@@ -453,7 +478,6 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
                .on("end", updateChart);
             svg.append("g").attr("class", "brush").call(brush);
             ```
-            **Breakdown**:
             - `let brush = d3.brushX()`: Initializes (functional & visual) a horizontal brush for the X-axis.
             - `.extent([[0, 0], [width, height]])`: Defines the area where the brush can operate.
             - `.on("end", updateChart)`: Calls the `updateChart` function when the user finishes brushing.
@@ -472,9 +496,10 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
 
          By leveraging D3.js for its robust data visualization capabilities, the Transactions Graph delivers an intuitive and responsive user experience while handling complex financial datasets efficiently.
 
-
-
 ---
+
+### **E. Multi-Factor Authentication (MFA)**
+MFA is implemented to add an extra layer of security for user authentication, ensuring only authorized users can access their accounts. 
 
 ### **C. Stock Price Data Integration**
 Real-time stock price data is fetched from Polygon.io API. Users can view the latest data for multiple stocks in a tabular format, including metrics such as open, close, high, low, and volume. This feature provides an overview of the stock market and helps users understand the status of their investments.
@@ -482,37 +507,6 @@ Real-time stock price data is fetched from Polygon.io API. Users can view the la
 ### **D. Market News**
 Real-time Financial News obtained from finnhub.io
 
-### **E. Multi-Factor Authentication (MFA)**
-MFA is implemented to add an extra layer of security for user authentication, ensuring only authorized users can access their accounts. 
-
-## Guest Login
-
-The application includes a **Guest Login** feature, allowing visitors to explore the full functionality of the site without creating an account. This feature provides a seamless way to navigate the platform and interact with all features using pre-seeded "dummy" data. It is ideal for demonstrating the application’s capabilities while ensuring the integrity of real user data.
-
-
-## Pages
-
-- **Home**: Provides an overview of the application, welcoming users and highlighting key features.
-- **Login**: Allows users to log in using their credentials to access their accounts securely.
-- **Sign-Up**: Enables new users to create an account by providing necessary details.
-- **Verify OTP**: Used during the login process to verify the one-time passcode sent to the user.
-- **404**: Displays an error message when users attempt to navigate to a non-existent page.
-- **Account Details**: Shows detailed information about the user’s account.
-- **Edit Account Details**: Allows users to update their account information.
-- **Edit Account Password**: Enables users to change their account password securely.
-- **Dashboard**: Displays account balances for checking, savings, and investments in a consolidated view.
-- **Investments**: Provides real time stock prices from third party API polygon.io.
-- **Transactions**: Allows users to view transactions in both table and graph formats, including sorting and filtering options.
-- **Add Transaction**: Enables users to log new financial transactions with details such as type, amount, and category.
-
-
-## Deployed Application
-- **Frontend hosted on Netlify**: [https://icapital-budgeter.netlify.app/](https://icapital-budgeter.netlify.app/)
-- **Backend Server hosted on Render**: [https://icapital-budgeter-backend-services.onrender.com/](https://icapital-budgeter-backend-services.onrender.com/)
-
-## GitHub Repositories
-- **Frontend**: [https://github.com/jorammercado/icapital-budgeter-frontend](https://github.com/jorammercado/icapital-budgeter-frontend)
-- **Backend**:  [https://github.com/jorammercado/icapital-budgeter-backend](https://github.com/jorammercado/icapital-budgeter-backend)
 
 ## Getting Started
 
