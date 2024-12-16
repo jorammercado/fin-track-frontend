@@ -552,7 +552,90 @@ This robust implementation highlights the seamless integration of third-party AP
 
 ---
 ### **F. Market News**
-Real-time Financial News obtained from finnhub.io
+
+The Market News feature delivers real-time financial news from **Finnhub.io**, providing users with relevant and up-to-date information to make informed financial decisions. This feature integrates news articles into the application with a dynamic and user-friendly design.
+
+#### **Core Functionalities**
+
+1. **Real-Time News Retrieval**:
+   - The application fetches financial news data from the Finnhub.io endpoint:
+     ```plaintext
+     https://finnhub.io/api/v1/news?category=general
+     ```
+     - This endpoint provides real-time general financial news articles, including headlines, summaries, images, and links to the full articles.
+     - Documentation reference: [Finnhub.io API Documentation](https://finnhub.io/docs/api/market-news).
+
+   - Example API integration:
+     ```javascript
+     useEffect(() => {
+         const fetchFinancialNews = async () => {
+             try {
+                 const response = await fetch(`https://finnhub.io/api/v1/news?category=general&token=${API}`)
+                 if (!response?.ok) {
+                     throw new Error(`Error: ${response?.statusText}`)
+                 }
+                 const data = await response?.json()
+                 setNews(data)
+             } catch (err) {
+                 console.error(err)
+             }
+         }
+         fetchFinancialNews()
+     }, [])
+     ```
+
+2. **Dynamic News Display**:
+   - News articles are displayed in a grid layout, ensuring responsiveness and visual clarity.
+   - Each article includes:
+     - **Headline**: Highlighting the main focus of the article.
+     - **Summary**: Providing a brief description of the news content.
+     - **Image**: A thumbnail to enhance visual appeal.
+     - **External Link**: Clicking on an article opens the full story in a new tab.
+
+   - Example rendering logic:
+     ```javascript
+     <div className="news__container">
+         {news?.map((item, index) => (
+             <div className="news__container__story"
+                 key={index}
+                 onClick={() => window.open(item?.url, '_blank', 'noopener, noreferrer')}>
+                 <div className="news__container__story__text">
+                     <div className="headline">{item?.headline}</div>
+                     <div className="summary">{item?.summary}</div>
+                 </div>
+                 <div>
+                     <img src={item?.image} />
+                 </div>
+             </div>
+         ))}
+     </div>
+     ```
+
+3. **Styling and Responsiveness**:
+   - The news grid leverages SCSS to deliver a polished and professional aesthetic.
+   - Articles "pop" out when hovering over - drawing user attention and improving interactivity.
+   - Sample SCSS snippet demonstrating styling and hover effect:
+     ```scss
+     .news {
+         &__container {
+            &__story {
+               cursor: pointer;
+               transition: box-shadow 0.35s ease-in-out;
+                  &:hover {
+                     box-shadow:
+                        rgba(0, 0, 0, 0.5) 0px 80px 80px -20px,
+                        rgba(0, 0, 0, 0.3) 0px -20px 50px -10px,
+                        rgba(0, 0, 0, 0.4) 0px 10px 20px -5px;
+                  }
+            }
+         }
+     }
+     ```
+
+#### **Feature Relevance**
+Timely information provides users with the latest financial news, enabling them to make informed decisions. Interactive design ensures a seamless browsing experience with visually appealing layouts and clickable elements. This integration exemplifies effective API usage and front-end design, making financial news easily accessible and visually engaging for users.
+
+
 
 
 ## Getting Started
@@ -576,7 +659,7 @@ To run this project, you will need:
    ```bash
    cd icapital-budgeter-frontend
    ```
-4. Create a `.env` file in the root of the project directory with the following content (replace `4001` with the port your backend server is running on if different). To get a Polygon API key you can go to https://polygon.io/ and click [Create API Key](https://polygon.io/dashboard/signup?redirect=%2Fdashboard%2Fkeys):
+4. Create a `.env` file in the root of the project directory with the following content (replace `4001` with the port your backend server is running on if different). To get a Polygon API key you can go to https://polygon.io/ and click [Create API Key](https://polygon.io/dashboard/signup?redirect=%2Fdashboard%2Fkeys). Similarly to get a Finnhub API key sign up here [https://finnhub.io/](https://finnhub.io/)
    ```
    VITE_API_URL=http://localhost:4001
    VITE_POLYGON_API_KEY=your_polygon_api_key_here
