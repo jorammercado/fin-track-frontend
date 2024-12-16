@@ -42,6 +42,18 @@ See [backend repository](https://github.com/jorammercado/icapital-budgeter-backe
             - [Brushing for Selection](#brushing-for-selection)
          - [Why This Graph Matters](#why-this-graph-matters)
    - [C. Multi-Factor Authentication](#c-multi-factor-authentication-mfa)
+      - [Login Initiation](#login-initiation)
+         - [Validation](#validations)
+         - [Submitting Request](#submits-request)
+      - [Backend receives initial login request](#backend-receives-initial-login-request)
+         - [Verifies the provided email and password](#verifies-the-provided-email-and-password)
+         - [Generates a 6-digit OTP](#generates-a-6-digit-otp)
+         - [Sends the OTP to the user’s email](#sends-the-otp-to-the-users-email)
+         - [Sends a response to the frontend](#sends-a-response-to-the-frontend)
+      - [Frontend redirect from Login to VerifyOTP Page](#frontend-redirect-from-login-to-verifyotp-page)
+         - [Validation](#validation)
+         - [Submitting Request](#submitting-request)
+      - [Backend Receives OTP for Verification](#backend-receives-otp-for-verification)
    - [D. Pagination](#d-pagination)
    - [E. Stock Price Data Integration](#e-stock-price-data-integration)
    - [F. Market News](#f-market-news)
@@ -490,7 +502,215 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
          By leveraging D3.js for its robust data visualization capabilities, the Transactions Graph delivers an intuitive and responsive user experience while handling complex financial datasets efficiently.
 ---
 ### **C. Multi-Factor Authentication (MFA)**
-MFA is implemented to add an extra layer of security for user authentication, ensuring only authorized users can access their accounts. 
+
+The Multi-Factor Authentication (MFA) system provides an additional layer of security for user authentication, ensuring only authorized users can access their accounts. The login flow consists of four distinct steps that involve interaction between the frontend and backend components.
+
+1. ### **Login Initiation**
+   Users initiate the login process by providing their email and password on the frontend. The provided credentials are validated locally before being sent to the backend for further processing.
+
+   1. #### Validations
+   - Validates email and password using regex and length checks. One example frontend validation:
+      ```javascript
+         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+         if (!emailRegex.test(email))
+            emailErrors.push(`Invalid email format. Please enter a valid email address, e.g., example@domain.com.`)
+         return emailErrors
+      ```
+      **Detailed Breakdown**:
+      - `^` and `$`: Assert the start and end of the string, ensuring the entire string matches the pattern.
+      - `[a-zA-Z0-9._%+-]+`: Matches the local part of the email, allowing letters, digits, and specific special characters (e.g., `.`, `_`, `%`, `+`, `-`).
+      - `@`: Matches the `@` symbol, separating the local part from the domain.
+      - `[a-zA-Z0-9.-]+`: Matches the domain name, allowing letters, digits, dots (`.`), and hyphens (`-`).
+      - `\.`: Matches the literal dot separating the domain from the top-level domain (TLD).
+      - `[a-zA-Z]{2,}`: Ensures the TLD contains only letters and is at least two characters long.
+
+      **Examples**:
+      - Valid Emails:
+      - `example@domain.com`
+      - `user.name+tag@sub.domain.org`
+      - Invalid Emails:
+      - `example@domain` (missing TLD)
+      - `@domain.com` (missing local part)
+      - `example@domain..com` (double dots in domain part)
+
+   2. #### Submits Request
+   - Submits the credentials to the backend via a POST request to the `/accounts/login-initiate` endpoint.
+
+      **Code Snippet**:
+      ```javascript
+      const handleSubmit = async (e) => {
+         e.preventDefault()
+         const emailErrors = validatesEmail()
+         const passwordErrors = validatesPassword()
+         if (emailErrors.length || passwordErrors.length) {
+            setErrors([...emailErrors, ...passwordErrors])
+            return
+         }
+
+         try {
+            const res = await axios.post(`${VITE_API_URL}/accounts/login-initiate`, { email, password })
+            if (res?.data?.error) throw new Error(res?.data?.error)
+
+            Swal.fire({
+                  text: `OTP has been sent to your email. Please verify to continue.`,
+                  confirmButtonText: 'OK',
+                  confirmButtonColor: '#07a',
+            }).then(() => {
+                  navigate(`/users/${res.data.account_id}/verify-otp-login`)
+            })
+         } catch (err) {
+            processLoginErrors(err?.response?.data?.error)
+         }
+      }
+      ```
+   
+2. ### **Backend receives initial login request**
+
+   1. #### Verifies the provided email and password:
+      ```javascript
+      const isMatch = await bcrypt.compare(req.body.password, oneAccount.password_hashed)
+         if (!isMatch) {
+               return res.status(400).json(loginFailureMessage)
+         }
+      ```
+
+      - `bcrypt.compare`: This function compares the hashed password stored in the database (`oneAccount.password_hashed`) with the plaintext password provided by the user (`req.body.password`). Hashing of the plaintext password and comparison to the stored hashed password done internally by `bcrypt.compare`.
+      - If the passwords do not match, the function responds with a `400` status and a `loginFailureMessage` JSON object to indicate a failed login attempt.
+      - This step ensures that only users with the correct credentials proceed further.
+
+   2. #### Generates a 6-digit OTP:
+      If valid, generates a 6-digit OTP (One-Time Password) and stores its hashed value with an expiration timestamp:
+         ```javascript
+         const otp = Math.floor(100000 + Math.random() * 900000).toString()
+         const hashedOtp = await bcrypt.hash(otp, 10)
+         const expirationTimeForOTP = new Date(Date.now() + OTP_EXPIRATION_MS)
+         await updateAccountMFAOneTimePassword(account_id, hashedOtp, expirationTimeForOTP)
+         ```
+         - **OTP Generation**:
+            - `Math.random() * 900000`: Produces a random number between 0 and 899999.
+            - `100000 +`: Ensures the resulting number is always a 6-digit value.
+            - `.toString()`: Converts the number to a string for consistency in processing and display.
+         - **Hashing the OTP**:
+            - `bcrypt.hash(otp, 10)`: Hashes the OTP using bcrypt with a salt factor of 10 for secure storage in the database.
+         - **Expiration Timestamp**:
+            - `new Date(Date.now() + OTP_EXPIRATION_MS)`: Sets the OTP’s expiration time by adding a predefined duration (`OTP_EXPIRATION_MS`) to the current timestamp. Set `OTP_EXPIRATION_MS` to 3 minutes in milliseconds. `expirationTimeForOTP` will be a Date Object representing a date/time in the future.
+         - **Database Update**:
+            - `updateAccountMFAOneTimePassword`: Stores the hashed OTP and expiration time in the database (for the user attempting to login) for later verification.
+
+   3. #### Sends the OTP to the user’s email:
+      ```javascript
+         const mailOptions = createMailOptions(
+            email,
+            "Your OTP for Login",
+            `Your one-time password (OTP) is: ${otp}. It will expire in 3 minutes.`
+         )
+         transporter.sendMail(mailOptions)
+      ```
+      - **Email Preparation**:
+         - `createMailOptions`: Constructs the email with the recipient’s address, subject line, and body content.
+         - The body includes the generated OTP and its expiration time to guide the user.
+      - **Email Dispatch**:
+         - `transporter.sendMail(mailOptions)`: Sends the email using nodemailer library, see function `emailTransporter.js` in email folder in backend repo for details.
+         - This ensures that the user receives the OTP securely via email for the next authentication step.
+
+
+
+   4. #### Sends a response to the frontend:
+      ```javascript
+         return res.status(200).json({
+            message: "Please check your email for the one-time password that has been sent to it.",
+            account_id: oneAccount.account_id
+         })
+      ```
+      - **Response Structure**:
+         - `message`: Provides feedback to the user. Not used in current implementation, alternate message displayed.
+         - `account_id`: Returns the user’s unique identifier for reference in subsequent steps (e.g., OTP verification).
+      - **HTTP Status Code**:
+         - `200`: Indicates a successful action, reassuring the frontend that the request was processed correctly.
+         - The frontend uses this response (**no errors from all previous steps**) to redirect the user to the OTP verification page. See `/login-initiate` route for full features and all checks performed including middleware validations.
+
+
+3. ### **Frontend redirect from Login to VerifyOTP Page**
+   Upon the backend sending the OTP, the frontend receives a successful response, with only the user's account id. The frontend then redirects the user to the VerifyOTP page, where they input the code. The frontend performs some validations, before then sending the account ID and OTP to the backend for further validation.
+
+   1. #### Validation
+   - Validates the OTP format (6-digit numeric code) and presence.
+      ```javascript
+         const validateOtp = () => {
+            const otpErrors = []
+            if (!otp.length)
+               otpErrors.push('OTP is required')
+            if (otp.length !== 6 || !/^[0-9]{6}$/.test(otp))
+               otpErrors.push('OTP must be a 6-digit numeric code')
+            return otpErrors
+         }
+      ```
+      - Regex `/^[0-9]{6}$/` ensures that stings starts with a digit `^`.
+      - Contains exactly 6 digits `[0-9]{6}`
+      - The `$` ensures the string ends after exactly 6 digits
+
+   2. #### Submitting Request
+   - Submits the account ID and OTP to the backend via a POST request to the `/accounts/verify-otp` endpoint.
+
+      ```javascript
+         const handleSubmit = async (e) => {
+            e.preventDefault()
+            const otpErrors = validateOtp()
+            if (otpErrors.length) {
+               setErrors(otpErrors)
+               return
+            }
+            try {
+               const res = await axios.post(`${VITE_API_URL}/accounts/verify-otp`, { account_id, otp })
+               if (res.data.error) throw new Error(res.data.error)
+
+               Swal.fire({
+                     text: `Success! Redirecting to your profile...`,
+                     confirmButtonText: 'OK',
+                     confirmButtonColor: '#07a',
+               }).then(() => {
+                     setCurrentUser(res.data.account, res.data.token)
+                     navigate(`/users/${account_id}/profile`)
+               })
+            } catch (err) {
+               Swal.fire({
+                     text: `Incorrect OTP! Redirecting to login page...`,
+                     confirmButtonText: 'OK',
+                     confirmButtonColor: '#07a',
+               }).then(() => {
+                     navigate(`/login`)
+               })
+            }
+         }
+      ```
+
+   - As seen from above code snippet, depending on the backend response, either sets the user general data and session token then redirects to profile page on successful verification of OTP, or, redirects to login page if backend verification of OTP failed.
+
+4. ### **Backend Receives OTP for Verification**:
+   - Validates the OTP by comparing it to the stored hashed value. OTP comparison done through `bcrypt.compare` function, same as password checking. Application developers cannot see either the password of the user or the OTP sent to their email.
+   - Checks if the OTP has expired.
+   - If either condition fails returns error.
+      ```javascript
+      const isMatch = await bcrypt.compare(otp, account.mfa_otp)
+      if (!isMatch || new Date() > account.mfa_otp_expiration) {
+         return res.status(400).json({ error: "Invalid account or OTP." })
+      }
+      ```
+   
+   - If OTP valid, generates a JWT token and authenticates the user.
+   - Sends successful response to the frontend
+      ```javascript
+      const token = jwt.sign(
+         { account_id: account.account_id, email: account.email, username: account.username },
+         process.env.JWT_SECRET,
+         { expiresIn: '30m' }
+      )
+      res.status(200).json({ message: "Login successful.", token, account })
+      ```
+   - Back to the previous Step 3 for program control flow, see [Submitting Request](#submitting-request). After user is redirected to profile page, also see [User Login and Session Initialization](#user-login-and-session-initialization) for program control flow.
+
+**Feature Significance**:
+This robust MFA implementation enhances account security by combining OTP-based authentication and device monitoring. It ensures that unauthorized access attempts are detected and mitigated effectively.
 
 ---
 ### **D. Pagination**
