@@ -55,6 +55,9 @@ See [backend repository](https://github.com/jorammercado/icapital-budgeter-backe
          - [Submitting Request](#submitting-request)
       - [Backend Receives OTP for Verification](#backend-receives-otp-for-verification)
    - [D. Pagination](#d-pagination)
+      - [Pagination Logic](#pagination-logic-usepaginationjs)
+      - [Pagination Component](#pagination-component-paginationjsx)
+      - [Pagination in Use: Transactions List](#pagination-in-use-transactions-list)
    - [E. Stock Price Data Integration](#e-stock-price-data-integration)
    - [F. Market News](#f-market-news)
 - [Getting Started](#getting-started)
@@ -714,7 +717,197 @@ This robust MFA implementation enhances account security by combining OTP-based 
 
 ---
 ### **D. Pagination**
-pagination
+
+Pagination is implemented to efficiently handle large datasets by dividing them into smaller, manageable chunks. This feature enhances both performance and usability, particularly for data-rich components like the Transactions and Stocks Tables.
+
+1. #### **Pagination Logic: usePagination.js**
+   The `usePagination.js` file encapsulates the logic for generating pagination ranges, ensuring a clean and reusable implementation. It calculates the page numbers to be displayed based on the current page, total pages, sibling counts, and edge cases for rendering dots (`...`).
+
+   **Code Explanation**:
+      ```javascript
+         const range = (start, end) => {
+            let length = end - start + 1
+            return Array.from({ length }, (_, idx) => idx + start)
+         }
+      ```
+      - **Purpose**: Generates an array of numbers from `start` to `end`.
+      - **Example**: `range(1, 5)` produces `[1, 2, 3, 4, 5]`.
+
+      ```javascript
+         export const usePagination = ({
+            totalCount,
+            pageSize,
+            siblingCount = 1,
+            currentPage
+         }) => {
+            const paginationRange = useMemo(() => {
+      ```
+      - **useMemo**: Ensures the `paginationRange` is only recalculated when any of the dependencies (`totalCount`, `pageSize`, `siblingCount`, `currentPage`) change, optimizing performance.
+
+      ```javascript
+      const totalPageCount = Math.ceil(totalCount / pageSize)
+      ```
+      - **Total Page Count**: Calculates the total number of pages by dividing the total number of items (`totalCount`) by the number of items per page (`pageSize`).
+      - **Example**: If `totalCount` is 100 and `pageSize` is 10, `totalPageCount` is 10.
+
+
+      ```javascript
+         const totalPageNumbers = siblingCount + 5
+      ```
+      - **Total Page Numbers**: Accounts for the current page, sibling pages, and edge pages (first and last). Adds 5 to include these components: the current page, two dots (`...`), and the first/last pages.
+
+      ```javascript
+         if (totalPageNumbers >= totalPageCount) {
+            return range(1, totalPageCount)
+         }
+      ```
+      - **Edge Case**: If the total number of pages is less than or equal to the number of pages that can be displayed, return the full range of pages without dots.
+      - **Example**: For `totalPageCount = 5`, the output is `[1, 2, 3, 4, 5]`.
+
+      ```javascript
+      const leftSiblingIndex = Math.max(currentPage - siblingCount, 1)
+      const rightSiblingIndex = Math.min(currentPage + siblingCount, totalPageCount)
+      ```   
+      - **Sibling Indices**: Calculate the indices for the left and right sibling pages while ensuring they stay within valid bounds.
+      - **Example**: For `currentPage = 5`, `siblingCount = 1`, and `totalPageCount = 10`, `leftSiblingIndex = 4` and `rightSiblingIndex = 6`.
+
+
+      ```javascript
+         const shouldShowLeftDots = leftSiblingIndex > 2
+         const shouldShowRightDots = rightSiblingIndex < totalPageCount - 2
+      ```
+      - **Dot Conditions**: Determine if dots (`...`) should be displayed on the left or right by checking if there are pages beyond the sibling indices.
+
+      ```javascript
+         if (!shouldShowLeftDots && shouldShowRightDots) {
+            let leftRange = range(1, 3 + 2 * siblingCount)
+            return [...leftRange, DOTS, totalPageCount]
+         }
+      ```   
+      - **Left Range Only**: If there are no left dots but right dots are needed, display the first few pages and append dots.
+      - **Example**: `[1, 2, 3, ..., 10]`.
+
+      ```javascript
+         if (shouldShowLeftDots && !shouldShowRightDots) {
+            let rightRange = range(totalPageCount - (3 + 2 * siblingCount) + 1, totalPageCount)
+            return [1, DOTS, ...rightRange]
+         }
+      ```
+      - **Right Range Only**: If there are no right dots but left dots are needed, display the last few pages and prepend dots.
+      - **Example**: `[1, ..., 8, 9, 10]`.
+
+      ```javascript
+         if (shouldShowLeftDots && shouldShowRightDots) {
+            let middleRange = range(leftSiblingIndex, rightSiblingIndex)
+            return [1, DOTS, ...middleRange, DOTS, totalPageCount]
+         }
+      ```
+      - **Both Ranges**: If both left and right dots are needed, include the sibling range with dots on either side.
+      - **Example**: `[1, ..., 4, 5, 6, ..., 10]`.
+
+      ```javascript
+         [totalCount, pageSize, siblingCount, currentPage])
+      ```
+      - **Dependency Array**: Ensures the memoized (stored result of computation) `paginationRange`, updates only when relevant inputs change.
+
+
+2. #### **Pagination Component: Pagination.jsx**
+
+   The `Pagination.jsx` file provides the visual and interactive elements for navigating between pages. It utilizes the `usePagination` hook to calculate and render the pagination controls.
+
+   **Key Features**:
+   ```javascript
+   if (currentPage === 0 || paginationRange.length < 2) {
+      return null
+   }
+   ```
+   - **Conditional Rendering**: Prevents rendering if no pagination is needed (e.g., only one page).
+
+   ```javascript
+   const onNext = () => {
+      onPageChange(currentPage + 1)
+   }
+
+   const onPrevious = () => {
+      onPageChange(currentPage - 1)
+   }
+   ```
+   - **Navigation Arrows**: Handles forward and backward navigation.
+
+   ```javascript
+   paginationRange.map((pageNumber, index) => {
+      if (pageNumber === DOTS) {
+         return <li key={index} className="pagination-item dots">…</li>
+      }
+
+      return (
+         <li
+               key={index}
+               className={classnames('pagination-item', { selected: pageNumber === currentPage })}
+               onClick={() => onPageChange(pageNumber)}
+         >
+               {pageNumber}
+         </li>
+      )
+   })
+   ```
+   - **Dots and Page Numbers**: Renders page numbers, or dots (`...`) for omitted ranges.
+   - **Styling**: Highlights the current page with a `selected` class for better user visibility.
+
+3. #### **Pagination in Use: Transactions List**
+
+   The `Pagination` component integrates seamlessly with the Transactions List (and stocks in investments page) to paginate the displayed transactions.
+
+   **Implementation**:
+   1. **Define Page Size and Current Page**:
+      ```javascript
+      let PageSize = 5
+      const [currentPage, setCurrentPage] = useState(1)
+      ```
+
+   2. **Calculate Current Table Data**:
+      ```javascript
+      const currentTableData = useMemo(() => {
+         const firstPageIndex = (currentPage - 1) * PageSize
+         const lastPageIndex = firstPageIndex + PageSize
+         return allTransactions?.slice(firstPageIndex, lastPageIndex)
+      }, [currentPage, allTransactions])
+      ```
+      - **Purpose**: Extracts the transactions for the current page based on the `PageSize`.
+
+   3. **Render Paginated Data**:
+      ```javascript
+      {currentTableData.map((transaction, index) => (
+         <Transaction
+            key={transaction.transaction_id}
+            transaction={transaction}
+            checking={checkingBalance}
+            savings={savingsBalance}
+            investment={investmentBalance}
+            index={index}
+            currentUser={currentUser}
+         />
+      ))}
+      ```
+      - Displays only the transactions relevant to the current page.
+
+   4. **Include Pagination Controls**:
+      ```javascript
+      <Pagination
+         className="transactions__pagination-bar"
+         currentPage={currentPage}
+         totalCount={allTransactions.length}
+         pageSize={PageSize}
+         onPageChange={page => setCurrentPage(page)}
+      />
+      ```
+      - Links the `Pagination` component to the Transactions List, enabling navigation between pages.
+
+
+   ### **What This Achieves**
+   - **Efficiency**: Handles large datasets without overwhelming the user or the browser.
+   - **Flexibility**: Easy customizable page sizes.
+   - **Usability**: Ensures smooth and intuitive interaction for users navigating through paginated content.
 
 ---
 ### **E. Stock Price Data Integration**
