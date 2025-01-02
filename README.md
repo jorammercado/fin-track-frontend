@@ -1,11 +1,11 @@
-# <img src="./public/logo-icapital.png" height="75px" alt="iCapital Logo">
+# <img src="./public/logo-icapital.png" height="80px" alt="iCapital Logo">
 
 [<img src="./public/home.png" height="185px" alt="Home Screenshot">](https://icapital-budgeter.netlify.app/)
 
 ## Description
-The iCapital Budgeter Frontend is part of the Software Engineer Take-Home Exam Project, designed to evaluate fellows' analytical, software development, and problem-solving skills by assessing their ability to design and develop a full-stack application. This project aims to provide insight into the candidate's thought processes, research methods, and approach to solving problems.
+The iCapital Budgeter is part of the Software Engineer Take-Home Exam Project for iCapital's rotational program. It is designed to evaluate fellows' analytical, software development, and problem-solving skills by assessing their ability to design and develop a full-stack application. This project aims to provide insight into the candidate's thought processes, research methods, and approach to solving problems.
 
-The application allows users to track income and expenses by means of logging financial transactions. Among others, using fields such as transaction type and category, users can track three accounts: checking, savings, and investments, as functions of these financial transactions. The application also allows users to view real-time stock prices and analyze stock performance, helping them make more informed investment decisions. The data for the three accounts is graphed in order for users to see trends in their spending and savings patterns.
+The application allows users to track income and expenses by logging financial transactions. Users can categorize and log transactions to track their checking, savings, and investment accounts. The data for the three accounts is tabulated and graphed, with sorting and filtering features in order for users to easily find transactions and see trends in their spending and savings patterns. The application also allows users to view real-time stock prices to analyze stock performance, as well as having relevant and current financial news, helping users make confident and informed investment decisions. 
 
 See [backend repository](https://github.com/jorammercado/icapital-budgeter-backend/blob/main/README.md) for full security features and backend services.
 
