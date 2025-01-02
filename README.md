@@ -1,4 +1,4 @@
-# <img src="./public/logo-icapital.png" height="65px" alt="iCapital Logo">
+# <img src="./public/logo-icapital.png" height="60px" alt="iCapital Logo">
 
 [<img src="./public/home.png" height="185px" alt="Home Screenshot">](https://icapital-budgeter.netlify.app/)
 
@@ -7,7 +7,7 @@ The iCapital Budgeter is part of the Software Engineer Take-Home Exam Project fo
 
 The application allows users to track income and expenses by logging financial transactions. Users can categorize and log transactions to track their checking, savings, and investment accounts. The data for the three accounts is tabulated and graphed, with sorting and filtering features in order for users to easily find transactions and see trends in their spending and savings patterns. The application also allows users to view real-time stock prices to analyze stock performance, as well as having relevant and current financial news, helping users make confident and informed investment decisions. 
 
-See [backend repository](https://github.com/jorammercado/icapital-budgeter-backend/blob/main/README.md) for full security features and backend services.
+For a detailed overview of security features and backend services, visit the [backend repository](https://github.com/jorammercado/icapital-budgeter-backend/blob/main/README.md).
 
 ## Contents
 - [Tech Stack](#tech-stack)
@@ -68,8 +68,9 @@ See [backend repository](https://github.com/jorammercado/icapital-budgeter-backe
 - **Frontend**: React, SCSS (BEM), D3, Bootstrap, styled-components
 - **Backend**: Node.js, Express
 - **Database**: PostgreSQL
-- **Third Party API**: Polygon.io for real-time stock data, Finnhub.io for market news
-- **Authentication**: JWT (using jwt-decode for session management & security)
+- **APIs**: Polygon.io for real-time stock data, Finnhub.io for market news
+- **Authentication**: JWT, bcrypt (bcrypt used for password verification; JWT for starting sessions and securing protected routes, handled by the backend)
+- **Session Management**: JWT (session lifecycle managed using jwt-decode)
 
 ## Deployed Application
 - **Frontend hosted on Netlify**: [icapital-budgeter.netlify.app](https://icapital-budgeter.netlify.app/)
