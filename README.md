@@ -1,4 +1,4 @@
-# <img src="./public/logo-icapital.png" height="60px" alt="iCapital Logo">
+# <img src="./public/logo-icapital.png" height="55px" alt="iCapital Logo">
 
 [<img src="./public/home.png" height="185px" alt="Home Screenshot">](https://icapital-budgeter.netlify.app/)
 
@@ -69,7 +69,7 @@ For a detailed overview of security features and backend services, visit the [ba
 - **Backend**: Node.js, Express
 - **Database**: PostgreSQL
 - **APIs**: Polygon.io for real-time stock data, Finnhub.io for market news
-- **Authentication**: JWT, bcrypt (bcrypt used for password verification; JWT for starting sessions and securing protected routes, handled by the backend)
+- **Authentication**: JWT, bcrypt (bcrypt for password verification; JWT for starting sessions and securing protected routes, handled by the backend)
 - **Session Management**: JWT (session lifecycle managed using jwt-decode)
 
 ## Deployed Application
@@ -81,7 +81,7 @@ For a detailed overview of security features and backend services, visit the [ba
 - **Backend**:  [github.com/jorammercado/icapital-budgeter-backend](https://github.com/jorammercado/icapital-budgeter-backend)
 
 ## Guest Login
-The application includes a **Guest Login** feature, allowing visitors to explore the full functionality of the site without creating an account. This feature provides a seamless way to navigate the platform and interact with all features using pre-seeded "dummy" data. It is ideal for demonstrating the application’s capabilities while ensuring the integrity of real user data.
+The application includes a **Guest Login** feature, allowing visitors to explore the full functionality of the site without creating an account. This feature provides a seamless way to navigate the platform and interact with all features using preloaded sample data. It is ideal for demonstrating the application’s capabilities while ensuring the integrity of real user data.
 
 ## Pages
 - **Home**: Provides an overview of the application, welcoming users and highlighting key features.
