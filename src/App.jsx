@@ -10,7 +10,7 @@ import FourOFour from "./pages/FourOFour"
 import SignUp from "./pages/SignUp"
 import Profile from "./pages/Profile"
 import VerifyOTP from "./pages/VerifyOTP"
-import UserEdit from "./components/UserEdit"
+import EditAccount from "./pages/EditAccount"
 import UserPasswordEdit from './components/UserPasswordEdit'
 import Transactions from './pages/Transactions'
 import Ivestments from './pages/Investments'
@@ -224,7 +224,7 @@ function App() {
               path="/users/:account_id/profile/edit"
               element={
                 <ProtectedRoute
-                  element={UserEdit}
+                  element={EditAccount}
                   currentUser={currentUser}
                   setCurrentUser={setCurrentUser}
                 />

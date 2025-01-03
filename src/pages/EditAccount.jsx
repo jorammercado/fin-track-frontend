@@ -11,11 +11,11 @@ import {
 import {
     EditButton
 } from '../styles/styledComponents'
-import "./SignUpForm.scss"
+import "./EditAccount.scss"
 import Swal from 'sweetalert2'
 const API = import.meta.env.VITE_API_URL
 
-export default function UserInfoEditForm({ setCurrentUser, currentUser }) {
+export default function EditAccount({ setCurrentUser, currentUser }) {
     const [user, setUser] = useState(currentUser)
     const navigate = useNavigate()
     const editUser = () => {
@@ -168,7 +168,7 @@ export default function UserInfoEditForm({ setCurrentUser, currentUser }) {
                     <br></br>
                     <div className="button-container">
                         <EditButton type="submit">
-                            Update User
+                            Update Profile
                         </EditButton>
                         <EditButton onClick={handleBack} type="button"  >
                             Back
