@@ -1,21 +1,13 @@
-import React from "react"
-import { useState } from "react"
+import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import Form from "react-bootstrap/Form"
-import Col from "react-bootstrap/Col"
-import Row from "react-bootstrap/Row"
-import InputGroup from "react-bootstrap/InputGroup"
-import {
-    PasswordUpdateBackground
-} from '../styles/styledComponents'
-import {
-    EditButton
-} from '../styles/styledComponents'
-import "./SignUpForm.scss"
+import { Form, Col, Row, InputGroup } from "react-bootstrap"
+import { PasswordUpdateBackground } from '../styles/styledComponents'
+import { EditButton } from '../styles/styledComponents'
+import "./EditAccountPassword.scss"
 import Swal from 'sweetalert2'
 const API = import.meta.env.VITE_API_URL
 
-export default function UserInfoEditForm({ setCurrentUser, currentUser }) {
+export default function EditAccountPassword({ setCurrentUser, currentUser }) {
     const [passwords, setPasswords] = useState({
         password: "",
         newPassword: "",

@@ -1,4 +1,4 @@
-[<img src="./public/logo-icapital.png" height="53px" alt="iCapital Logo">](https://icapital-budgeter.netlify.app/)
+[<img src="./public/logo-icapital.png" height="54px" alt="iCapital Logo">](https://icapital-budgeter.netlify.app/)
 ___
 
 [<img src="./public/home.png" height="185px" alt="Home Screenshot">](https://icapital-budgeter.netlify.app/)

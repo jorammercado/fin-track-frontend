@@ -11,7 +11,7 @@ import SignUp from "./pages/SignUp"
 import Profile from "./pages/Profile"
 import VerifyOTP from "./pages/VerifyOTP"
 import EditAccount from "./pages/EditAccount"
-import UserPasswordEdit from './components/UserPasswordEdit'
+import EditAccountPassword from './pages/EditAccountPassword'
 import Transactions from './pages/Transactions'
 import Ivestments from './pages/Investments'
 import TransactionsAdd from './pages/TransactionsAdd'
@@ -235,7 +235,7 @@ function App() {
               path="/users/:account_id/profile/password"
               element={
                 <ProtectedRoute
-                  element={UserPasswordEdit}
+                  element={EditAccountPassword}
                   currentUser={currentUser}
                   setCurrentUser={setCurrentUser}
                 />

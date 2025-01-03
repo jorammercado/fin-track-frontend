@@ -1,16 +1,8 @@
-import React from "react"
-import { useState } from "react"
+import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import Form from "react-bootstrap/Form"
-import Col from "react-bootstrap/Col"
-import Row from "react-bootstrap/Row"
-import InputGroup from "react-bootstrap/InputGroup"
-import {
-    EditBackground
-} from '../styles/styledComponents'
-import {
-    EditButton
-} from '../styles/styledComponents'
+import { Form, Col, Row, InputGroup } from "react-bootstrap"
+import { EditBackground } from '../styles/styledComponents'
+import { EditButton } from '../styles/styledComponents'
 import "./EditAccount.scss"
 import Swal from 'sweetalert2'
 const API = import.meta.env.VITE_API_URL
