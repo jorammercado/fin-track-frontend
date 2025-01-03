@@ -1,4 +1,5 @@
-# <img src="./public/logo-icapital.png" height="55px" alt="iCapital Logo">
+[<img src="./public/logo-icapital.png" height="50px" alt="iCapital Logo">](https://icapital-budgeter.netlify.app/)
+___
 
 [<img src="./public/home.png" height="185px" alt="Home Screenshot">](https://icapital-budgeter.netlify.app/)
 
@@ -86,10 +87,10 @@ The application includes a **Guest Login** feature, allowing visitors to explore
 ## Pages
 - **Home**: Provides an overview of the application, welcoming users and highlighting key features.
 - **Login**: Allows users to log in using their credentials to access their accounts securely.
-- **Sign-Up**: Enables new users to create an account by providing necessary details.
+- **Sign Up**: Enables new users to create an account by providing necessary details.
 - **Verify OTP**: Used during the login process to verify the one-time passcode sent to the user's email.
 - **404**: Displays an error message when a user attempt to navigate to a non-existent page.
-- **Account Details**: Shows detailed information about the user’s account.
+- **Profile**: Shows detailed information about the user’s account.
 - **Edit Account Details**: Allows users to update their account information.
 - **Edit Account Password**: Enables users to change their account password securely.
 - **Dashboard**: Displays account balances for checking, savings, and investments in a consolidated view.

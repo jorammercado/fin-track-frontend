@@ -4,7 +4,7 @@ import {
 } from '../styles/styledComponents'
 import UserInfo from '../components/UserInfo'
 
-const User = ({ currentUser, setCurrentUser, setToken, handleLogout }) => {
+const Profile = ({ currentUser, setCurrentUser, setToken, handleLogout }) => {
     return (
         <ProfileMain>
             <UserInfo
@@ -16,4 +16,4 @@ const User = ({ currentUser, setCurrentUser, setToken, handleLogout }) => {
     )
 }
 
-export default User
+export default Profile

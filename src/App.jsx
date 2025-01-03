@@ -8,7 +8,7 @@ import Login from "./pages/Login"
 import Home from "./pages/Home"
 import FourOFour from "./pages/FourOFour"
 import SignUp from "./pages/SignUp"
-import User from "./pages/User"
+import Profile from "./pages/Profile"
 import VerifyOTP from "./pages/VerifyOTP"
 import UserEdit from "./components/UserEdit"
 import UserPasswordEdit from './components/UserPasswordEdit'
@@ -246,7 +246,7 @@ function App() {
               path="/users/:account_id/profile"
               element={
                 <ProtectedRoute
-                  element={User}
+                  element={Profile}
                   currentUser={currentUser}
                   setCurrentUser={setCurrentUser}
                   setToken={setToken}
