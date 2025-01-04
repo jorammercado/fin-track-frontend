@@ -1,5 +1,5 @@
 import React from 'react'
-import EditTransaction from '../components/EditTransaction'
+import EditTransaction from '../components/transactions/EditTransaction'
 
 const TransactionsEdit = ({ currentUser }) => {
     return (

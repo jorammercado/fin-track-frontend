@@ -2,13 +2,13 @@ import React, { useState, useEffect, useMemo } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import Transaction from "./Transaction"
 import "./TransactionsList.scss"
-import Pagination from "../layout/Pagination"
+import Pagination from "../../layout/Pagination"
 import {
     TransactionsButton,
     TransactionsButtonDisabled,
     TransactionsButtonDisabledBalances,
     TransactionsButtonDate
-} from '../styles/styledComponents'
+} from '../../styles/styledComponents'
 import Graph from "./TransactionsGraph"
 
 const API = import.meta.env.VITE_API_URL

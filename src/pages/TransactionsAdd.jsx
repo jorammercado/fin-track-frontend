@@ -1,5 +1,5 @@
 import React from 'react'
-import AddTransaction from '../components/AddTransaction'
+import AddTransaction from '../components/transactions/AddTransaction'
 
 const TransactionsAdd = ({ currentUser }) => {
     return (

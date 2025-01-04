@@ -1,19 +1,29 @@
 import React, { useState } from "react"
-import { useNavigate, useLocation } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Form from "react-bootstrap/Form"
 import Col from "react-bootstrap/Col"
 import Row from "react-bootstrap/Row"
 import InputGroup from "react-bootstrap/InputGroup"
 import Swal from "sweetalert2"
-import "./EditTransaction.scss"
-import { EditTransactionBackground, SmallEditButton } from "../styles/styledComponents"
+import "./AddTransaction.scss"
+import { AddTransactionBackground, EditButton } from "../../styles/styledComponents"
 
 const API = import.meta.env.VITE_API_URL
 
-const EditTransaction = ({ currentUser }) => {
-    const location = useLocation()
+export default function AddTransactionForm({ currentUser }) {
+    const [transaction, setTransaction] = useState({
+        account_id: currentUser.account_id,
+        transaction_type: "income",
+        amount: 0,
+        category: "salary",
+        description: "",
+        recurring: false,
+        recurring_frequency: "one-time",
+        risk_level: "n/a",
+        is_planned: false,
+    })
     const navigate = useNavigate()
-    const [transaction, setTransaction] = useState(location?.state?.transaction || {})
+
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target
         setTransaction({
@@ -31,12 +41,12 @@ const EditTransaction = ({ currentUser }) => {
                 confirmButtonText: "OK",
                 confirmButtonColor: "#07a",
             })
-            return
+            return 
         }
 
         const token = localStorage.getItem("authToken")
-        fetch(`${API}/accounts/${currentUser.account_id}/transactions/${transaction.transaction_id}`, {
-            method: "PUT",
+        fetch(`${API}/accounts/${currentUser.account_id}/transactions/create`, {
+            method: "POST",
             body: JSON.stringify(transaction),
             headers: {
                 "Content-Type": "application/json",
@@ -53,7 +63,7 @@ const EditTransaction = ({ currentUser }) => {
             })
             .then((data) => {
                 Swal.fire({
-                    text: "Transaction successfully updated!",
+                    text: "Transaction successfully added!",
                     confirmButtonText: "OK",
                     confirmButtonColor: "#07a",
                 }).then(() => {
@@ -66,7 +76,7 @@ const EditTransaction = ({ currentUser }) => {
                     confirmButtonText: "OK",
                     confirmButtonColor: "#07a",
                 })
-                console.error("Error updating transaction:", error)
+                console.error("Error adding transaction:", error)
             })
     }
 
@@ -74,82 +84,17 @@ const EditTransaction = ({ currentUser }) => {
         navigate(-1)
     }
 
-    const handleDelete = (e) => {
-        e.preventDefault()
-        const token = localStorage.getItem("authToken")
-        const httpOptions = {
-            method: "DELETE",
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        }
-        Swal.fire({
-            text: "Are you sure you want to delete this transaction? This action cannot be undone.",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Yes, delete it!",
-            cancelButtonText: "No, keep it",
-            confirmButtonColor: "#e74c3c",
-            cancelButtonColor: "#07a",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                fetch(`${API}/accounts/${currentUser.account_id}/transactions/${transaction.transaction_id}`, httpOptions)
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.error) {
-                            throw new Error(data.error)
-                        }
-                        else if (data.err) {
-                            throw new Error(data.err)
-                        }
-                        else {
-                            Swal.fire({
-                                text: "Transaction successfully deleted!",
-                                confirmButtonText: "OK",
-                                confirmButtonColor: "#07a",
-                            }).then(() => {
-                                navigate(`/users/${currentUser.account_id}/profile/transactions`)
-                            })
-                        }
-                    })
-                    .catch((err) => {
-                        Swal.fire({
-                            text: `Server error: ${err}. Cannot delete Transaction.`,
-                            confirmButtonText: "OK",
-                            confirmButtonColor: "#07a",
-                        })
-                        console.error(err)
-                    })
-            } else {
-                Swal.fire({
-                    text: "Transaction not deleted.",
-                    confirmButtonText: "OK",
-                    confirmButtonColor: "#07a",
-                })
-            }
-        })
-    }
-
     return (
         <div className="form-add-transaction">
-            <EditTransactionBackground>
+            <AddTransactionBackground>
                 <Form className="form" noValidate onSubmit={handleSubmit}>
-                    <Row className="mb-3" style={{ color: "red" }}>
-                        <Form.Group as={Col} className="mb-3__group">
-                            <Form.Label>
-                                Updating TXN ID: &nbsp; {transaction.index}
-                            </Form.Label>
-                        </Form.Group>
-                    </Row>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="transaction_type" className="mb-3__group">
-                            <Form.Label>
-                                Transaction Type
-                            </Form.Label>
+                            <Form.Label>Transaction Type</Form.Label>
                             <Form.Select
                                 className="mb-3__group__input"
                                 name="transaction_type"
-                                value={transaction?.transaction_type}
+                                value={transaction.transaction_type}
                                 onChange={handleInputChange}
                             >
                                 <option value="income">Income</option>
@@ -172,7 +117,7 @@ const EditTransaction = ({ currentUser }) => {
                                     name="amount"
                                     type="number"
                                     placeholder="Amount"
-                                    value={transaction?.amount}
+                                    value={transaction.amount}
                                     onChange={handleInputChange}
                                 />
                             </InputGroup>
@@ -185,7 +130,7 @@ const EditTransaction = ({ currentUser }) => {
                             <Form.Select
                                 className="mb-3__group__input"
                                 name="category"
-                                value={transaction?.category}
+                                value={transaction.category}
                                 onChange={handleInputChange}
                             >
                                 <option value="salary">Salary</option>
@@ -230,7 +175,7 @@ const EditTransaction = ({ currentUser }) => {
                                 name="description"
                                 type="text"
                                 placeholder="Description"
-                                value={transaction?.description}
+                                value={transaction.description}
                                 onChange={handleInputChange}
                             />
                         </Form.Group>
@@ -242,7 +187,7 @@ const EditTransaction = ({ currentUser }) => {
                                 type="checkbox"
                                 name="recurring"
                                 label="Recurring"
-                                checked={transaction?.recurring}
+                                checked={transaction.recurring}
                                 onChange={handleInputChange}
                             />
                         </Form.Group>
@@ -254,9 +199,9 @@ const EditTransaction = ({ currentUser }) => {
                             <Form.Select
                                 className="mb-3__group__input"
                                 name="recurring_frequency"
-                                value={transaction?.recurring_frequency}
+                                value={transaction.recurring_frequency}
                                 onChange={handleInputChange}
-                                disabled={!transaction?.recurring}
+                                disabled={!transaction.recurring}
                             >
                                 <option value="one-time">One-Time</option>
                                 <option value="daily">Daily</option>
@@ -273,7 +218,7 @@ const EditTransaction = ({ currentUser }) => {
                             <Form.Select
                                 className="mb-3__group__input"
                                 name="risk_level"
-                                value={transaction?.risk_level}
+                                value={transaction.risk_level}
                                 onChange={handleInputChange}
                             >
                                 <option value="n/a">N/A</option>
@@ -290,25 +235,20 @@ const EditTransaction = ({ currentUser }) => {
                                 type="checkbox"
                                 name="is_planned"
                                 label="Planned"
-                                checked={transaction?.is_planned}
+                                checked={transaction.is_planned}
                                 onChange={handleInputChange}
                             />
                         </Form.Group>
                     </Row>
 
                     <div className="button-container">
-                        <SmallEditButton type="submit">Update </SmallEditButton>
-                        <SmallEditButton onClick={handleBack} type="button">
+                        <EditButton type="submit">Add Transaction</EditButton>
+                        <EditButton onClick={handleBack} type="button">
                             Back
-                        </SmallEditButton>
-                        <SmallEditButton onClick={handleDelete} type="button">
-                            Delete
-                        </SmallEditButton>
+                        </EditButton>
                     </div>
                 </Form>
-            </EditTransactionBackground>
+            </AddTransactionBackground>
         </div>
     )
 }
-
-export default EditTransaction
