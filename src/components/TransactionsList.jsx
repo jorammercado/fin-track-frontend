@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import Transaction from "./Transaction"
 import "./TransactionsList.scss"
-import Pagination from "./Pagination"
+import Pagination from "../layout/Pagination"
 import {
     TransactionsButton,
     TransactionsButtonDisabled,

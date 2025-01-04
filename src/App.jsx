@@ -22,8 +22,8 @@ import TransactionsEdit from './pages/TransactionsEdit'
 import PublicRoute from "./components/PublicRoute"
 import ProtectedRoute from "./components/ProtectedRoute"
 
-import NavBar from './components/NavBar'
-import Footer from './components/Footer'
+import NavBar from './layout/NavBar'
+import Footer from './layout/Footer'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
