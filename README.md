@@ -1,7 +1,7 @@
-[<img src="./public/logo-icapital.png" height="54px" alt="iCapital Logo">](https://icapital-budgeter.netlify.app/)
+[<img src="./public/images/logo-icapital.png" height="54px" alt="iCapital Logo">](https://icapital-budgeter.netlify.app/)
 ___
 
-[<img src="./public/home.png" height="185px" alt="Home Screenshot">](https://icapital-budgeter.netlify.app/)
+[<img src="./public/images/home.png" height="185px" alt="Home Screenshot">](https://icapital-budgeter.netlify.app/)
 
 ## Description
 The iCapital Budgeter is part of the Software Engineer Take-Home Exam Project for iCapital's rotational program. It is designed to evaluate fellows' analytical, software development, and problem-solving skills by assessing their ability to design and develop a full-stack application. This project aims to provide insight into the candidate's thought processes, research methods, and approach to solving problems.
