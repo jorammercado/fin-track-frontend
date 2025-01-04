@@ -2,7 +2,7 @@ import React from 'react'
 import {
     ProfileMain,
 } from '../styles/styledComponents'
-import UserInfo from '../components/UserInfo'
+import UserInfo from '../components/user/UserInfo'
 
 const Profile = ({ currentUser, setCurrentUser, setToken, handleLogout }) => {
     return (

@@ -8,8 +8,8 @@ import InputGroup from "react-bootstrap/InputGroup"
 import {
     SignUpBackground,
     SignUpButton
-} from '../styles/styledComponents'
-import asterisk from "../assets/images/asterisk.svg"
+} from '../../styles/styledComponents'
+import asterisk from "../../assets/images/asterisk.svg"
 import "./SignUpForm.scss"
 import Swal from 'sweetalert2'
 const API = import.meta.env.VITE_API_URL
