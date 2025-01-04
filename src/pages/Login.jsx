@@ -3,10 +3,10 @@ import {
     LoginHeader,
     LoginLabel,
     BigErrorList,
-    FormInput,
-    LoginButton,
-    OkButton,
+    FormInput
 } from '../styles/styledComponents'
+import { LoginButton } from '../styles/buttons/LoginButton'
+import { OkButton } from '../styles/buttons/OkButton'
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate, Link } from "react-router-dom"

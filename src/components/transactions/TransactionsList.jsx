@@ -3,12 +3,11 @@ import { useParams, useNavigate } from "react-router-dom"
 import Transaction from "./Transaction"
 import "./TransactionsList.scss"
 import Pagination from "../../layout/Pagination"
-import {
-    TransactionsButton,
-    TransactionsButtonDisabled,
-    TransactionsButtonDisabledBalances,
-    TransactionsButtonDate
-} from '../../styles/styledComponents'
+import { TransactionsButton } from '../../styles/buttons/TransactionsButton'
+import { TransactionsButtonDate } from '../../styles/buttons/TransactionsButtonDate'
+import { TransactionsButtonDisabled } from '../../styles/buttons/TransactionsButtonDisabled'
+import { TransactionsButtonDisabledBalances }
+    from '../../styles/buttons/TransactionsButtonDisabledBalances'
 import Graph from "./TransactionsGraph"
 
 const API = import.meta.env.VITE_API_URL

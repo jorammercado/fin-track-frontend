@@ -5,10 +5,8 @@ import Form from "react-bootstrap/Form"
 import Col from "react-bootstrap/Col"
 import Row from "react-bootstrap/Row"
 import InputGroup from "react-bootstrap/InputGroup"
-import {
-    SignUpBackground,
-    SignUpButton
-} from '../../styles/styledComponents'
+import { SignUpBackground } from '../../styles/styledComponents'
+import { SignUpButton } from '../../styles/buttons/SignUpButton'
 import asterisk from "../../assets/images/asterisk.svg"
 import "./SignUpForm.scss"
 import Swal from 'sweetalert2'

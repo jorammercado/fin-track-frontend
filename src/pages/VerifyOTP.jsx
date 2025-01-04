@@ -3,10 +3,10 @@ import {
     VerifyOTPHeader,
     LoginLabel,
     BigErrorList,
-    FormInput,
-    VerifyOTPButton,
-    OkButton
+    FormInput
 } from '../styles/styledComponents'
+import { VerifyOTPButton } from '../styles/buttons/VerifyOTPButton'
+import { OkButton } from '../styles/buttons/OkButton'
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'

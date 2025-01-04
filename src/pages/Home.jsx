@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from "react-router-dom"
 import {
     HomeButton
-} from '../styles/styledComponents.js'
+} from '../styles/buttons/HomeButton'
 import "./Home.scss"
 
 const Home = () => {

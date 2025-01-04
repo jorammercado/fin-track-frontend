@@ -6,7 +6,8 @@ import Row from "react-bootstrap/Row"
 import InputGroup from "react-bootstrap/InputGroup"
 import Swal from "sweetalert2"
 import "./AddTransaction.scss"
-import { AddTransactionBackground, EditButton } from "../../styles/styledComponents"
+import { AddTransactionBackground } from "../../styles/styledComponents"
+import { EditButton } from "../../styles/buttons/EditButton"
 
 const API = import.meta.env.VITE_API_URL
 
@@ -41,7 +42,7 @@ export default function AddTransactionForm({ currentUser }) {
                 confirmButtonText: "OK",
                 confirmButtonColor: "#07a",
             })
-            return 
+            return
         }
 
         const token = localStorage.getItem("authToken")
