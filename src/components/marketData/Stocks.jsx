@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import Pagination from '../../layout/Pagination'
 import Stock from './Stock'
-import "./Stocks.scss"
+import './Stocks.scss'
 import { SortStocksButton } from '../../styles/styledComponents'
 
 const API = import.meta.env.VITE_POLYGON_API_KEY
 
-const Stocks = ({ currentUser, setStocks, stocks }) => {
+const Stocks = () => {
     const [stocksData, setStocksData] = useState(null)
     const [sortOrder, setSortOrder] = useState('asc')
 
@@ -19,8 +19,6 @@ const Stocks = ({ currentUser, setStocks, stocks }) => {
                         throw new Error(`HTTP error! Status: ${response.status}`)
                     }
                     const data = await response.json()
-                    setStocks(data.tickers)
-                    localStorage.setItem('stocks', JSON.stringify(data.tickers))
                     setStocksData(data.tickers)
                 }
             } catch (error) {
@@ -29,7 +27,7 @@ const Stocks = ({ currentUser, setStocks, stocks }) => {
         }
 
         fetchStockData()
-    }, [API, stocks, setStocks])
+    }, [API])
 
     const handleSort = event => {
         event.preventDefault()
@@ -55,7 +53,7 @@ const Stocks = ({ currentUser, setStocks, stocks }) => {
     return (
         <div>
             {stocksData ? (
-                <div className='stocks'>
+                <div className="stocks">
                     <div className="transactions">
                         <section className="transactions__container">
                             <table className="table table-hover table-responsive table-dark transactions__container__table">
@@ -67,8 +65,8 @@ const Stocks = ({ currentUser, setStocks, stocks }) => {
                                     </tr>
                                     <tr className="transactions__container__table__headers">
                                         <td >
-                                            <SortStocksButton onClick={handleSort} type='button'>
-                                                {sortOrder === 'asc' ? '\u2191' : '\u2193'}
+                                            <SortStocksButton onClick={handleSort} type="button">
+                                                {sortOrder === "asc" ? "\u2191" : "\u2193"}
                                             </SortStocksButton>
                                         </td>
                                         <td>Change</td>

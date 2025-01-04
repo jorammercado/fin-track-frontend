@@ -1,14 +1,10 @@
 import React from 'react'
 import Stocks from '../components/marketData/Stocks'
 
-const Ivestments = ({ currentUser, setStocks, stocks }) => {
+const Ivestments = () => {
     return (
         <div className="investments">
-            <Stocks
-                currentUser={currentUser}
-                setStocks={setStocks}
-                stocks={stocks}
-            />
+            <Stocks />
         </div>
     )
 }

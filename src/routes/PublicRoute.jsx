@@ -1,33 +1,18 @@
 
-import {
-    Navigate, useLocation
-} from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 import FourOFour from '../pages/FourOFour'
 
-const PublicRoute = ({
-    element: Component,
-    currentUser,
-    setCurrentUser }) => {
+const PublicRoute = ({ element: Component, setCurrentUser, currentUser }) => {
 
     const token = localStorage.getItem('authToken')
     const location = useLocation()
 
-    if (Component === FourOFour) {
+    if (Component === FourOFour || location.pathname === "/") {
         return <Component />
     }
 
-    if (location.pathname === "/") {
-        return (
-            <Component
-                setCurrentUser={setCurrentUser}
-                currentUser={currentUser} />
-        )
-    }
-
     return !token ?
-        <Component
-            setCurrentUser={setCurrentUser}
-            currentUser={currentUser} />
+        <Component setCurrentUser={setCurrentUser} />
         :
         <Navigate to={`/users/${currentUser?.account_id}/profile`} />
 }

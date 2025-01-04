@@ -1,26 +1,26 @@
 import { useState, useRef, useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import axios from 'axios'
-import { jwtDecode } from "jwt-decode"
+import { jwtDecode } from 'jwt-decode'
 import Swal from 'sweetalert2'
 
-import Login from "./pages/Login"
-import Home from "./pages/Home"
-import FourOFour from "./pages/FourOFour"
-import SignUp from "./pages/SignUp"
-import Profile from "./pages/Profile"
-import VerifyOTP from "./pages/VerifyOTP"
-import EditAccount from "./pages/EditAccount"
+import Home from './pages/Home'
+import Login from './pages/Login'
+import SignUp from './pages/SignUp'
+import VerifyOTP from './pages/VerifyOTP'
+import FourOFour from './pages/FourOFour'
+import Profile from './pages/Profile'
+import EditAccount from './pages/EditAccount'
 import EditAccountPassword from './pages/EditAccountPassword'
-import Transactions from './pages/Transactions'
-import Ivestments from './pages/Investments'
-import TransactionsAdd from './pages/TransactionsAdd'
 import Dashboard from './pages/Dashboard'
+import Ivestments from './pages/Investments'
 import MarketNews from './pages/MarketNews'
+import Transactions from './pages/Transactions'
+import TransactionsAdd from './pages/TransactionsAdd'
 import TransactionsEdit from './pages/TransactionsEdit'
 
-import PublicRoute from "./routes/PublicRoute"
-import ProtectedRoute from "./routes/ProtectedRoute"
+import PublicRoute from './routes/PublicRoute'
+import ProtectedRoute from './routes/ProtectedRoute'
 
 import NavBar from './layout/NavBar'
 import Footer from './layout/Footer'
@@ -34,7 +34,7 @@ function App() {
     JSON.parse(localStorage.getItem('currentUser')) || null
   )
   const [token, setToken] = useState(localStorage.getItem('authToken') || null)
-  const [stocks, setStocks] = useState(localStorage.getItem('stocks') || [])
+
   const timeoutIdRef = useRef(null)
 
   const handleLogin = (user, jwtToken) => {
@@ -59,10 +59,9 @@ function App() {
   const handleLogout = (isTimeout = false) => {
     setCurrentUser(null)
     setToken(null)
-    setStocks(null)
     localStorage.removeItem('authToken')
     localStorage.removeItem('currentUser')
-    localStorage.removeItem('stocks')
+
     clearTimeout(timeoutIdRef.current)
 
     if (isTimeout) {
@@ -104,7 +103,7 @@ function App() {
   }, [token])
 
   return (
-    <div className='app'>
+    <div className="app">
       <Router>
         <div className="app__nav">
           <NavBar
@@ -119,8 +118,6 @@ function App() {
               element={
                 <PublicRoute
                   element={Home}
-                  currentUser={currentUser}
-                  setCurrentUser={handleLogin}
                 />
               }
             />
@@ -150,7 +147,6 @@ function App() {
               element={
                 <PublicRoute
                   element={VerifyOTP}
-                  currentUser={currentUser}
                   setCurrentUser={handleLogin}
                 />
               }
@@ -191,9 +187,6 @@ function App() {
               element={
                 <ProtectedRoute
                   element={Ivestments}
-                  currentUser={currentUser}
-                  setStocks={setStocks}
-                  stocks={stocks}
                 />
               }
             />
@@ -203,9 +196,6 @@ function App() {
               element={
                 <ProtectedRoute
                   element={MarketNews}
-                  currentUser={currentUser}
-                  setStocks={setStocks}
-                  stocks={stocks}
                 />
               }
             />
