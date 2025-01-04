@@ -19,8 +19,8 @@ import Dashboard from './pages/Dashboard'
 import MarketNews from './pages/MarketNews'
 import TransactionsEdit from './pages/TransactionsEdit'
 
-import PublicRoute from "./components/PublicRoute"
-import ProtectedRoute from "./components/ProtectedRoute"
+import PublicRoute from "./routes/PublicRoute"
+import ProtectedRoute from "./routes/ProtectedRoute"
 
 import NavBar from './layout/NavBar'
 import Footer from './layout/Footer'
