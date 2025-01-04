@@ -147,6 +147,7 @@ function App() {
               element={
                 <PublicRoute
                   element={VerifyOTP}
+                  currentUser={currentUser}
                   setCurrentUser={handleLogin}
                 />
               }

@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row"
 import InputGroup from "react-bootstrap/InputGroup"
 import Swal from "sweetalert2"
 import "./AddTransaction.scss"
-import { AddTransactionBackground } from "../../styles/styledComponents"
+import { AddTransactionBackground } from "../../styles/styledLayouts/AddTransactionBackground"
 import { EditButton } from "../../styles/buttons/EditButton"
 
 const API = import.meta.env.VITE_API_URL

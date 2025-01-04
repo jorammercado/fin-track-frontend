@@ -1,10 +1,10 @@
 import {
-    LoginBackground,
     LoginHeader,
     LoginLabel,
     BigErrorList,
     FormInput
 } from '../styles/styledComponents'
+import { LoginForm } from '../styles/forms/LoginForm'
 import { LoginButton } from '../styles/buttons/LoginButton'
 import { OkButton } from '../styles/buttons/OkButton'
 import { useState } from 'react'
@@ -134,7 +134,7 @@ const Login = ({ setCurrentUser }) => {
 
     return (
         <div className="login">
-            <LoginBackground onSubmit={handleSubmit}>
+            <LoginForm onSubmit={handleSubmit}>
                 {
                     loading ?
                         <div className="spinner-container">
@@ -160,7 +160,7 @@ const Login = ({ setCurrentUser }) => {
                                 </OkButton>
                             </>
                 }
-            </LoginBackground>
+            </LoginForm>
         </div>
     )
 }

@@ -1,10 +1,10 @@
 import {
-    VerifyOPTBackground,
     VerifyOTPHeader,
     LoginLabel,
     BigErrorList,
     FormInput
 } from '../styles/styledComponents'
+import { VerifyOPTForm } from '../styles/forms/VerifyOTPForm'
 import { VerifyOTPButton } from '../styles/buttons/VerifyOTPButton'
 import { OkButton } from '../styles/buttons/OkButton'
 import { useState } from 'react'
@@ -60,7 +60,6 @@ const VerifyOTP = ({ setCurrentUser }) => {
             }).then(() => {
                 setErrors([])
                 setCurrentUser(res.data.account, res.data.token)
-                navigate(`/users/${account_id}/profile`)
             })
         } catch (err) {
             setLoading(false)
@@ -83,7 +82,7 @@ const VerifyOTP = ({ setCurrentUser }) => {
 
     return (
         <div className="verify-otp">
-            <VerifyOPTBackground onSubmit={handleSubmit}>
+            <VerifyOPTForm onSubmit={handleSubmit}>
                 {
                     loading ?
                         <div className="spinner-container">
@@ -104,7 +103,7 @@ const VerifyOTP = ({ setCurrentUser }) => {
                                 <OkButton onClick={handleOk}>OK</OkButton>
                             </>
                 }
-            </VerifyOPTBackground>
+            </VerifyOPTForm>
         </div>
     )
 }

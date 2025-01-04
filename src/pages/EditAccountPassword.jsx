@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Form, Col, Row, InputGroup } from "react-bootstrap"
-import { PasswordUpdateBackground } from '../styles/styledComponents'
+import { PasswordUpdateBackground } from '../styles/styledLayouts/PasswordUpdateBackground'
 import { EditButton } from '../styles/buttons/EditButton'
 import "./EditAccountPassword.scss"
 import Swal from 'sweetalert2'
