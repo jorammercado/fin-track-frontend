@@ -21,7 +21,7 @@
 
 body {
 	font-family: 'Roboto-Regular', 'AvenirNextLTPro-Medium', Helvetica, sans-serif;
-	background-color: #F0F5F8;
+	background-color: #f0f5f8;
 	color: #252525;
 }
 
@@ -31,15 +31,13 @@ body {
 .verify-otp:after,
 .user:after,
 .transactions:after,
-.investments:after,
 .form-password-edit:after,
 .form-edit-user:after,
 .form-new-user:after,
-.dashboard:after {
-	-moz-animation: overlay-hide 0.35s ease-in forwards !important;
-	-webkit-animation: overlay-hide 0.35s ease-in forwards !important;
-	-ms-animation: overlay-hide 0.35s ease-in forwards !important;
-	animation: overlay-hide 0.35s ease-in forwards !important;
+.dashboard:after,
+.news:after,
+.form-add-transaction:after {
+	animation: overlay-hide 0.35s ease-in forwards;
 	background: #ffffff;
 	content: '';
 	display: block;
@@ -50,72 +48,6 @@ body {
 	top: 0;
 	width: 100%;
 	z-index: -1;
-}
-
-@-moz-keyframes overlay-hide {
-	0% {
-		opacity: 1;
-		z-index: 100000;
-	}
-
-	15% {
-		opacity: 1;
-		z-index: 100000;
-	}
-
-	99% {
-		opacity: 0;
-		z-index: 100000;
-	}
-
-	100% {
-		opacity: 0;
-		z-index: -1;
-	}
-}
-
-@-webkit-keyframes overlay-hide {
-	0% {
-		opacity: 1;
-		z-index: 100000;
-	}
-
-	15% {
-		opacity: 1;
-		z-index: 100000;
-	}
-
-	99% {
-		opacity: 0;
-		z-index: 100000;
-	}
-
-	100% {
-		opacity: 0;
-		z-index: -1;
-	}
-}
-
-@-ms-keyframes overlay-hide {
-	0% {
-		opacity: 1;
-		z-index: 100000;
-	}
-
-	15% {
-		opacity: 1;
-		z-index: 100000;
-	}
-
-	99% {
-		opacity: 0;
-		z-index: 100000;
-	}
-
-	100% {
-		opacity: 0;
-		z-index: -1;
-	}
 }
 
 @keyframes overlay-hide {
