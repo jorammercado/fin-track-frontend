@@ -1,5 +1,5 @@
 import React from 'react'
-import Stocks from '../components/Stocks'
+import Stocks from '../components/marketData/Stocks'
 
 const Ivestments = ({ currentUser, setStocks, stocks }) => {
     return (
