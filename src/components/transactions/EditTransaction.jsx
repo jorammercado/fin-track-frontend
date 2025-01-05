@@ -129,7 +129,7 @@ const EditTransaction = ({ currentUser }) => {
     }
 
     return (
-        <div className="form-add-transaction">
+        <div className="form-edit-transaction">
             <EditTransactionBackground>
                 <Form className="form" noValidate onSubmit={handleSubmit}>
                     <Row className="mb-3" style={{ color: "red" }}>
