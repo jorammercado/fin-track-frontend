@@ -2,6 +2,8 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Swal from "sweetalert2"
 
+import { handleInputChange as handleInput } from "../../utils/formHandler"
+
 import { Form, Col, Row, InputGroup } from "react-bootstrap"
 import { AddTransactionBackground } from "../../styledComponents/styledLayouts"
 import { EditButton } from "../../styledComponents/buttons"
@@ -23,16 +25,10 @@ export default function AddTransactionForm({ currentUser }) {
     })
     const navigate = useNavigate()
 
-    const handleInputChange = (e) => {
-        const { name, value, type, checked } = e.target
-        setTransaction({
-            ...transaction,
-            [name]: type === "checkbox" ? checked : value,
-        })
-    }
+    const handleInputChange = (event) => handleInput(event, transaction, setTransaction)
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    const handleSubmit = (event) => {
+        event.preventDefault()
 
         if (transaction.amount === 0) {
             Swal.fire({
@@ -60,7 +56,7 @@ export default function AddTransactionForm({ currentUser }) {
                 }
                 return response.json()
             })
-            .then((data) => {
+            .then(() => {
                 Swal.fire({
                     text: "Transaction successfully added!",
                     confirmButtonText: "OK",
