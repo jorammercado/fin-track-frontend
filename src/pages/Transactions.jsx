@@ -1,4 +1,3 @@
-import React from 'react'
 import TransactionsList from '../components/transactions/TransactionsList'
 
 const Transactions = ({ currentUser }) => {

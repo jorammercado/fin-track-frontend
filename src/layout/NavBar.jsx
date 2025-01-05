@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from "react-router-dom"
-import "./NavBar.scss"
+
 import logo from "../assets/images/icapital-logo-full-name.svg"
+import "./NavBar.scss"
 
 export default function NavBar({ token, handleLogout, currentUser }) {
     const navigate = useNavigate()

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import "./MarketNews.scss"
 
 const API = import.meta.env.VITE_FINNHUB_API_KEY

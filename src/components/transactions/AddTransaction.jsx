@@ -1,13 +1,11 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import Form from "react-bootstrap/Form"
-import Col from "react-bootstrap/Col"
-import Row from "react-bootstrap/Row"
-import InputGroup from "react-bootstrap/InputGroup"
 import Swal from "sweetalert2"
+
+import { Form, Col, Row, InputGroup } from "react-bootstrap"
+import { AddTransactionBackground } from "../../styledComponents/styledLayouts"
+import { EditButton } from "../../styledComponents/buttons"
 import "./AddTransaction.scss"
-import { AddTransactionBackground } from "../../styledComponents/styledLayouts/AddTransactionBackground"
-import { EditButton } from "../../styledComponents/buttons/EditButton"
 
 const API = import.meta.env.VITE_API_URL
 

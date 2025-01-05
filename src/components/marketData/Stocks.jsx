@@ -1,8 +1,10 @@
-import React, { useEffect, useState, useMemo } from 'react'
-import Pagination from '../../layout/Pagination'
+import { useEffect, useState, useMemo } from 'react'
+
 import Stock from './Stock'
+import Pagination from '../../layout/Pagination'
+
+import { SortStocksButton } from '../../styledComponents/buttons'
 import './Stocks.scss'
-import { SortStocksButton } from '../../styledComponents/buttons/SortStocksButton'
 
 const API = import.meta.env.VITE_POLYGON_API_KEY
 

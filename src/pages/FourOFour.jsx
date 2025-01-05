@@ -1,8 +1,6 @@
-import React from 'react'
-import {
-    FourOFourButton
-} from '../styledComponents/buttons/FourOFourButton'
 import { Link } from "react-router-dom"
+
+import { FourOFourButton } from '../styledComponents/buttons'
 import "./FourOFour.scss"
 
 const FourOFour = () => {

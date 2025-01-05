@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function Stock({ stock }) {
     return (
         <tr className="transactions__container__table__row-values">

@@ -1,17 +1,13 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from "react-router-dom"
 
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
-import { FormInput } from '../styledComponents/forms/FormInput'
-import { ErrorList } from '../styledComponents/text/ErrorList'
-import { HeaderWrapper } from '../styledComponents/styledLayouts/HeaderWrapper'
-import { LoginHeader } from '../styledComponents/text/LoginHeader'
-import { LoginForm } from '../styledComponents/forms/LoginForm'
-import { LoginButton } from '../styledComponents/buttons/LoginButton'
-import { OkButton } from '../styledComponents/buttons/OkButton'
-
+import { FormInput, LoginForm } from '../styledComponents/forms'
+import { ErrorList, LoginHeader } from '../styledComponents/text'
+import { HeaderWrapper } from '../styledComponents/styledLayouts'
+import { LoginButton, OkButton } from '../styledComponents/buttons'
 import "./Login.scss"
 
 const VITE_API_URL = import.meta.env.VITE_API_URL

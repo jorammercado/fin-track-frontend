@@ -1,15 +1,14 @@
-import { FormInput } from '../styledComponents/forms/FormInput'
-import { ErrorList } from '../styledComponents/text/ErrorList'
-import { HeaderWrapper } from '../styledComponents/styledLayouts/HeaderWrapper'
-import { VerifyOTPHeader } from '../styledComponents/text/VerifyOTPHeader'
-import { VerifyOPTForm } from '../styledComponents/forms/VerifyOTPForm'
-import { VerifyOTPButton } from '../styledComponents/buttons/VerifyOTPButton'
-import { OkButton } from '../styledComponents/buttons/OkButton'
 import { useState } from 'react'
-import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
-import "./Login.scss"
+
+import axios from 'axios'
 import Swal from 'sweetalert2'
+
+import { FormInput, VerifyOTPForm } from '../styledComponents/forms'
+import { ErrorList, VerifyOTPHeader } from '../styledComponents/text'
+import { HeaderWrapper } from '../styledComponents/styledLayouts'
+import { VerifyOTPButton, OkButton } from '../styledComponents/buttons'
+import "./Login.scss"
 
 const VITE_API_URL = import.meta.env.VITE_API_URL
 
@@ -80,7 +79,7 @@ const VerifyOTP = ({ setCurrentUser }) => {
 
     return (
         <div className="verify-otp">
-            <VerifyOPTForm onSubmit={handleSubmit}>
+            <VerifyOTPForm onSubmit={handleSubmit}>
                 {
                     loading ?
                         <div className="spinner-container">
@@ -101,7 +100,7 @@ const VerifyOTP = ({ setCurrentUser }) => {
                                 <OkButton onClick={handleOk}>OK</OkButton>
                             </>
                 }
-            </VerifyOPTForm>
+            </VerifyOTPForm>
         </div>
     )
 }

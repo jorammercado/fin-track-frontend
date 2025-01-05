@@ -1,8 +1,6 @@
-import React from 'react'
 import { Link } from "react-router-dom"
-import {
-    HomeButton
-} from '../styledComponents/buttons/HomeButton'
+
+import { HomeButton } from '../styledComponents/buttons'
 import "./Home.scss"
 
 const Home = () => {

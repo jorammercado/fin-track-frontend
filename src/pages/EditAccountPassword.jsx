@@ -1,10 +1,12 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { Form, Col, Row, InputGroup } from "react-bootstrap"
-import { PasswordUpdateBackground } from '../styledComponents/styledLayouts/PasswordUpdateBackground'
-import { EditButton } from '../styledComponents/buttons/EditButton'
-import "./EditAccountPassword.scss"
 import Swal from 'sweetalert2'
+
+import { Form, Col, Row, InputGroup } from "react-bootstrap"
+import { PasswordUpdateBackground } from '../styledComponents/styledLayouts'
+import { EditButton } from '../styledComponents/buttons'
+import "./EditAccountPassword.scss"
+
 const API = import.meta.env.VITE_API_URL
 
 export default function EditAccountPassword({ setCurrentUser, currentUser }) {

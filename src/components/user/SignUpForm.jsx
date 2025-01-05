@@ -1,15 +1,13 @@
-import React from "react"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import Form from "react-bootstrap/Form"
-import Col from "react-bootstrap/Col"
-import Row from "react-bootstrap/Row"
-import InputGroup from "react-bootstrap/InputGroup"
-import { SignUpBackground } from '../../styledComponents/styledLayouts/SignUpBackground'
-import { SignUpButton } from '../../styledComponents/buttons/SignUpButton'
+import Swal from 'sweetalert2'
+
+import { Form, Col, Row, InputGroup } from "react-bootstrap"
+import { SignUpBackground } from '../../styledComponents/styledLayouts'
+import { SignUpButton } from '../../styledComponents/buttons'
 import asterisk from "../../assets/images/asterisk.svg"
 import "./SignUpForm.scss"
-import Swal from 'sweetalert2'
+
 const API = import.meta.env.VITE_API_URL
 
 export default function SignUpForm({ setCurrentUser }) {

@@ -1,10 +1,12 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { Form, Col, Row, InputGroup } from "react-bootstrap"
-import { EditBackground } from '../styledComponents/styledLayouts/EditBackground'
-import { EditButton } from '../styledComponents/buttons/EditButton'
-import "./EditAccount.scss"
 import Swal from 'sweetalert2'
+
+import { Form, Col, Row, InputGroup } from "react-bootstrap"
+import { EditBackground } from '../styledComponents/styledLayouts'
+import { EditButton } from '../styledComponents/buttons'
+import "./EditAccount.scss"
+
 const API = import.meta.env.VITE_API_URL
 
 export default function EditAccount({ setCurrentUser, currentUser }) {

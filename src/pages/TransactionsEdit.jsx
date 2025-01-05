@@ -1,4 +1,3 @@
-import React from 'react'
 import EditTransaction from '../components/transactions/EditTransaction'
 
 const TransactionsEdit = ({ currentUser }) => {

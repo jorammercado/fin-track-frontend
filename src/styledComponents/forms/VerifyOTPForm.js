@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const VerifyOPTForm = styled.form`
+export const VerifyOTPForm = styled.form`
   position: absolute;
   width: 315px;
   height: 250px;
