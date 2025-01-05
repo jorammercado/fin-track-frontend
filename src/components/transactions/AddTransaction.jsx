@@ -4,6 +4,7 @@ import Swal from "sweetalert2"
 
 import { handleInputChange as handleInput } from "../../utils/formHandler"
 import { navigateBack } from "../../utils/navigation"
+import { categories } from "../../data/categories"
 
 import { Form, Col, Row, InputGroup } from "react-bootstrap"
 import { AddTransactionBackground } from "../../styledComponents/styledLayouts"
@@ -126,36 +127,17 @@ export default function AddTransactionForm({ currentUser }) {
                                 value={transaction.category}
                                 onChange={handleInputChange}
                             >
-                                <option value="salary">Salary</option>
-                                <option value="checking">Checking</option>
-                                <option value="bonus">Bonus</option>
-                                <option value="interest">Interest</option>
-                                <option value="dividend">Dividend</option>
-                                <option value="rental income">Rental Income</option>
-                                <option value="business income">Business Income</option>
-                                <option value="ivestment">Investment</option>
-                                <option value="groceries">Groceries</option>
-                                <option value="utilities">Utilities</option>
-                                <option value="rent/mortgage">Rent/Mortgage</option>
-                                <option value="transportation">Transportation</option>
-                                <option value="education">Education</option>
-                                <option value="healthcare">Healthcare</option>
-                                <option value="entertainment">Entertainment</option>
-                                <option value="subscriptions">Subscriptions</option>
-                                <option value="travel">Travel</option>
-                                <option value="savings">Savings</option>
-                                <option value="emergency fund">Emergency Fund</option>
-                                <option value="retirement">Retirement</option>
-                                <option value="clothing">Clothing</option>
-                                <option value="dining">Dining</option>
-                                <option value="household supplies">Household Supplies</option>
-                                <option value="charity">Charity</option>
-                                <option value="debt repayment">Debt Repayment</option>
-                                <option value="other">Other</option>
-                                <option value="wages">Wages</option>
-                                <option value="account funding">Account Funding</option>
-                                <option value="loan disbursement">Loan Disbursement</option>
-
+                                {categories.map((category, index) => (
+                                    <option
+                                        key={index}
+                                        value={category}
+                                    >
+                                        {category
+                                            .split(" ")
+                                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                                            .join(" ")}
+                                    </option>
+                                ))}
                             </Form.Select>
                         </Form.Group>
                     </Row>
