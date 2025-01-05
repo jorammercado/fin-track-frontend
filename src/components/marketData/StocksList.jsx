@@ -4,11 +4,11 @@ import Stock from './Stock'
 import Pagination from '../../layout/Pagination'
 
 import { SortStocksButton } from '../../styledComponents/buttons'
-import './Stocks.scss'
+import './StocksList.scss'
 
 const API = import.meta.env.VITE_POLYGON_API_KEY
 
-const Stocks = () => {
+const StocksList = () => {
     const [stocksData, setStocksData] = useState(null)
     const [sortOrder, setSortOrder] = useState('asc')
 
@@ -110,4 +110,4 @@ const Stocks = () => {
     )
 }
 
-export default Stocks
+export default StocksList
