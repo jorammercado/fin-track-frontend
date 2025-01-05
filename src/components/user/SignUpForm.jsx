@@ -2,6 +2,8 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Swal from 'sweetalert2'
 
+import { handleInputChange as handleInput } from "../../utils/formHandler"
+
 import { Form, Col, Row, InputGroup } from "react-bootstrap"
 import { SignUpBackground } from '../../styledComponents/styledLayouts'
 import { SignUpButton } from '../../styledComponents/buttons'
@@ -71,16 +73,7 @@ export default function SignUpForm({ setCurrentUser }) {
             })
     }
 
-    const handleInputChange = (e) => {
-        const { name, value, type, checked } = e.target
-        setUser({
-            ...user,
-            [name]: type === "checkbox" ? checked : value,
-        })
-        if (name === "confirm-password") {
-            setConfirmPassword(value)
-        }
-    }
+    const handleInputChange = (event) => handleInput(event, user, setUser, setConfirmPassword )
 
     const handleSubmit = (e) => {
         e.preventDefault()
