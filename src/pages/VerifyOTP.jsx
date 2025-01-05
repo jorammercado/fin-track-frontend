@@ -4,6 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
+import { validateOTP } from '../utils/validateOTP'
+
 import { FormInput, VerifyOTPForm } from '../styledComponents/forms'
 import { ErrorList, VerifyOTPHeader } from '../styledComponents/text'
 import { HeaderWrapper } from '../styledComponents/styledLayouts'
@@ -15,26 +17,15 @@ const VITE_API_URL = import.meta.env.VITE_API_URL
 const VerifyOTP = ({ setCurrentUser }) => {
     const navigate = useNavigate()
     const { account_id } = useParams()
+
     const [otp, setOtp] = useState('')
     const [errors, setErrors] = useState([])
     const [loading, setLoading] = useState(false)
 
-    const validateOtp = () => {
-        const otpErrors = []
-
-        if (!otp.length)
-            otpErrors.push('OTP is required')
-
-        if (otp.length !== 6 || !/^[0-9]{6}$/.test(otp))
-            otpErrors.push('OTP must be a 6-digit numeric code')
-
-        return otpErrors
-    }
-
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const otpErrors = validateOtp()
+        const otpErrors = validateOTP(otp)
 
         if (otpErrors.length) {
             setErrors(otpErrors)

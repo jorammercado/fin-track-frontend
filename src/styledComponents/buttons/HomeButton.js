@@ -16,7 +16,6 @@ export const HomeButton = styled.button`
         border: 1px solid #07a;
     }
   
-
   @media (max-width: 570px) {
     height: 40px;
     width: 150px;

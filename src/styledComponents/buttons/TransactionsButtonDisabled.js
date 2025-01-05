@@ -15,8 +15,6 @@ export const TransactionsButtonDisabled = styled.button`
     border: 1px solid #07a;
     transition: background-color 0.45s ease-in-out;
 
-
-
     @media (max-width: 570px) {
         font-size: 11px;
     }
