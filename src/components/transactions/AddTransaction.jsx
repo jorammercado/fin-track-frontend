@@ -5,6 +5,9 @@ import Swal from "sweetalert2"
 import { handleInputChange as handleInput } from "../../utils/formHandler"
 import { navigateBack } from "../../utils/navigation"
 import { categories } from "../../data/categories"
+import { transactionTypes } from "../../data/transactionTypes"
+import { recurringFrequencies } from "../../data/recurringFrequencies"
+import { riskLevels } from "../../data/riskLevels"
 
 import { Form, Col, Row, InputGroup } from "react-bootstrap"
 import { AddTransactionBackground } from "../../styledComponents/styledLayouts"
@@ -91,10 +94,14 @@ export default function AddTransactionForm({ currentUser }) {
                                 value={transaction.transaction_type}
                                 onChange={handleInputChange}
                             >
-                                <option value="income">Income</option>
-                                <option value="expense">Expense</option>
-                                <option value="investment">Investment</option>
-                                <option value="deposit">Deposit</option>
+                                {transactionTypes.map((type, index) => (
+                                    <option
+                                        key={index}
+                                        value={type}
+                                    >
+                                        {type.charAt(0).toUpperCase() + type.slice(1)}
+                                    </option>
+                                ))}
                             </Form.Select>
                         </Form.Group>
                     </Row>
@@ -178,11 +185,17 @@ export default function AddTransactionForm({ currentUser }) {
                                 onChange={handleInputChange}
                                 disabled={!transaction.recurring}
                             >
-                                <option value="one-time">One-Time</option>
-                                <option value="daily">Daily</option>
-                                <option value="weekly">Weekly</option>
-                                <option value="monthly">Monthly</option>
-                                <option value="yearly">Yearly</option>
+                                {recurringFrequencies.map((frequency, index) => (
+                                    <option
+                                        key={index}
+                                        value={frequency}
+                                    >
+                                        {frequency
+                                            .split("-")
+                                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                                            .join("-")}
+                                    </option>
+                                ))}
                             </Form.Select>
                         </Form.Group>
                     </Row>
@@ -196,10 +209,17 @@ export default function AddTransactionForm({ currentUser }) {
                                 value={transaction.risk_level}
                                 onChange={handleInputChange}
                             >
-                                <option value="n/a">N/A</option>
-                                <option value="low">Low</option>
-                                <option value="moderate">Moderate</option>
-                                <option value="high">High</option>
+                                {riskLevels.map((Level, index) => (
+                                    <option
+                                        key={index}
+                                        value={Level}
+                                    >
+                                        {Level
+                                            .split("/")
+                                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                                            .join("/")}
+                                    </option>
+                                ))}
                             </Form.Select>
                         </Form.Group>
                     </Row>

@@ -27,5 +27,5 @@ export const categories = [
     "other",
     "wages",
     "account funding",
-    "loan disbursement",
+    "loan disbursement"
 ]
