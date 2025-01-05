@@ -3,6 +3,7 @@ import { useEffect, useState, useMemo } from 'react'
 import Stock from './Stock'
 import Pagination from '../../layout/Pagination'
 
+import Spinner from '../common/Spinner'
 import { SortStocksButton } from '../../styledComponents/buttons'
 import './StocksList.scss'
 
@@ -102,9 +103,7 @@ const StocksList = () => {
                     </div>
                 </div>
             ) : (
-                <div className="spinner-container">
-                    <div className="loading-spinner"></div>
-                </div>
+                <Spinner />
             )}
         </div>
     )

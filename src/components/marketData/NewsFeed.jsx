@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+
+import Spinner from '../common/Spinner'
 import "./NewsFeed.scss"
 
 const API = import.meta.env.VITE_FINNHUB_API_KEY
@@ -46,9 +48,7 @@ const NewsFeed = () => {
                         ))}
                     </div>
                 </div> :
-                <div className="spinner-container">
-                    <div className="loading-spinner"></div>
-                </div>}
+                <Spinner />}
         </>
     )
 }
