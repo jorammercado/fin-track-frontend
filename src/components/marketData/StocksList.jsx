@@ -55,17 +55,17 @@ const StocksList = () => {
     return (
         <div>
             {stocksData ? (
-                <div className="stocks">
-                    <div className="transactions">
-                        <section className="transactions__container">
-                            <table className="table table-hover table-responsive table-dark transactions__container__table">
+                <div className="stocks-wrapper">
+                    <div className="stocks">
+                        <section className="stocks__container">
+                            <table className="table table-hover table-responsive table-dark stocks__container__table">
                                 <tbody>
-                                    <tr className="transactions__container__table__headers">
-                                        <td className="transactions__container__table__headers__count">Stocks: {stocksData?.length}</td>
+                                    <tr className="stocks__container__table__headers">
+                                        <td className="stocks__container__table__headers__count">Stocks: {stocksData?.length}</td>
                                         <td colSpan="8" style={{ textAlign: "center" }}>Today</td>
                                         <td colSpan="6" style={{ textAlign: "center" }}>Previous Day</td>
                                     </tr>
-                                    <tr className="transactions__container__table__headers">
+                                    <tr className="stocks__container__table__headers">
                                         <td >
                                             <SortStocksButton onClick={handleSort} type="button">
                                                 {sortOrder === "asc" ? "\u2191" : "\u2193"}
@@ -92,7 +92,7 @@ const StocksList = () => {
                                 </tbody>
                             </table>
                             <Pagination
-                                className="transactions__pagination-bar"
+                                className="stocks__pagination-bar"
                                 currentPage={currentPage}
                                 totalCount={stocksData?.length}
                                 pageSize={PageSize}
@@ -102,8 +102,8 @@ const StocksList = () => {
                     </div>
                 </div>
             ) : (
-                <div className="spinner-container-stocks">
-                    <div className="loading-spinner-stocks"></div>
+                <div className="spinner-container">
+                    <div className="loading-spinner"></div>
                 </div>
             )}
         </div>

@@ -1,31 +1,93 @@
-.stocks {
+.stocks-wrapper {
     margin-top: -80px;
     text-align: right;
+
+    .stocks {
+        margin-top: 120px;
+        text-align: right;
+        position: relative;
+
+        &__container {
+            font-family: 'Roboto-Thin';
+            margin: auto;
+            width: 85%;
+            overflow-x: auto;
+            border-radius: 5px;
+
+            @media (min-width: 1440px) {
+                max-width: 1400px;
+            }
+
+            @media (max-width: 1500px) {
+                width: 88%;
+            }
+
+            @media (max-width: 1320px) {
+                width: 95%;
+            }
+
+            &__table {
+                background-color: #09213A;
+                width: 100%;
+                table-layout: auto;
+                overflow-x: auto;
+
+                td {
+                    background-color: #09213A !important;
+                }
+
+                &__headers {
+                    &__count {
+                        font-size: 13px;
+                        padding: 7px 5px !important;
+                        text-align: center;
+                        font-family: 'Roboto-Regular';
+                    }
+                }
+
+                &__row-values {
+                    cursor: default;
+
+                    &__cell {
+                        font-size: 14px;
+                        padding-top: 5px;
+                        padding-bottom: 5px;
+                    }
+                }
+            }
+        }
+
+        &__pagination-bar {
+            justify-content: center;
+            font-family: 'Roboto-Regular';
+        }
+    }
+
 }
 
-.spinner-container-stocks {
+.spinner-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin-top: -180px;
-}
 
-.loading-spinner-stocks {
-    width: 150px;
-    height: 150px;
-    border: 6px solid black;
-    border-top: 6px solid #07a;
-    border-radius: 50%;
-    animation: spin 0.70s linear infinite;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
+    .loading-spinner {
+        width: 150px;
+        height: 150px;
+        border: 6px solid black;
+        border-top: 6px solid #07a;
+        border-radius: 50%;
+        animation: spin 0.70s linear infinite;
     }
 
-    100% {
-        transform: rotate(360deg);
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+    
+        100% {
+            transform: rotate(360deg);
+        }
     }
 }
