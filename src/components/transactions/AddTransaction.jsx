@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import Swal from "sweetalert2"
 
 import { handleInputChange as handleInput } from "../../utils/formHandler"
+import { navigateBack } from "../../utils/navigation"
 
 import { Form, Col, Row, InputGroup } from "react-bootstrap"
 import { AddTransactionBackground } from "../../styledComponents/styledLayouts"
@@ -12,6 +13,7 @@ import "./AddTransaction.scss"
 const API = import.meta.env.VITE_API_URL
 
 export default function AddTransactionForm({ currentUser }) {
+    const navigate = useNavigate()
     const [transaction, setTransaction] = useState({
         account_id: currentUser.account_id,
         transaction_type: "income",
@@ -23,9 +25,9 @@ export default function AddTransactionForm({ currentUser }) {
         risk_level: "n/a",
         is_planned: false,
     })
-    const navigate = useNavigate()
 
     const handleInputChange = (event) => handleInput(event, transaction, setTransaction)
+    const handleBack = () => navigateBack(navigate)
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -73,10 +75,6 @@ export default function AddTransactionForm({ currentUser }) {
                 })
                 console.error("Error adding transaction:", error)
             })
-    }
-
-    const handleBack = () => {
-        navigate(-1)
     }
 
     return (
