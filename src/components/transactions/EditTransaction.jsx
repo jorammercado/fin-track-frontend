@@ -2,6 +2,13 @@ import { useState } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
 import Swal from "sweetalert2"
 
+import { handleInputChange as handleInput } from "../../utils/formHandler"
+import { navigateBack } from "../../utils/navigation"
+import { categories } from "../../data/categories"
+import { transactionTypes } from "../../data/transactionTypes"
+import { recurringFrequencies } from "../../data/recurringFrequencies"
+import { riskLevels } from "../../data/riskLevels"
+
 import { Form, Col, Row, InputGroup } from "react-bootstrap"
 import { EditTransactionBackground } from "../../styledComponents/styledLayouts"
 import { SmallEditButton } from "../../styledComponents/buttons"
@@ -13,16 +20,12 @@ const EditTransaction = ({ currentUser }) => {
     const location = useLocation()
     const navigate = useNavigate()
     const [transaction, setTransaction] = useState(location?.state?.transaction || {})
-    const handleInputChange = (e) => {
-        const { name, value, type, checked } = e.target
-        setTransaction({
-            ...transaction,
-            [name]: type === "checkbox" ? checked : value,
-        })
-    }
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    const handleInputChange = (event) => handleInput(event, transaction, setTransaction)
+    const handleBack = () => navigateBack(navigate)
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
 
         if (transaction.amount === 0) {
             Swal.fire({
@@ -67,10 +70,6 @@ const EditTransaction = ({ currentUser }) => {
                 })
                 console.error("Error updating transaction:", error)
             })
-    }
-
-    const handleBack = () => {
-        navigate(-1)
     }
 
     const handleDelete = (e) => {
@@ -151,10 +150,14 @@ const EditTransaction = ({ currentUser }) => {
                                 value={transaction?.transaction_type}
                                 onChange={handleInputChange}
                             >
-                                <option value="income">Income</option>
-                                <option value="expense">Expense</option>
-                                <option value="investment">Investment</option>
-                                <option value="deposit">Deposit</option>
+                                {transactionTypes.map((type, index) => (
+                                    <option
+                                        key={index}
+                                        value={type}
+                                    >
+                                        {type.charAt(0).toUpperCase() + type.slice(1)}
+                                    </option>
+                                ))}
                             </Form.Select>
                         </Form.Group>
                     </Row>
@@ -187,36 +190,17 @@ const EditTransaction = ({ currentUser }) => {
                                 value={transaction?.category}
                                 onChange={handleInputChange}
                             >
-                                <option value="salary">Salary</option>
-                                <option value="checking">Checking</option>
-                                <option value="bonus">Bonus</option>
-                                <option value="interest">Interest</option>
-                                <option value="dividend">Dividend</option>
-                                <option value="rental income">Rental Income</option>
-                                <option value="business income">Business Income</option>
-                                <option value="ivestment">Investment</option>
-                                <option value="groceries">Groceries</option>
-                                <option value="utilities">Utilities</option>
-                                <option value="rent/mortgage">Rent/Mortgage</option>
-                                <option value="transportation">Transportation</option>
-                                <option value="education">Education</option>
-                                <option value="healthcare">Healthcare</option>
-                                <option value="entertainment">Entertainment</option>
-                                <option value="subscriptions">Subscriptions</option>
-                                <option value="travel">Travel</option>
-                                <option value="savings">Savings</option>
-                                <option value="emergency fund">Emergency Fund</option>
-                                <option value="retirement">Retirement</option>
-                                <option value="clothing">Clothing</option>
-                                <option value="dining">Dining</option>
-                                <option value="household supplies">Household Supplies</option>
-                                <option value="charity">Charity</option>
-                                <option value="debt repayment">Debt Repayment</option>
-                                <option value="other">Other</option>
-                                <option value="wages">Wages</option>
-                                <option value="account funding">Account Funding</option>
-                                <option value="loan disbursement">Loan Disbursement</option>
-
+                                {categories.map((category, index) => (
+                                    <option
+                                        key={index}
+                                        value={category}
+                                    >
+                                        {category
+                                            .split(" ")
+                                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                                            .join(" ")}
+                                    </option>
+                                ))}
                             </Form.Select>
                         </Form.Group>
                     </Row>
@@ -257,11 +241,17 @@ const EditTransaction = ({ currentUser }) => {
                                 onChange={handleInputChange}
                                 disabled={!transaction?.recurring}
                             >
-                                <option value="one-time">One-Time</option>
-                                <option value="daily">Daily</option>
-                                <option value="weekly">Weekly</option>
-                                <option value="monthly">Monthly</option>
-                                <option value="yearly">Yearly</option>
+                                {recurringFrequencies.map((frequency, index) => (
+                                    <option
+                                        key={index}
+                                        value={frequency}
+                                    >
+                                        {frequency
+                                            .split("-")
+                                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                                            .join("-")}
+                                    </option>
+                                ))}
                             </Form.Select>
                         </Form.Group>
                     </Row>
@@ -275,10 +265,17 @@ const EditTransaction = ({ currentUser }) => {
                                 value={transaction?.risk_level}
                                 onChange={handleInputChange}
                             >
-                                <option value="n/a">N/A</option>
-                                <option value="low">Low</option>
-                                <option value="moderate">Moderate</option>
-                                <option value="high">High</option>
+                                {riskLevels.map((Level, index) => (
+                                    <option
+                                        key={index}
+                                        value={Level}
+                                    >
+                                        {Level
+                                            .split("/")
+                                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                                            .join("/")}
+                                    </option>
+                                ))}
                             </Form.Select>
                         </Form.Group>
                     </Row>
