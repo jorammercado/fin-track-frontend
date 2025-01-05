@@ -44,7 +44,7 @@ function App() {
   }
 
   const handleLogout = (isTimeout = false) => {
-    const swalOptions = logoutHandler(isTimeout, setCurrentUser, setToken, timeoutIdRef,)
+    const swalOptions = logoutHandler(setCurrentUser, setToken, timeoutIdRef, isTimeout)
     Swal.fire(swalOptions)
   }
 
