@@ -26,6 +26,8 @@ import ProtectedRoute from './routes/ProtectedRoute'
 import NavBar from './layout/NavBar'
 import Footer from './layout/Footer'
 
+import { handleLogin as loginHandler, handleLogout as logoutHandler } from './utils/auth'
+
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import './App.scss'
@@ -35,49 +37,15 @@ function App() {
     JSON.parse(localStorage.getItem('currentUser')) || null
   )
   const [token, setToken] = useState(localStorage.getItem('authToken') || null)
-
   const timeoutIdRef = useRef(null)
 
   const handleLogin = (user, jwtToken) => {
-    setCurrentUser(user)
-    localStorage.setItem('currentUser', JSON.stringify(user))
-    setToken(jwtToken)
-    localStorage.setItem('authToken', jwtToken)
-
-    try {
-      const { exp } = jwtDecode(jwtToken)
-      const expirationTime = exp * 1000 - Date.now()
-
-      timeoutIdRef.current = setTimeout(() => {
-        handleLogout(true)
-      }, expirationTime)
-    } catch (error) {
-      console.error('Invalid token during login:', error)
-      handleLogout(false)
-    }
+    loginHandler(user, jwtToken, setCurrentUser, setToken, timeoutIdRef, handleLogout)
   }
 
   const handleLogout = (isTimeout = false) => {
-    setCurrentUser(null)
-    setToken(null)
-    localStorage.removeItem('authToken')
-    localStorage.removeItem('currentUser')
-
-    clearTimeout(timeoutIdRef.current)
-
-    if (isTimeout) {
-      Swal.fire({
-        text: 'Your session has timed out. Please log in again.',
-        confirmButtonText: 'OK',
-        confirmButtonColor: '#07a'
-      })
-    } else {
-      Swal.fire({
-        text: 'You have been successfully logged out.',
-        confirmButtonText: 'OK',
-        confirmButtonColor: '#07a'
-      })
-    }
+    const swalOptions = logoutHandler(isTimeout, setCurrentUser, setToken, timeoutIdRef,)
+    Swal.fire(swalOptions)
   }
 
   useEffect(() => {
