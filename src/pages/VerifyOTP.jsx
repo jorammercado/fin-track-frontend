@@ -1,12 +1,10 @@
-import {
-    VerifyOTPHeader,
-    LoginLabel,
-    BigErrorList,
-    FormInput
-} from '../styles/styledComponents'
-import { VerifyOPTForm } from '../styles/forms/VerifyOTPForm'
-import { VerifyOTPButton } from '../styles/buttons/VerifyOTPButton'
-import { OkButton } from '../styles/buttons/OkButton'
+import { FormInput } from '../styledComponents/forms/FormInput'
+import { ErrorList } from '../styledComponents/text/ErrorList'
+import { HeaderWrapper } from '../styledComponents/styledLayouts/HeaderWrapper'
+import { VerifyOTPHeader } from '../styledComponents/text/VerifyOTPHeader'
+import { VerifyOPTForm } from '../styledComponents/forms/VerifyOTPForm'
+import { VerifyOTPButton } from '../styledComponents/buttons/VerifyOTPButton'
+import { OkButton } from '../styledComponents/buttons/OkButton'
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -90,16 +88,16 @@ const VerifyOTP = ({ setCurrentUser }) => {
                         </div> :
                         !errors.length ?
                             <>
-                                <LoginLabel>
+                                <HeaderWrapper>
                                     <VerifyOTPHeader>Verify OTP</VerifyOTPHeader>
-                                </LoginLabel>
+                                </HeaderWrapper>
                                 <FormInput type="text" value={otp} onChange={e => setOtp(e.currentTarget.value)} placeholder="Enter OTP" />
                                 <VerifyOTPButton>{'Verify OTP'}</VerifyOTPButton>
                             </> :
                             <>
-                                <BigErrorList>
+                                <ErrorList>
                                     {errors.map((error, i) => <li key={i}>&nbsp;{error}</li>)}
-                                </BigErrorList>
+                                </ErrorList>
                                 <OkButton onClick={handleOk}>OK</OkButton>
                             </>
                 }

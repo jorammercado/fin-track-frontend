@@ -1,18 +1,16 @@
 import React from 'react'
-import {
-    ProfileMain,
-} from '../styles/styledComponents'
+import { ProfileWrapper } from '../styledComponents/styledLayouts/ProfileWrapper'
 import UserInfo from '../components/user/UserInfo'
 
 const Profile = ({ currentUser, setCurrentUser, setToken, handleLogout }) => {
     return (
-        <ProfileMain>
+        <ProfileWrapper>
             <UserInfo
                 currentUser={currentUser}
                 setCurrentUser={setCurrentUser}
                 setToken={setToken}
                 handleLogout={handleLogout} />
-        </ProfileMain>
+        </ProfileWrapper>
     )
 }
 

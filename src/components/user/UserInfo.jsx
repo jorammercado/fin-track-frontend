@@ -2,7 +2,7 @@ import { useNavigate, Link } from "react-router-dom"
 import "./UserInfo.scss"
 import {
     ProfileButton
-} from '../../styles/buttons/ProfileButton'
+} from '../../styledComponents/buttons/ProfileButton'
 import Swal from 'sweetalert2'
 
 const API = import.meta.env.VITE_API_URL

@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Form, Col, Row, InputGroup } from "react-bootstrap"
-import { EditBackground } from '../styles/styledLayouts/EditBackground'
-import { EditButton } from '../styles/buttons/EditButton'
+import { EditBackground } from '../styledComponents/styledLayouts/EditBackground'
+import { EditButton } from '../styledComponents/buttons/EditButton'
 import "./EditAccount.scss"
 import Swal from 'sweetalert2'
 const API = import.meta.env.VITE_API_URL

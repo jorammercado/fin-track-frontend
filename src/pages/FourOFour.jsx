@@ -1,7 +1,7 @@
 import React from 'react'
 import {
     FourOFourButton
-} from '../styles/buttons/FourOFourButton'
+} from '../styledComponents/buttons/FourOFourButton'
 import { Link } from "react-router-dom"
 import "./FourOFour.scss"
 

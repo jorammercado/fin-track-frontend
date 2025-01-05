@@ -1,17 +1,18 @@
-import {
-    LoginHeader,
-    LoginLabel,
-    BigErrorList,
-    FormInput
-} from '../styles/styledComponents'
-import { LoginForm } from '../styles/forms/LoginForm'
-import { LoginButton } from '../styles/buttons/LoginButton'
-import { OkButton } from '../styles/buttons/OkButton'
-import { useState } from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from "react-router-dom"
+
 import axios from 'axios'
-import { useNavigate, Link } from "react-router-dom"
-import "./Login.scss"
 import Swal from 'sweetalert2'
+
+import { FormInput } from '../styledComponents/forms/FormInput'
+import { ErrorList } from '../styledComponents/text/ErrorList'
+import { HeaderWrapper } from '../styledComponents/styledLayouts/HeaderWrapper'
+import { LoginHeader } from '../styledComponents/text/LoginHeader'
+import { LoginForm } from '../styledComponents/forms/LoginForm'
+import { LoginButton } from '../styledComponents/buttons/LoginButton'
+import { OkButton } from '../styledComponents/buttons/OkButton'
+
+import "./Login.scss"
 
 const VITE_API_URL = import.meta.env.VITE_API_URL
 
@@ -143,18 +144,18 @@ const Login = ({ setCurrentUser }) => {
                         :
                         !errors.length ?
                             <>
-                                <LoginLabel>
+                                <HeaderWrapper>
                                     <LoginHeader>Login to Your Account</LoginHeader>
-                                </LoginLabel>
+                                </HeaderWrapper>
                                 <FormInput type="text" value={email} onChange={e => setEmail(e.currentTarget.value)} placeholder="Email" />
                                 <FormInput type="password" value={password} onChange={e => setPassword(e.currentTarget.value)} placeholder="Password" />
                                 <LoginButton type="submit" >{'Sign In'}</LoginButton>
                                 <button className="guest-login" type="button" onClick={guestLogin}> Continue as Guest </button>
                             </> :
                             <>
-                                <BigErrorList>
+                                <ErrorList>
                                     {errors.length > 0 ? errors.map((error, i) => <li key={`${i}`}>&nbsp;{error}</li>) : ""}
-                                </BigErrorList>
+                                </ErrorList>
                                 <OkButton onClick={handleOk}>
                                     OK
                                 </OkButton>
