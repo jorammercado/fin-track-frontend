@@ -5,6 +5,18 @@ import Transaction from "./Transaction"
 import Graph from "./TransactionsGraph"
 import Pagination from "../../layout/Pagination"
 
+import { calculateBalances } from "../../utils/balanceCalculator"
+import {
+    handleSortType as handleSortTypeHandler,
+    handleSortAmount as handleSortAmountHandler,
+    handleSortCategory as handleSortCategoryHandler,
+    handleSortRecurring as handleSortRecurringHandler,
+    handleSortRecurringFreq as handleSortRecurringFreqHandler,
+    handleSortRiskLevel as handleSortRiskLevelHandler,
+    handleSortIsPlanned as handleSortIsPlanneHandler,
+    handleSortDate as handleSortDateHandler
+} from "../../utils/sorting"
+
 import {
     TransactionsButton,
     TransactionsButtonDate,
@@ -46,104 +58,51 @@ export default function TransactionsList({ currentUser }) {
     const [dateOrder, setDateOrder] = useState(false)
 
     const handleSortType = event => {
-        event.preventDefault()
-        const sortedTransactions = [...allTransactions].sort((a, b) => {
-            if (typeOrder) {
-                return b.transaction_type.localeCompare(a.transaction_type)
-            }
-            return a.transaction_type.localeCompare(b.transaction_type)
-        })
-
-        setAllTransactions(sortedTransactions)
-        setTypeOrder(!typeOrder)
+        handleSortTypeHandler(
+            event, allTransactions, setAllTransactions, typeOrder, setTypeOrder
+        )
     }
 
     const handleSortAmount = event => {
-        event.preventDefault()
-        const sortedTransactions = [...allTransactions].sort((a, b) => {
-            if (amountOrder) {
-                return b.amount - a.amount
-            }
-            return a.amount - b.amount
-        })
-
-        setAllTransactions(sortedTransactions)
-        setAmountOrder(!amountOrder)
+        handleSortAmountHandler(
+            event, allTransactions, setAllTransactions, amountOrder, setAmountOrder
+        )
     }
 
     const handleSortCategory = event => {
-        event.preventDefault()
-        const sortedTransactions = [...allTransactions].sort((a, b) => {
-            if (categoryOrder) {
-                return b.category.localeCompare(a.category)
-            }
-            return a.category.localeCompare(b.category)
-        })
-
-        setAllTransactions(sortedTransactions)
-        setCategoryOrder(!categoryOrder)
+        handleSortCategoryHandler(
+            event, allTransactions, setAllTransactions, categoryOrder, setCategoryOrder
+        )
     }
 
     const handleSortRecurring = event => {
-        event.preventDefault()
-        const sortedTransactions = [...allTransactions].sort((a, b) => {
-            if (recurringOrder) {
-                return b.recurring - a.recurring
-            }
-            return a.recurring - b.recurring
-        })
-
-        setAllTransactions(sortedTransactions)
-        setRecurringOrder(!recurringOrder)
+        handleSortRecurringHandler(
+            event, allTransactions, setAllTransactions, recurringOrder, setRecurringOrder
+        )
     }
 
     const handleSortRecurringFreq = event => {
-        event.preventDefault()
-        const sortedTransactions = [...allTransactions].sort((a, b) => {
-            if (recurringOrderFreq) {
-                return b.recurring_frequency.localeCompare(a.recurring_frequency)
-            }
-            return a.recurring_frequency.localeCompare(b.recurring_frequency)
-        })
-
-        setAllTransactions(sortedTransactions)
-        setRecurringOrderFreq(!recurringOrderFreq)
+        handleSortRecurringFreqHandler(
+            event, allTransactions, setAllTransactions, recurringOrderFreq, setRecurringOrderFreq
+        )
     }
 
     const handleSortRiskLevel = event => {
-        event.preventDefault()
-        const sortedTransactions = [...allTransactions].sort((a, b) => {
-            if (riskLevelOrder) {
-                return b.risk_level.localeCompare(a.risk_level)
-            }
-            return a.risk_level.localeCompare(b.risk_level)
-        })
-
-        setAllTransactions(sortedTransactions)
-        setRiskLevelOrder(!riskLevelOrder)
+        handleSortRiskLevelHandler(
+            event, allTransactions, setAllTransactions, riskLevelOrder, setRiskLevelOrder
+        )
     }
 
     const handleSortIsPlanned = event => {
-        event.preventDefault()
-        const sortedTransactions = [...allTransactions].sort((a, b) => {
-            if (isPlannedOrder) {
-                return b.is_planned - a.is_planned
-            }
-            return a.is_planned - b.is_planned
-        })
-
-        setAllTransactions(sortedTransactions)
-        setIsPlannedOrder(!isPlannedOrder)
-
+        handleSortIsPlanneHandler(
+            event, allTransactions, setAllTransactions, isPlannedOrder, setIsPlannedOrder
+        )
     }
 
     const handleSortDate = event => {
-        event.preventDefault()
-        if (dateOrder)
-            setAllTransactions([...allTransactionsDateOrder])
-        else
-            setAllTransactions([...allTransactionsDateOrder].reverse())
-        setDateOrder(!dateOrder)
+        handleSortDateHandler(
+            event, allTransactionsDateOrder, setAllTransactions, dateOrder, setDateOrder
+        )
     }
 
     useEffect(() => {
@@ -161,63 +120,7 @@ export default function TransactionsList({ currentUser }) {
                 setAllTransactions(data?.sort((a, b) => a?.transaction_id - b?.transaction_id))
                 setAllTransactionsDateOrder(data?.sort((a, b) => a?.transaction_id - b?.transaction_id))
 
-                let checking = [0]
-                let savings = [0]
-                let investments = [0]
-
-                data.forEach(transaction => {
-                    let balanceColumn
-                    const { transaction_type, category, amount } = transaction
-                    if (transaction_type === 'expense') {
-                        if (category === 'investment') {
-                            balanceColumn = 'investments'
-                        } else if (category === 'savings') {
-                            balanceColumn = 'savings_account'
-                        } else {
-                            balanceColumn = 'checking_account'
-                        }
-                    } else if (transaction_type === 'investment') {
-                        if (['retirement', 'savings', 'emergency fund'].includes(category)) {
-                            balanceColumn = 'savings_account'
-                        } else {
-                            balanceColumn = 'investments'
-                        }
-                    } else if (transaction_type === 'deposit') {
-                        if (category === 'savings') {
-                            balanceColumn = 'savings_account'
-                        } else if (category === 'investment') {
-                            balanceColumn = 'investments'
-                        } else {
-                            balanceColumn = 'checking_account'
-                        }
-                    } else if (transaction_type === 'income') {
-                        if (category === 'savings') {
-                            balanceColumn = 'savings_account'
-                        } else if (category === 'investment') {
-                            balanceColumn = 'investments'
-                        } else {
-                            balanceColumn = 'checking_account'
-                        }
-                    }
-
-                    if (balanceColumn) {
-                        const updateValue = transaction_type === 'expense' ? -Number(amount) : Number(amount)
-                        if (balanceColumn === 'checking_account') {
-                            checking.push(checking[checking.length - 1] + updateValue)
-                            savings.push(savings[savings.length - 1])
-                            investments.push(investments[investments.length - 1])
-                        } else if (balanceColumn === 'savings_account') {
-                            savings.push(savings[savings.length - 1] + updateValue)
-                            checking.push(checking[checking.length - 1])
-                            investments.push(investments[investments.length - 1])
-                        } else if (balanceColumn === 'investments') {
-                            investments.push(investments[investments.length - 1] + updateValue)
-                            savings.push(savings[savings.length - 1])
-                            checking.push(checking[checking.length - 1])
-                        }
-                    }
-                })
-
+                const { checking, savings, investments } = calculateBalances(data)
                 setCheckingBalance(checking)
                 setSavingsBalance(savings)
                 setInvestmentBalance(investments)
