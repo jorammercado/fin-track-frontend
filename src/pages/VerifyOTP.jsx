@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
+import SpinnerSmall from '../components/common/SpinnerSmall'
 import { validateOTP } from '../utils/validateOTP'
 
 import { FormInput, VerifyOTPForm } from '../styledComponents/forms'
@@ -72,10 +73,7 @@ const VerifyOTP = ({ setCurrentUser }) => {
         <div className="verify-otp">
             <VerifyOTPForm onSubmit={handleSubmit}>
                 {
-                    loading ?
-                        <div className="spinner-container">
-                            <div className="loading-spinner"></div>
-                        </div> :
+                    loading ? <SpinnerSmall /> :
                         !errors.length ?
                             <>
                                 <HeaderWrapper>

@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom"
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
+import SpinnerSmall from '../components/common/SpinnerSmall'
+
 import { FormInput, LoginForm } from '../styledComponents/forms'
 import { ErrorList, LoginHeader } from '../styledComponents/text'
 import { HeaderWrapper } from '../styledComponents/styledLayouts'
@@ -133,11 +135,7 @@ const Login = ({ setCurrentUser }) => {
         <div className="login">
             <LoginForm onSubmit={handleSubmit}>
                 {
-                    loading ?
-                        <div className="spinner-container">
-                            <div className="spinner-container__spinner"></div>
-                        </div>
-                        :
+                    loading ? <SpinnerSmall /> :
                         !errors.length ?
                             <>
                                 <HeaderWrapper>
