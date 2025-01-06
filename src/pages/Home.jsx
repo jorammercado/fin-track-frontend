@@ -6,7 +6,6 @@ import "./Home.scss"
 const Home = () => {
     return (
         <div className="home-page">
-            {/* Hero Section */}
             <section className="hero-section-home text-white text-center">
                 <div className="container">
                     <h1 className="display-4">Take Control of Your Finances</h1>
@@ -14,12 +13,9 @@ const Home = () => {
                     <Link to="/signup"><HomeButton>Get Started Today</HomeButton></Link>
                 </div>
             </section>
-
-            {/* Feature Section */}
             <section className="feature-section-home py-5">
                 <div className="container">
                     <div className="row text-center">
-                        {/* Budget Tracking Feature */}
                         <div className="col-md-4">
                             <div className="card feature-card-home">
                                 <div className="card-body">
@@ -29,7 +25,6 @@ const Home = () => {
                                 </div>
                             </div>
                         </div>
-                        {/* AI-Powered Investment Recommendations Feature */}
                         <div className="col-md-4">
                             <div className="card feature-card-home">
                                 <div className="card-body">
@@ -39,7 +34,6 @@ const Home = () => {
                                 </div>
                             </div>
                         </div>
-                        {/* Projected Earnings Visualization Feature */}
                         <div className="col-md-4">
                             <div className="card feature-card-home">
                                 <div className="card-body">
@@ -52,8 +46,6 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-
-            {/* Real-Time Stock Price Updates Section */}
             <section className="real-time-stock-section py-5">
                 <div className="container">
                     <div className="text-center">

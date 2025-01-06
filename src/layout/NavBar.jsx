@@ -1,21 +1,13 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from "react-router-dom"
 
+import useScreenWidth from '../hooks/useScreenWidth'
 import logo from "../assets/images/icapital-logo-full-name.svg"
 import "./NavBar.scss"
 
 export default function NavBar({ token, handleLogout, currentUser }) {
     const navigate = useNavigate()
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
-    useEffect(() => {
-        const handleResize = () => {
-            setScreenWidth(window.innerWidth)
-        }
-        window.addEventListener('resize', handleResize)
-        return () => {
-            window.removeEventListener('resize', handleResize)
-        }
-    }, [])
+    const screenWidth = useScreenWidth()
 
     return (
         <nav className="navbar navbar-expand-lg">
@@ -88,4 +80,3 @@ export default function NavBar({ token, handleLogout, currentUser }) {
         </nav>
     )
 }
-

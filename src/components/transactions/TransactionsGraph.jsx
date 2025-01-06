@@ -1,18 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
+import useScreenWidth from '../../hooks/useScreenWidth';
 
 const Graph = ({ checking = [], savings = [],
     investments = [] }) => {
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-    useEffect(() => {
-        const handleResize = () => {
-            setScreenWidth(window.innerWidth);
-        };
-        window.addEventListener('resize', handleResize);
-
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
+    const screenWidth = useScreenWidth();
     const graphRef = useRef(null);
 
     useEffect(() => {
