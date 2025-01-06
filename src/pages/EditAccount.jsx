@@ -2,6 +2,9 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Swal from 'sweetalert2'
 
+import { handleInputChange as handleInput } from "../../utils/formHandler"
+import { navigateBack } from "../../utils/navigation"
+
 import { Form, Col, Row, InputGroup } from "react-bootstrap"
 import { EditBackground } from '../styledComponents/styledLayouts'
 import { EditButton } from '../styledComponents/buttons'
@@ -51,23 +54,14 @@ export default function EditAccount({ setCurrentUser, currentUser }) {
             })
     }
 
-    const handleInputChange = (e) => {
-        const { name, value, type, checked } = e.target
-        setUser({
-            ...user,
-            [name]: type === "checkbox" ? checked : value,
-        })
-    }
+    const handleInputChange = (event) => handleInput(event, user, setUser)
+    const handleBack = () => navigateBack(navigate)
 
     const handleSubmit = (e) => {
         e.preventDefault()
         editUser()
     }
-
-    const handleBack = () => {
-        navigate(-1)
-    }
-
+    
     return (
         <div className="form-edit-user">
             <EditBackground >
