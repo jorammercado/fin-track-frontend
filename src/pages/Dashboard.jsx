@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom"
 
+import { calculateBalances } from "../utils/balanceCalculator"
 import "./Dashboard.scss"
 
 const API = import.meta.env.VITE_API_URL
@@ -26,49 +27,7 @@ const Dashboard = ({ currentUser }) => {
             .then((data) => {
                 setAllTransactions(data)
 
-                let checking = [0]
-                let savings = [0]
-                let investments = [0]
-
-                data.forEach(transaction => {
-                    let balanceColumn
-                    const { transaction_type, category, amount } = transaction
-                    if (transaction_type === 'income' || transaction_type === 'expense') {
-                        balanceColumn = 'checking_account'
-                    } else if (transaction_type === 'investment') {
-                        if (['retirement', 'savings', 'emergency fund'].includes(category)) {
-                            balanceColumn = 'savings_account'
-                        } else {
-                            balanceColumn = 'investments'
-                        }
-                    } else if (transaction_type === 'deposit') {
-                        if (category === 'savings') {
-                            balanceColumn = 'savings_account'
-                        } else if (category === 'investment') {
-                            balanceColumn = 'investments'
-                        } else {
-                            balanceColumn = 'checking_account'
-                        }
-                    }
-
-                    if (balanceColumn) {
-                        const updateValue = transaction_type === 'expense' ? -Number(amount) : Number(amount)
-                        if (balanceColumn === 'checking_account') {
-                            checking.push(checking[checking.length - 1] + updateValue)
-                            savings.push(savings[savings.length - 1])
-                            investments.push(investments[investments.length - 1])
-                        } else if (balanceColumn === 'savings_account') {
-                            savings.push(savings[savings.length - 1] + updateValue)
-                            checking.push(checking[checking.length - 1])
-                            investments.push(investments[investments.length - 1])
-                        } else if (balanceColumn === 'investments') {
-                            investments.push(investments[investments.length - 1] + updateValue)
-                            savings.push(savings[savings.length - 1])
-                            checking.push(checking[checking.length - 1])
-                        }
-                    }
-                })
-
+                const { checking, savings, investments } = calculateBalances(data)
                 setCheckingBalance(checking)
                 setSavingsBalance(savings)
                 setInvestmentBalance(investments)
