@@ -5,6 +5,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 
 import SpinnerSmall from '../components/common/SpinnerSmall'
+import { validatesEmail, validatesPassword } from '../utils/validation'
 
 import { FormInput, LoginForm } from '../styledComponents/forms'
 import { ErrorList, LoginHeader } from '../styledComponents/text'
@@ -21,36 +22,11 @@ const Login = ({ setCurrentUser }) => {
     const [errors, setErrors] = useState([])
     const [loading, setLoading] = useState(false)
 
-    const validatesEmail = () => {
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-        const emailErrors = []
-
-        if (!email.length)
-            emailErrors.push('Email is required.')
-
-        if (!emailRegex.test(email))
-            emailErrors.push(`Invalid email format. Please enter a valid email address, e.g., example@domain.com.`)
-
-        if (email.length < 5 || email.length > 150)
-            emailErrors.push('Email must be between 6 and 150 characters.')
-
-        return emailErrors
-    }
-
-    const validatesPassword = () => {
-        const passwordErrors = []
-
-        if (!password?.length)
-            passwordErrors.push('Password is required.')
-
-        return passwordErrors
-    }
-
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const emailErrors = validatesEmail()
-        const passwordErrors = validatesPassword()
+        const emailErrors = validatesEmail(email)
+        const passwordErrors = validatesPassword(password)
 
         if (emailErrors.length || passwordErrors.length) {
             setErrors([...emailErrors, ...passwordErrors])

@@ -2,6 +2,8 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Swal from 'sweetalert2'
 
+import { navigateBack } from "../utils/navigation"
+
 import { Form, Col, Row, InputGroup } from "react-bootstrap"
 import { PasswordUpdateBackground } from '../styledComponents/styledLayouts'
 import { EditButton } from '../styledComponents/buttons'
@@ -80,10 +82,7 @@ export default function EditAccountPassword({ setCurrentUser, currentUser }) {
         }
     }
 
-    const handleBack = () => {
-        navigate(-1)
-    }
-
+    const handleBack = () => navigateBack(navigate)
 
     return (
         <div className="form-password-edit">

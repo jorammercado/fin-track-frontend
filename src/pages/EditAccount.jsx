@@ -2,8 +2,8 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Swal from 'sweetalert2'
 
-import { handleInputChange as handleInput } from "../../utils/formHandler"
-import { navigateBack } from "../../utils/navigation"
+import { handleInputChange as handleInput } from "../utils/formHandler"
+import { navigateBack } from "../utils/navigation"
 
 import { Form, Col, Row, InputGroup } from "react-bootstrap"
 import { EditBackground } from '../styledComponents/styledLayouts'
