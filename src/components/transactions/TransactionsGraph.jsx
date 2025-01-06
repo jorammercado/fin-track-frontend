@@ -1,49 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import useScreenWidth from '../../hooks/useScreenWidth';
+import { calculateGraphWidth } from '../../utils/graphUtils';
 
-const Graph = ({ checking = [], savings = [],
-    investments = [] }) => {
+const Graph = ({ checking = [], savings = [], investments = [] }) => {
     const screenWidth = useScreenWidth();
     const graphRef = useRef(null);
 
     useEffect(() => {
         d3.select("#my_dataviz svg").remove();
-        let margin = { top: 60, right: 115, bottom: 50, left: 50 },
-            width = ((
-                screenWidth > 1660 ? 1400 :
-                screenWidth <= 1660 && screenWidth > 1560 ? 1350 :
-                screenWidth <= 1560 && screenWidth > 1460 ? 1300 :
-                screenWidth <= 1460 && screenWidth > 1360 ? 1250 :
-                screenWidth <= 1360 && screenWidth > 1280 ? 1200 :
-                screenWidth <= 1280 && screenWidth > 1215 ? 1150 :
-                screenWidth <= 1215 && screenWidth > 1165 ? 1100 :
-                screenWidth <= 1165 && screenWidth > 1100 ? 1065 :
-                screenWidth <= 1100 && screenWidth > 1024 ? 1000 :
-                screenWidth <= 1024 && screenWidth > 950 ? 930 :
-                screenWidth <= 950 && screenWidth > 890 ? 870 :
-                screenWidth <= 890 && screenWidth > 840 ? 820 :
-                screenWidth <= 840 && screenWidth > 790 ? 770 :
-                screenWidth <= 790 && screenWidth > 740 ? 720 :
-                screenWidth <= 740 && screenWidth > 700 ? 680 :
-                screenWidth <= 700 && screenWidth > 650 ? 630 :
-                screenWidth <= 650 && screenWidth > 615 ? 590 :
-                screenWidth <= 615 && screenWidth > 570 ? 550 :
-                screenWidth <= 570 && screenWidth > 540 ? 520 :
-                screenWidth <= 540 && screenWidth > 520 ? 500 :
-                screenWidth <= 520 && screenWidth > 500 ? 480 :
-                screenWidth <= 500 && screenWidth > 480 ? 460 :
-                screenWidth <= 480 && screenWidth > 460 ? 440 :
-                screenWidth <= 460 && screenWidth > 440 ? 420 :
-                screenWidth <= 440 && screenWidth > 420 ? 400 :
-                screenWidth <= 420 && screenWidth > 400 ? 380 :
-                screenWidth <= 400 && screenWidth > 380 ? 360 :
-                screenWidth <= 380 && screenWidth > 370 ? 355 :
-                330
-            ) - margin.left - margin.right),
-            height = 275 - margin.top - margin.bottom;
+        const margin = { top: 60, right: 115, bottom: 50, left: 50 };
+        const width = calculateGraphWidth(screenWidth, margin);
+        const height = 275 - margin.top - margin.bottom;
 
-        let svg = d3.select("#my_dataviz")
+        const svg = d3.select("#my_dataviz")
             .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -77,10 +47,10 @@ const Graph = ({ checking = [], savings = [],
         }
 
         // List of groups
-        let keys = Object.keys(data[0]).filter(key => key !== 'x');
+        const keys = Object.keys(data[0]).filter(key => key !== 'x');
 
         // Color palette
-        let color = d3.scaleOrdinal()
+        const color = d3.scaleOrdinal()
             .domain(keys)
             .range([
                 "#07a",
@@ -100,10 +70,10 @@ const Graph = ({ checking = [], savings = [],
         //////////
 
         // Add X axis
-        let x = d3.scaleLinear()
+        const x = d3.scaleLinear()
             .domain(d3.extent(data, function (d) { return d.x; }))
             .range([0, width]);
-        let xAxis = svg.append("g")
+        const xAxis = svg.append("g")
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(x).ticks(15));
 
@@ -163,7 +133,7 @@ const Graph = ({ checking = [], savings = [],
         //   .attr("height", height);
 
         // Area generator with curve interpolation
-        let area = d3.area()
+        const area = d3.area()
             .x(function (d) { return x(d.x); })
             .y0(function () { return y(0); }) // Fix y0 position
             .y1(function (d) { return y(d.value); })
@@ -201,7 +171,7 @@ const Graph = ({ checking = [], savings = [],
         //////////
 
         // Add legend dots
-        let legend = svg.selectAll(".legend")
+        const legend = svg.selectAll(".legend")
             .data(keys)
             .enter().append("g")
             .attr("class", "legend")
@@ -274,7 +244,7 @@ const Graph = ({ checking = [], savings = [],
 
         let idleTimeout;
         // Add brushing
-        let brush = d3.brushX()
+        const brush = d3.brushX()
             .extent([[0, 0], [width, height]])
             .on("end", updateChart);
 
