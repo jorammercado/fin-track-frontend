@@ -1,14 +1,14 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
-import { handleInputChange as handleInput } from "../../utils/formHandler"
-import { navigateBack } from "../../utils/navigation"
+import { handleInputChange as handleInput } from '../../utils/formHandler'
+import { navigateBack } from '../../utils/navigation'
 
-import { Form, Col, Row, InputGroup } from "react-bootstrap"
+import { Form, Col, Row, InputGroup } from 'react-bootstrap'
 import { EditBackground } from '../../styledComponents/styledLayouts'
 import { EditButton } from '../../styledComponents/buttons'
-import "./UserEdit.scss"
+import './UserEdit.scss'
 
 const API = import.meta.env.VITE_API_URL
 
@@ -18,11 +18,11 @@ export default function UserEdit({ setCurrentUser, currentUser }) {
     const editUser = () => {
         const token = localStorage.getItem('authToken')
         fetch(`${API}/accounts/${currentUser.account_id}`, {
-            method: "PUT",
+            method: 'PUT',
             body: JSON.stringify(user),
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
         })
             .then(response => response.json())

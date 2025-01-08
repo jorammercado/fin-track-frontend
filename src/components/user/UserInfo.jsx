@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
 import { ProfileButton } from '../../styledComponents/buttons'
-import "./UserInfo.scss"
+import './UserInfo.scss'
 
 const API = import.meta.env.VITE_API_URL
 
@@ -11,20 +11,20 @@ const UserInfo = ({ currentUser, setCurrentUser, setToken, handleLogout }) => {
 
     const handleDelete = () => {
         Swal.fire({
-            text: "Are you sure you want to delete your account? This action cannot be undone.",
-            icon: "warning",
+            text: 'Are you sure you want to delete your account? This action cannot be undone.',
+            icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: "Yes, delete it!",
-            cancelButtonText: "No, keep it",
-            confirmButtonColor: "#e74c3c",
-            cancelButtonColor: "#07a",
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it',
+            confirmButtonColor: '#e74c3c',
+            cancelButtonColor: '#07a',
         }).then((result) => {
             if (result.isConfirmed) {
                 const token = localStorage.getItem('authToken')
                 const httpOptions = {
-                    method: "DELETE",
+                    method: 'DELETE',
                     headers: {
-                        "Authorization": `Bearer ${token}`
+                        'Authorization': `Bearer ${token}`
                     }
                 }
                 fetch(`${API}/accounts/${currentUser.account_id}`, httpOptions)
@@ -44,7 +44,7 @@ const UserInfo = ({ currentUser, setCurrentUser, setToken, handleLogout }) => {
                                 localStorage.removeItem('currentUser')
                                 setCurrentUser(null)
                                 setToken(null)
-                                navigate("/login")
+                                navigate('/login')
                             })
                         }
                     })
@@ -55,14 +55,14 @@ const UserInfo = ({ currentUser, setCurrentUser, setToken, handleLogout }) => {
                             confirmButtonText: 'OK',
                             confirmButtonColor: '#07a'
                         }).then(() => {
-                            console.error("Guest account cannot be deleted!")
+                            console.error('Guest account cannot be deleted!')
                         })
                     })
             } else {
                 Swal.fire({
-                    text: "Your account was not deleted.",
-                    confirmButtonText: "OK",
-                    confirmButtonColor: "#07a",
+                    text: 'Your account was not deleted.',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#07a',
                 })
             }
         })
@@ -71,7 +71,7 @@ const UserInfo = ({ currentUser, setCurrentUser, setToken, handleLogout }) => {
     return (
         <div >
             <article className="user">
-                <table className="table user__table table-bordered table-responsive table-hover table-dark ">
+                <table className="table user__table table-bordered table-responsive table-hover table-dark">
                     <tbody>
 
                         <tr >

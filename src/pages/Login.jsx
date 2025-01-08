@@ -11,7 +11,7 @@ import { FormInput, LoginForm } from '../styledComponents/forms'
 import { ErrorList, LoginHeader } from '../styledComponents/text'
 import { HeaderWrapper } from '../styledComponents/styledLayouts'
 import { LoginButton, OkButton } from '../styledComponents/buttons'
-import "./Login.scss"
+import './Login.scss'
 
 const VITE_API_URL = import.meta.env.VITE_API_URL
 
@@ -69,8 +69,8 @@ const Login = ({ setCurrentUser }) => {
 
     const handleOk = (event) => {
         event.preventDefault()
-        setEmail("")
-        setPassword("")
+        setEmail('')
+        setPassword('')
         setErrors([])
     }
 

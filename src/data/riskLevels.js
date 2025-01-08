@@ -1,6 +1,6 @@
 export const riskLevels = [
-    "n/a",
-    "low",
-    "moderate",
-    "high"
+    'n/a',
+    'low',
+    'moderate',
+    'high'
 ]

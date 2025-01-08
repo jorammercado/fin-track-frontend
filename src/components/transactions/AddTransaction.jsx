@@ -1,18 +1,18 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import Swal from "sweetalert2"
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
-import { handleInputChange as handleInput } from "../../utils/formHandler"
-import { navigateBack } from "../../utils/navigation"
-import { categories } from "../../data/categories"
-import { transactionTypes } from "../../data/transactionTypes"
-import { recurringFrequencies } from "../../data/recurringFrequencies"
-import { riskLevels } from "../../data/riskLevels"
+import { handleInputChange as handleInput } from '../../utils/formHandler'
+import { navigateBack } from '../../utils/navigation'
+import { categories } from '../../data/categories'
+import { transactionTypes } from '../../data/transactionTypes'
+import { recurringFrequencies } from '../../data/recurringFrequencies'
+import { riskLevels } from '../../data/riskLevels'
 
-import { Form, Col, Row, InputGroup } from "react-bootstrap"
-import { AddTransactionBackground } from "../../styledComponents/styledLayouts"
-import { EditButton } from "../../styledComponents/buttons"
-import "./AddTransaction.scss"
+import { Form, Col, Row, InputGroup } from 'react-bootstrap'
+import { AddTransactionBackground } from '../../styledComponents/styledLayouts'
+import { EditButton } from '../../styledComponents/buttons'
+import './AddTransaction.scss'
 
 const API = import.meta.env.VITE_API_URL
 
@@ -20,13 +20,13 @@ export default function AddTransactionForm({ currentUser }) {
     const navigate = useNavigate()
     const [transaction, setTransaction] = useState({
         account_id: currentUser.account_id,
-        transaction_type: "income",
+        transaction_type: 'income',
         amount: 0,
-        category: "salary",
-        description: "",
+        category: 'salary',
+        description: '',
         recurring: false,
-        recurring_frequency: "one-time",
-        risk_level: "n/a",
+        recurring_frequency: 'one-time',
+        risk_level: 'n/a',
         is_planned: false,
     })
 
@@ -38,35 +38,35 @@ export default function AddTransactionForm({ currentUser }) {
 
         if (transaction.amount === 0) {
             Swal.fire({
-                text: "Amount must be a non-zero value.",
-                confirmButtonText: "OK",
-                confirmButtonColor: "#07a",
+                text: 'Amount must be a non-zero value.',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#07a',
             })
             return
         }
 
-        const token = localStorage.getItem("authToken")
+        const token = localStorage.getItem('authToken')
         fetch(`${API}/accounts/${currentUser.account_id}/transactions/create`, {
-            method: "POST",
+            method: 'POST',
             body: JSON.stringify(transaction),
             headers: {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`,
             },
         })
             .then((response) => {
                 if (!response.ok) {
                     return response.json().then((data) => {
-                        throw new Error(data.error || data.message || "Failed to add transaction")
+                        throw new Error(data.error || data.message || 'Failed to add transaction')
                     })
                 }
                 return response.json()
             })
             .then(() => {
                 Swal.fire({
-                    text: "Transaction successfully added!",
-                    confirmButtonText: "OK",
-                    confirmButtonColor: "#07a",
+                    text: 'Transaction successfully added!',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#07a',
                 }).then(() => {
                     navigate(`/users/${currentUser.account_id}/profile/transactions`)
                 })
@@ -74,10 +74,10 @@ export default function AddTransactionForm({ currentUser }) {
             .catch((error) => {
                 Swal.fire({
                     text: error.message,
-                    confirmButtonText: "OK",
-                    confirmButtonColor: "#07a",
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#07a',
                 })
-                console.error("Error adding transaction:", error)
+                console.error('Error adding transaction:', error)
             })
     }
 

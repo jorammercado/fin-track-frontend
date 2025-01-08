@@ -1,27 +1,27 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
-import { handleInputChange as handleInput } from "../../utils/formHandler"
+import { handleInputChange as handleInput } from '../../utils/formHandler'
 
-import { Form, Col, Row, InputGroup } from "react-bootstrap"
+import { Form, Col, Row, InputGroup } from 'react-bootstrap'
 import { SignUpBackground } from '../../styledComponents/styledLayouts'
 import { SignUpButton } from '../../styledComponents/buttons'
-import asterisk from "../../assets/images/asterisk.svg"
-import "./SignUpForm.scss"
+import asterisk from '../../assets/images/asterisk.svg'
+import './SignUpForm.scss'
 
 const API = import.meta.env.VITE_API_URL
 
 export default function SignUpForm({ setCurrentUser }) {
     const [user, setUser] = useState({
         account_id: 0,
-        firstname: "",
-        lastname: "",
-        username: "",
-        email: "",
-        password: "",
-        dob: "",
-        registration_date: ""
+        firstname: '',
+        lastname: '',
+        username: '',
+        email: '',
+        password: '',
+        dob: '',
+        registration_date: ''
     })
     const [confirmPassword, setConfirmPassword] = useState("")
     const navigate = useNavigate()
@@ -31,7 +31,7 @@ export default function SignUpForm({ setCurrentUser }) {
             method: "POST",
             body: JSON.stringify(user),
             headers: {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
             },
         })
             .then(response => response.json())
@@ -52,13 +52,13 @@ export default function SignUpForm({ setCurrentUser }) {
                         navigate(`/users/${data?.createdAccount?.account_id}/profile`)
                         setUser({
                             account_id: 0,
-                            firstname: "",
-                            lastname: "",
-                            username: "",
-                            email: "",
-                            password: "",
-                            dob: "",
-                            registration_date: ""
+                            firstname: '',
+                            lastname: '',
+                            username: '',
+                            email: '',
+                            password: '',
+                            dob: '',
+                            registration_date: ''
                         })
                     })
                 }

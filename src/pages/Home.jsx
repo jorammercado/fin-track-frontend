@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom'
 
 import { HomeButton } from '../styledComponents/buttons'
-import "./Home.scss"
+import './Home.scss'
 
 const Home = () => {
     return (

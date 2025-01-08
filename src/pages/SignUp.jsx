@@ -1,4 +1,4 @@
-import SignUpForm from "../components/user/SignUpForm"
+import SignUpForm from '../components/user/SignUpForm'
 
 const SignUp = ({ setCurrentUser }) => {
     return (

@@ -1,4 +1,4 @@
-import UserEditPass from "../components/user/UserEditPass"
+import UserEditPass from '../components/user/UserEditPass'
 
 const EditAccountPassword = ({ setCurrentUser, currentUser }) => {
     return (

@@ -1,4 +1,4 @@
-import UserEdit from "../components/user/UserEdit"
+import UserEdit from '../components/user/UserEdit'
 
 const EditAccount = ({ setCurrentUser, currentUser }) => {
     return (

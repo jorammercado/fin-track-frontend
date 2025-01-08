@@ -1,18 +1,18 @@
-import { useState } from "react"
-import { useNavigate, useLocation } from "react-router-dom"
-import Swal from "sweetalert2"
+import { useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
-import { handleInputChange as handleInput } from "../../utils/formHandler"
-import { navigateBack } from "../../utils/navigation"
-import { categories } from "../../data/categories"
-import { transactionTypes } from "../../data/transactionTypes"
-import { recurringFrequencies } from "../../data/recurringFrequencies"
-import { riskLevels } from "../../data/riskLevels"
+import { handleInputChange as handleInput } from '../../utils/formHandler'
+import { navigateBack } from '../../utils/navigation'
+import { categories } from '../../data/categories'
+import { transactionTypes } from '../../data/transactionTypes'
+import { recurringFrequencies } from '../../data/recurringFrequencies'
+import { riskLevels } from '../../data/riskLevels'
 
-import { Form, Col, Row, InputGroup } from "react-bootstrap"
-import { EditTransactionBackground } from "../../styledComponents/styledLayouts"
-import { SmallEditButton } from "../../styledComponents/buttons"
-import "./EditTransaction.scss"
+import { Form, Col, Row, InputGroup } from 'react-bootstrap'
+import { EditTransactionBackground } from '../../styledComponents/styledLayouts'
+import { SmallEditButton } from '../../styledComponents/buttons'
+import './EditTransaction.scss'
 
 const API = import.meta.env.VITE_API_URL
 
@@ -29,35 +29,35 @@ const EditTransaction = ({ currentUser }) => {
 
         if (transaction.amount === 0) {
             Swal.fire({
-                text: "Amount must be a non-zero value.",
-                confirmButtonText: "OK",
-                confirmButtonColor: "#07a",
+                text: 'Amount must be a non-zero value.',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#07a',
             })
             return
         }
 
-        const token = localStorage.getItem("authToken")
+        const token = localStorage.getItem('authToken')
         fetch(`${API}/accounts/${currentUser.account_id}/transactions/${transaction.transaction_id}`, {
-            method: "PUT",
+            method: 'PUT',
             body: JSON.stringify(transaction),
             headers: {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`,
             },
         })
             .then((response) => {
                 if (!response.ok) {
                     return response.json().then((data) => {
-                        throw new Error(data.error || data.message || "Failed to add transaction")
+                        throw new Error(data.error || data.message || 'Failed to add transaction')
                     })
                 }
                 return response.json()
             })
             .then((data) => {
                 Swal.fire({
-                    text: "Transaction successfully updated!",
-                    confirmButtonText: "OK",
-                    confirmButtonColor: "#07a",
+                    text: 'Transaction successfully updated!',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#07a',
                 }).then(() => {
                     navigate(`/users/${currentUser.account_id}/profile/transactions`)
                 })
@@ -65,30 +65,30 @@ const EditTransaction = ({ currentUser }) => {
             .catch((error) => {
                 Swal.fire({
                     text: error.message,
-                    confirmButtonText: "OK",
-                    confirmButtonColor: "#07a",
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#07a',
                 })
-                console.error("Error updating transaction:", error)
+                console.error('Error updating transaction:', error)
             })
     }
 
     const handleDelete = (e) => {
         e.preventDefault()
-        const token = localStorage.getItem("authToken")
+        const token = localStorage.getItem('authToken')
         const httpOptions = {
-            method: "DELETE",
+            method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         }
         Swal.fire({
-            text: "Are you sure you want to delete this transaction? This action cannot be undone.",
-            icon: "warning",
+            text: 'Are you sure you want to delete this transaction? This action cannot be undone.',
+            icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: "Yes, delete it!",
-            cancelButtonText: "No, keep it",
-            confirmButtonColor: "#e74c3c",
-            cancelButtonColor: "#07a",
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it',
+            confirmButtonColor: '#e74c3c',
+            cancelButtonColor: '#07a',
         }).then((result) => {
             if (result.isConfirmed) {
                 fetch(`${API}/accounts/${currentUser.account_id}/transactions/${transaction.transaction_id}`, httpOptions)
@@ -102,9 +102,9 @@ const EditTransaction = ({ currentUser }) => {
                         }
                         else {
                             Swal.fire({
-                                text: "Transaction successfully deleted!",
-                                confirmButtonText: "OK",
-                                confirmButtonColor: "#07a",
+                                text: 'Transaction successfully deleted!',
+                                confirmButtonText: 'OK',
+                                confirmButtonColor: '#07a',
                             }).then(() => {
                                 navigate(`/users/${currentUser.account_id}/profile/transactions`)
                             })
@@ -113,16 +113,16 @@ const EditTransaction = ({ currentUser }) => {
                     .catch((err) => {
                         Swal.fire({
                             text: `Server error: ${err}. Cannot delete Transaction.`,
-                            confirmButtonText: "OK",
-                            confirmButtonColor: "#07a",
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#07a',
                         })
                         console.error(err)
                     })
             } else {
                 Swal.fire({
-                    text: "Transaction not deleted.",
-                    confirmButtonText: "OK",
-                    confirmButtonColor: "#07a",
+                    text: 'Transaction not deleted.',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#07a',
                 })
             }
         })

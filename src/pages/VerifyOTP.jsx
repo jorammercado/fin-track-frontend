@@ -11,7 +11,7 @@ import { FormInput, VerifyOTPForm } from '../styledComponents/forms'
 import { ErrorList, VerifyOTPHeader } from '../styledComponents/text'
 import { HeaderWrapper } from '../styledComponents/styledLayouts'
 import { VerifyOTPButton, OkButton } from '../styledComponents/buttons'
-import "./Login.scss"
+import './Login.scss'
 
 const VITE_API_URL = import.meta.env.VITE_API_URL
 

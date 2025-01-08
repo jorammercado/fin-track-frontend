@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import Spinner from '../common/Spinner'
-import "./NewsFeed.scss"
+import './NewsFeed.scss'
 
 const API = import.meta.env.VITE_FINNHUB_API_KEY
 
@@ -32,7 +32,7 @@ const NewsFeed = () => {
                         {news?.map((item, index) => (
                             <div className="news__container__story"
                                 key={index}
-                                onClick={() => window.open(item?.url, '_blank', 'noopener, noreferrer')}
+                                onClick={() => window.open(item?.url, "_blank", "noopener, noreferrer")}
                             >
                                 <div className="news__container__story__text">
                                     <div className="headline" >{item?.headline}</div>
@@ -41,7 +41,7 @@ const NewsFeed = () => {
                                 <div>
                                     <img src={item?.image}
                                         height={
-                                            item?.image?.includes('market_watch_logo.png') ? "20px" : "55px"}
+                                            item?.image?.includes("market_watch_logo.png") ? "20px" : "55px"}
                                     />
                                 </div>
                             </div>

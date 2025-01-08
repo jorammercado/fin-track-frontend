@@ -1,34 +1,34 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
-import { navigateBack } from "../../utils/navigation"
+import { navigateBack } from '../../utils/navigation'
 
-import { Form, Col, Row, InputGroup } from "react-bootstrap"
+import { Form, Col, Row, InputGroup } from 'react-bootstrap'
 import { PasswordUpdateBackground } from '../../styledComponents/styledLayouts'
 import { EditButton } from '../../styledComponents/buttons'
-import "./UserEditPass.scss"
+import './UserEditPass.scss'
 
 const API = import.meta.env.VITE_API_URL
 
 export default function UserEditPass({ setCurrentUser, currentUser }) {
     const [passwords, setPasswords] = useState({
-        password: "",
-        newPassword: "",
-        confirmPassword: "",
+        password: '',
+        newPassword: '',
+        confirmPassword: '',
     })
     const navigate = useNavigate()
     const editUser = () => {
         const token = localStorage.getItem('authToken')
         fetch(`${API}/accounts/${currentUser.account_id}/password`, {
-            method: "PUT",
+            method: 'PUT',
             body: JSON.stringify({
                 password: passwords.password,
                 newPassword: passwords.newPassword
             }),
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
         })
             .then(response => response.json())

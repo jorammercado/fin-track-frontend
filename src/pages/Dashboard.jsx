@@ -1,4 +1,4 @@
-import BalancesSummary from "../components/transactions/BalancesSummary"
+import BalancesSummary from '../components/transactions/BalancesSummary'
 
 const Dashboard = ({ currentUser }) => {
     return (

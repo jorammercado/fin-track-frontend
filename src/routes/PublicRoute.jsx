@@ -6,7 +6,7 @@ const PublicRoute = ({ element: Component, setCurrentUser, currentUser }) => {
     const token = localStorage.getItem('authToken')
     const location = useLocation()
 
-    if (Component === FourOFour || location.pathname === "/") {
+    if (Component === FourOFour || location.pathname === '/') {
         return <Component />
     }
 

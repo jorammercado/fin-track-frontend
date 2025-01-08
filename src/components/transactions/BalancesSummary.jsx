@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import { useParams } from "react-router-dom"
+import { useParams } from 'react-router-dom'
 
-import { calculateBalances } from "../../utils/balanceCalculator"
-import "./BalancesSummary.scss"
+import { calculateBalances } from '../../utils/balanceCalculator'
+import './BalancesSummary.scss'
 
 const API = import.meta.env.VITE_API_URL
 
@@ -33,7 +33,7 @@ const BalancesSummary = ({ currentUser }) => {
                 setInvestmentBalance(investments)
             })
             .catch((error) => {
-                console.error("Error fetching data: ", error)
+                console.error('Error fetching data: ', error)
             })
     }, [account_id, currentUser, API])
     return (

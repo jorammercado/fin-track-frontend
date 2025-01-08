@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom'
 function Transaction({ transaction, index, checking, savings, investment, currentUser }) {
     const navigate = useNavigate()
     const createdAt = new Date(transaction.created_at)
-    const options = { timeZone: "America/New_York" }
-    const estDate = createdAt.toLocaleDateString("en-US", options)
-    const estTime = createdAt.toLocaleTimeString("en-US", options)
+    const options = { timeZone: 'America/New_York' }
+    const estDate = createdAt.toLocaleDateString('en-US', options)
+    const estTime = createdAt.toLocaleTimeString('en-US', options)
     const enhancedTransaction = { ...transaction, index: index + 1 }
     return (
         <tr className="transactions__container__table__row-values"

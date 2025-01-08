@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom'
 
 import { FourOFourButton } from '../styledComponents/buttons'
-import "./FourOFour.scss"
+import './FourOFour.scss'
 
 const FourOFour = () => {
     return (

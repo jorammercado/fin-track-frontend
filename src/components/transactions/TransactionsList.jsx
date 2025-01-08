@@ -1,11 +1,11 @@
-import { useState, useEffect, useMemo } from "react"
-import { useParams, useNavigate } from "react-router-dom"
+import { useState, useEffect, useMemo } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 
-import Transaction from "./Transaction"
-import Graph from "./TransactionsGraph"
-import Pagination from "../../layout/Pagination"
+import Transaction from './Transaction'
+import Graph from './TransactionsGraph'
+import Pagination from '../../layout/Pagination'
 
-import { calculateBalances } from "../../utils/balanceCalculator"
+import { calculateBalances } from '../../utils/balanceCalculator'
 import {
     handleSortType as handleSortTypeHandler,
     handleSortAmount as handleSortAmountHandler,
@@ -15,7 +15,7 @@ import {
     handleSortRiskLevel as handleSortRiskLevelHandler,
     handleSortIsPlanned as handleSortIsPlanneHandler,
     handleSortDate as handleSortDateHandler
-} from "../../utils/sorting"
+} from '../../utils/sorting'
 
 import {
     TransactionsButton,
@@ -23,7 +23,7 @@ import {
     TransactionsButtonDisabled,
     TransactionsButtonDisabledBalances
 } from '../../styledComponents/buttons'
-import "./TransactionsList.scss"
+import './TransactionsList.scss'
 
 const API = import.meta.env.VITE_API_URL
 
@@ -126,7 +126,7 @@ export default function TransactionsList({ currentUser }) {
                 setInvestmentBalance(investments)
             })
             .catch((error) => {
-                console.error("Error fetching data: ", error)
+                console.error('Error fetching data: ', error)
             })
     }, [account_id, currentUser, API])
 
