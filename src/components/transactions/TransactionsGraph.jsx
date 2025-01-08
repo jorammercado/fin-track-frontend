@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import * as d3 from 'd3';
 import useScreenWidth from '../../hooks/useScreenWidth';
 import { calculateGraphWidth } from '../../utils/graphUtils';
+import './TransactionsGraph.scss';
 
 const Graph = ({ checking = [], savings = [], investments = [] }) => {
     const screenWidth = useScreenWidth();
@@ -309,14 +310,7 @@ const Graph = ({ checking = [], savings = [], investments = [] }) => {
     }, [checking, savings, investments, screenWidth]);
 
     return (
-        <div style={{
-            backgroundColor: '#09213A',
-            paddingBottom: '15px',
-            borderRadius: '5px',
-            marginBottom: '40px',
-            marginTop: '-70px',
-            fontFamily: 'Roboto-Thin',
-        }} id="my_dataviz"></div>
+        <div id="my_dataviz"></div>
     );
 };
 
