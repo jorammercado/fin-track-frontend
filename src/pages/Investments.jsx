@@ -2,7 +2,7 @@ import StocksList from '../components/marketData/StocksList'
 
 const Ivestments = () => {
     return (
-        <div className="investments">
+        <div >
             <StocksList />
         </div>
     )
