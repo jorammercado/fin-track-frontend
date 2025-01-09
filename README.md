@@ -35,6 +35,7 @@ For a detailed overview of security features and backend services, visit the [ba
          - [Editing & Deleting Transactions](#editing--deleting-transactions)
          - [Balance Updates](#balance-updates)
       - [Transactions Graph](#transactions-graph)
+         - [How the Transactions Graph was Built](#how-the-transactions-graph-was-built)
          - [Core Functionalities](#core-functionalities)
          - [Axes & Visualization](#axes--visualizationh)
          - [Dynamic Scaling](#dynamic-scaling)
@@ -100,8 +101,8 @@ The application includes a **Guest Login** feature, allowing visitors to explore
 - **Add Transaction**: Enables users to log new financial transactions with details such as type, amount, and category.
 - **Edit Transaction**: Enables users to edt or delete a financial transactions.
 
-## Features
 ---
+## Features
 ### **A. Session Security**
 Session management on the frontend is implemented using a JWT (JSON Web Token) issued by the backend after verifying user credentials. The JWT is securely stored in local storage with an expiration time of 30 minutes. Upon expiration or user logout, the token and general user data are automatically removed from local storage to maintain session security. Sensitive user data such as financial transactions and password are not stored on the frontend. Instead when access is needed, they are retrieved from the backend after verifying the token attached to the request header.
 
@@ -408,15 +409,33 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
       This mechanism ensures accurate and real-time account updates, providing users with immediate insights into their financial standing without requiring backend recalculation. By leveraging dynamic processing and immutability principles, the application delivers both performance and reliability in balance management.
 
 2. ### **Transactions Graph**
-      The Transactions Graph provides users with a dynamic visualization of changes in their financial accounts (checking, savings, and investments) over time. Implemented using D3.js, this interactive graph includes the following features:
+      The Transactions Graph provides users with a dynamic visualization of changes in their financial accounts (checking, savings, and investments) over time, implemented using D3.js.
 
-      1. #### **Core Functionalities**
+      1. #### **How the Transactions Graph Was Built**
+         The Graph was initially developed as part of my capstone project, **Court-IQ**, during my time at the **Pursuit Fellowship**. This project focused on providing an intuitive, data-driven platform for basketball enthusiasts, offering real-time insights into player statistics such as points, rebounds, and assists per game for the current season. You can explore the project on its [GitHub repository](https://github.com/jorammercado/Court-IQ) or visit the deployed site at [Court-IQ.netlify.app](https://court-iq.netlify.app/).
+
+         The original development of the graph was a challenging but rewarding process, as it involved extensive research and learning about D3.js and its ecosystem. Altering the graph to fit the current use case of visualizing financial transactions was a relatively straightforward process, but it was built upon the complex foundation established during the development of Court-IQ.
+
+         #### **Development Journey**
+         To create the original graph, I combined resources and inspiration from several key sources. My approach involved adapting templates and learning from the official [D3.js documentation](https://d3js.org/) alongside practical examples from online graph galleries. Some of the most influential resources were:
+
+         - **React-Graph Gallery** ([react-graph-gallery.com](https://www.react-graph-gallery.com/)): This site provided an excellent starting point for integrating D3.js with React. Its examples and templates helped bridge the gap between raw D3.js functionality and React's component-based architecture.
+         - **D3 Graph Gallery** ([d3-graph-gallery.com](https://d3-graph-gallery.com/)): Templates such as the [stacked area chart](https://d3-graph-gallery.com/graph/stackedarea_template.html) and the [area plot](https://www.react-graph-gallery.com/area-plot) served as foundational examples. I analyzed these templates, extracting relevant features and adapting them to fit the requirements of the Court-IQ project.
+
+         The development process involved stitching together pieces of knowledge and examples, often requiring trial and error, debugging, and customization to achieve the desired functionality and aesthetics. Over time, developing an understanding of how D3.js interacts with the data, allowing me to build the highly interactive and responsive graph that became a core feature of Court-IQ.
+
+         #### **Reimagining the Graph for Financial Data**
+         The transition from Court-IQ's basketball statistics graph to the Transactions Graph for financial data demonstrates the flexibility and reusability of the original implementation. 
+
+         This transformation showcases how a robustly designed graph can be adapted to different datasets and use cases with minimal adjustments. By leveraging the lessons learned from the initial development, the Transactions Graph was developed to meet the specific needs of this financial visualization, providing users with a tool to make data-driven decisions effortlessly.
+
+      2. #### **Core Functionalities**
          1. **Account Visualization**: Displays the running balances of checking, savings, and investment accounts as line graphs.
          2. **Dynamic Data Updates**: Graph data updates in real-time based on user transactions, reflecting changes immediately.
          3. **Zoom**: Users can zoom in/out to focus on specific time periods or transactions, providing granular insights into account trends.
          4. **Customizable Visibility**: A built-in legend allows users to toggle individual accounts (checking, savings, investments) on or off, enhancing clarity.
 
-      2. #### **Axes & Visualization**
+      3. #### **Axes & Visualization**
          - The X-axis represents transactions by order of time/date - logged into the system. If a given transaction was performed on the savings account for example, then the other two accounts will remain the same for that particular transaction. 
          - The Y-axis scales to the balance for a given account, updating dynamically as data changes.
          - **Styling**
@@ -428,7 +447,7 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
             3. Lines and shaded areas under lines create a visually engaging experience when data changes or users zoom in/out.
             4. Specific data points are plotted as small circles for precise visualization.
 
-      3. #### **Dynamic Scaling**
+      4. #### **Dynamic Scaling**
       - The graph dynamically adjusts to the user's screen size to ensure optimal display across devices. 
       In the following code snippet, an event listener is added to the window object - when screen size changes, it triggers the function handleResize to execute. 
          ```javascript
@@ -449,7 +468,7 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
                      screenWidth <= 1660 && screenWidth > 1560 ? 1350 :
          ```
 
-      4. #### **User Interaction Features**
+      5. #### **User Interaction Features**
          1. #### **Legend and Toggling**:
             - A clickable legend allows users to toggle the visibility of individual accounts.
             - Color-coded boxes indicate whether an account is visible or hidden.
@@ -498,7 +517,7 @@ Session management on the frontend is implemented using a JWT (JSON Web Token) i
 
 
 
-      5. #### **Why This Graph Matters**
+      6. #### **Why This Graph Matters**
          This interactive graph empowers users to make data-driven financial decisions by offering:
          - A clear, real-time visualization of account trends.
          - Tools to analyze patterns in income, expenses, and investments.
