@@ -70,7 +70,7 @@ const Graph = ({ checking = [], savings = [], investments = [] }) => {
         const color = d3.scaleOrdinal()
             .domain(keys)
             .range([
-                '#07a',
+                '#94c4dc',
                 '#2ca8e2',
                 '#1480d8'
             ].reverse())
@@ -180,8 +180,8 @@ const Graph = ({ checking = [], savings = [], investments = [] }) => {
                 .attr('class', key + 'Point')
                 .attr('cx', function (d) { return x(d.x) })
                 .attr('cy', function (d) { return y(d[key]) })
-                .attr('r', 2)
-                .style('fill', color(key))
+                .attr('r', 1.50)
+                .style('fill', '#f0f5f8')
                 .style('opacity', visible[key] ? 1 : 0)
         })
 
