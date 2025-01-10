@@ -18,6 +18,7 @@ import {
 } from '../../utils/sorting'
 
 import {
+    AddTransactionButton,
     TransactionsButton,
     TransactionsButtonDate,
     TransactionsButtonDisabled,
@@ -231,12 +232,12 @@ export default function TransactionsList({ currentUser }) {
                         })}
                         <tr className="transactions__container__table__headers--bottom">
                             <td colSpan="11">
-                                <TransactionsButton
+                                <AddTransactionButton
                                     type="button"
                                     onClick={() => navigate(`/users/${currentUser?.account_id}/profile/transactions/add`)}
                                 >
                                     Add Transaction
-                                </TransactionsButton>
+                                </AddTransactionButton>
                             </td>
                         </tr>
                     </tbody>
