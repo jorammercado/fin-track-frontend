@@ -45,7 +45,7 @@ const Graph = ({ checking = [], savings = [], investments = [] }) => {
             checking.forEach((value, i) => {
                 data.push({
                     x: i,
-                    checking: value, 
+                    checking: value,
                     savings: savings[i],
                     investments: investments[i]
                 })
@@ -87,12 +87,25 @@ const Graph = ({ checking = [], savings = [], investments = [] }) => {
         //////////
 
         // Add X axis
+
+        const getTickValues = (data, maxTicks, domain) => {
+            // Filter data within the new domain, needed when zooming
+            const filteredData = data.filter(d => d.x >= domain[0] && d.x <= domain[1])
+            // Calculate step for max ticks
+            const step = Math.ceil(filteredData.length / maxTicks)
+            // Return sampled x values
+            return filteredData.filter((_, index) => index % step === 0).map(d => d.x)
+        }
+
         const x = d3.scaleLinear()
             .domain(d3.extent(data, function (d) { return d.x })) // Get the min and max of 'x' values
             .range([0, width]) // Map data to the width of the chart
         const xAxis = svg.append('g')
             .attr('transform', 'translate(0,' + height + ')') // Position at the bottom of the chart
-            .call(d3.axisBottom(x).ticks(15)) // Create bottom axis with 15 ticks
+            .call(d3.axisBottom(x)
+                .tickValues(getTickValues(data, 15, x.domain())) // Display only data points as ticks
+                .tickFormat(d3.format('d')) // Ensure integers only
+            )
 
         // Style X axis
         xAxis.selectAll('text').style('fill', 'white')
@@ -284,8 +297,15 @@ const Graph = ({ checking = [], savings = [], investments = [] }) => {
                 svg.select('.brush').call(brush.move, null) // Clear the brushed area visually
             }
 
+            const domain = x.domain() // Get the updated domain
+
             // Update the x-axis to reflect the new domain
-            xAxis.transition().duration(1000).call(d3.axisBottom(x).ticks(15)) // Animate x-axis update
+            xAxis.transition().duration(1000) // Animate x-axis update
+                .call(
+                    d3.axisBottom(x)
+                        .tickValues(getTickValues(data, 15, domain)) // Display only data points as ticks
+                        .tickFormat(d3.format('d')) // Ensure integers only
+                )
                 .selectAll('text').style('fill', 'white')
             xAxis.selectAll('line').style('stroke', 'white')
             xAxis.selectAll('path').style('stroke', 'white')
