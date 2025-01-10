@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const AddTransactionButton = styled.button`  
     width: 110px;
-    height: 30px;
+    height: 27px;
     border-radius: 4px;
     font-size: 14px;
     font-family: 'Roboto-Thin';

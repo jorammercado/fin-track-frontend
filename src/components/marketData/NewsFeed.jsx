@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { SeeMoreButton } from '../../styledComponents/buttons'
 import Spinner from '../common/Spinner'
 import './NewsFeed.scss'
 
@@ -7,6 +8,8 @@ const API = import.meta.env.VITE_FINNHUB_API_KEY
 
 const NewsFeed = () => {
     const [news, setNews] = useState([])
+    const [visibleNews, setVisibleNews] = useState([])
+    const [newsIndex, setNewsIndex] = useState(10)
 
     useEffect(() => {
         const fetchNews = async () => {
@@ -17,6 +20,7 @@ const NewsFeed = () => {
                 }
                 const data = await response?.json()
                 setNews(data)
+                setVisibleNews(data.slice(0, 10))
             } catch (err) {
                 console.error(err)
             }
@@ -24,12 +28,18 @@ const NewsFeed = () => {
         fetchNews()
     }, [])
 
+    const handleSeeMore = () => {
+        const nextIndex = Math.min(newsIndex + 10, news.length)
+        setVisibleNews(news.slice(0, nextIndex))
+        setNewsIndex(nextIndex)
+    }
+
     return (
         <>
             {news?.length > 0 ?
                 <div className="news" >
                     <div className="news__container" >
-                        {news?.map((item, index) => (
+                        {visibleNews?.map((item, index) => (
                             <div className="news__container__story"
                                 key={index}
                                 onClick={() => window.open(item?.url, "_blank", "noopener, noreferrer")}
@@ -47,6 +57,13 @@ const NewsFeed = () => {
                             </div>
                         ))}
                     </div>
+                    {newsIndex < news.length && (
+                        <div className="news__button">
+                            <SeeMoreButton onClick={handleSeeMore}>
+                                See More
+                            </SeeMoreButton>
+                        </div>
+                    )}
                 </div> :
                 <Spinner />}
         </>
