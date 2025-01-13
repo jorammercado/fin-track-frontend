@@ -8,8 +8,6 @@ The iCapital Budgeter is part of the Software Engineer Take-Home Exam Project fo
 
 The application allows users to track income and expenses by logging financial transactions. Users can categorize and log transactions to track their checking, savings, and investment accounts. The data for the three accounts is tabulated and graphed, with sorting and filtering features in order for users to easily find transactions and see trends in their spending and savings patterns. The application also allows users to view real-time stock prices to analyze stock performance, as well as having relevant and current financial news, helping users make confident and informed investment decisions. 
 
-For a detailed overview of security features and backend services, visit the [backend repository](https://github.com/jorammercado/icapital-budgeter-backend/blob/main/README.md).
-
 ## Contents
 - [Tech Stack](#tech-stack)
 - [Deployed Application](#deployed-application)
