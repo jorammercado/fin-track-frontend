@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 
 import useScreenWidth from '../hooks/useScreenWidth'
-import logo from '../assets/images/icapital-logo-full-name.svg'
 import './NavBar.scss'
 
 export default function NavBar({ token, handleLogout, currentUser }) {
@@ -14,8 +13,7 @@ export default function NavBar({ token, handleLogout, currentUser }) {
 
                 <div className="navbar__logo">
                     <Link to="/">
-                        <img src={logo} alt="Logo" className="navbar__logo__image" />
-                        <span className="navbar__logo__text">{screenWidth > 610 ? " - Budgeter" : "Budgeter"}</span>
+                        <span className="navbar__logo__text">FinTrack</span>
                     </Link>
                 </div>
 
