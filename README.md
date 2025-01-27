@@ -1061,15 +1061,15 @@ To run this project, you will need:
 
 ### Installation
 
-1. Fork the repository from [https://github.com/jorammercado/icapital-budgeter-frontend](https://github.com/jorammercado/icapital-budgeter-frontend).
+1. Fork the repository from [https://github.com/JoramAMercado/fin-track-frontend](https://github.com/JoramAMercado/fin-track-frontend).
 
 2. Then clone such repository:
    ```bash
-   git clone https://github.com/your-username/icapital-budgeter-frontend.git
+   git clone https://github.com/your-username/fin-track-frontend.git
    ```
 3. Navigate to the project directory:
    ```bash
-   cd icapital-budgeter-frontend
+   cd fin-track-frontend
    ```
 4. Create a `.env` file in the root of the project directory with the following content (replace `4001` with the port your backend server is running on if different). To get a Polygon API key you can go to https://polygon.io/ and click [Create API Key](https://polygon.io/dashboard/signup?redirect=%2Fdashboard%2Fkeys). Similarly to get a Finnhub API key sign up here [https://finnhub.io/](https://finnhub.io/)
    ```
@@ -1098,4 +1098,4 @@ This project is licensed under the MIT License. See the [LICENSE](https://openso
 ## Contact
 For any inquiries or feedback, please contact:
 
-- Joram Mercado: [GitHub](https://github.com/jorammercado), [LinkedIn](https://www.linkedin.com/in/jorammercado)
+- Joram Mercado: [GitHub](https://github.com/JoramAMercado), [LinkedIn](https://www.linkedin.com/in/joramamercado)
