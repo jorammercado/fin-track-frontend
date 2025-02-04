@@ -55,7 +55,7 @@ export default function NavBar({ token, handleLogout, currentUser }) {
                         </button>
                         <button
                             className="navbar__link"
-                            onClick={() => navigate(`/users/${currentUser.account_id}/profile/investments`)}
+                            onClick={() => navigate(`/construction`)}
                         >
                             Investments
                         </button>

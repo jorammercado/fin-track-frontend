@@ -37,7 +37,8 @@ body {
 .dashboard:after,
 .news:after,
 .stocks-wrapper:after,
-.form-add-transaction:after {
+.form-add-transaction:after,
+.construction:after {
 	animation: overlay-hide 0.35s ease-in forwards;
 	background: #ffffff;
 	content: '';

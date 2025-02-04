@@ -19,6 +19,7 @@ import MarketNews from './pages/MarketNews'
 import Transactions from './pages/Transactions'
 import TransactionsAdd from './pages/TransactionsAdd'
 import TransactionsEdit from './pages/TransactionsEdit'
+import UnderConstruction from './pages/UnderConstruction'
 
 import PublicRoute from './routes/PublicRoute'
 import ProtectedRoute from './routes/ProtectedRoute'
@@ -211,6 +212,15 @@ function App() {
                   setCurrentUser={setCurrentUser}
                   setToken={setToken}
                   handleLogout={handleLogout}
+                />
+              }
+            />
+
+            <Route
+              path="/construction"
+              element={
+                <ProtectedRoute
+                  element={UnderConstruction}
                 />
               }
             />

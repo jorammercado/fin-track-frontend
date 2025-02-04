@@ -1,21 +1,16 @@
 export default function Stock({ stock }) {
     return (
         <tr className="stocks__container__table__row-values">
-            <td className="stocks__container__table__row-values__cell">{stock.ticker}</td>
-            <td className="stocks__container__table__row-values__cell">{stock.todaysChange?.toFixed(2)}</td>
-            <td className="stocks__container__table__row-values__cell">{stock.todaysChangePerc?.toFixed(2)}</td>
-            <td className="stocks__container__table__row-values__cell">{stock.day.o?.toFixed(2)}</td>
-            <td className="stocks__container__table__row-values__cell">{stock.day.h?.toFixed(2)}</td>
-            <td className="stocks__container__table__row-values__cell">{stock.day.l?.toFixed(2)}</td>
-            <td className="stocks__container__table__row-values__cell">{stock.day.c?.toFixed(2)}</td>
-            <td className="stocks__container__table__row-values__cell">{stock.day.v}</td>
-            <td className="stocks__container__table__row-values__cell">{stock.day.vw?.toFixed(2)}</td>
-            <td className="stocks__container__table__row-values__cell">{stock.prevDay.o?.toFixed(2)}</td>
-            <td className="stocks__container__table__row-values__cell">{stock.prevDay.h?.toFixed(2)}</td>
-            <td className="stocks__container__table__row-values__cell">{stock.prevDay.l?.toFixed(2)}</td>
-            <td className="stocks__container__table__row-values__cell">{stock.prevDay.c?.toFixed(2)}</td>
-            <td className="stocks__container__table__row-values__cell">{stock.prevDay.v}</td>
-            <td className="stocks__container__table__row-values__cell">{stock.prevDay.vw?.toFixed(2)}</td>
+            <td className="stocks__container__table__row-values__cell">{stock.code}</td>
+            <td className="stocks__container__table__row-values__cell">{stock.timestamp}</td>
+            <td className="stocks__container__table__row-values__cell">{stock.change?.toFixed(2)}</td>
+            <td className="stocks__container__table__row-values__cell">{stock.change_p?.toFixed(2)}</td>
+            <td className="stocks__container__table__row-values__cell">{stock.open?.toFixed(2)}</td>
+            <td className="stocks__container__table__row-values__cell">{stock.high?.toFixed(2)}</td>
+            <td className="stocks__container__table__row-values__cell">{stock.low?.toFixed(2)}</td>
+            <td className="stocks__container__table__row-values__cell">{stock.close?.toFixed(2)}</td>
+            <td className="stocks__container__table__row-values__cell">{stock.volume}</td>
+            <td className="stocks__container__table__row-values__cell">{stock.previousClose?.toFixed(2)}</td>
         </tr>
     )
 }
