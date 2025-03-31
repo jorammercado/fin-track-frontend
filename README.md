@@ -1,4 +1,5 @@
 # Financial Insights and Tracking Application
+*A robust platform for tracking income, expenses, and investments — with real-time stock prices and financial news.*
 ___
 
 [<img src="./public/images/home.png" height="185px" alt="Home Screenshot">](https://fintrackpro.netlify.app/)
@@ -75,11 +76,18 @@ The FinTrack application allows users to track income and expenses by logging fi
 - **Backend Server hosted on Render**: [fintrack-backend-services.onrender.com](https://fintrack-backend-services.onrender.com/)
 
 ## GitHub Repositories
-- **Frontend**: [github.com/JoramAMercado/fin-track-frontend](https://github.com/JoramAMercado/fin-track-frontend)
-- **Backend**:  [github.com/JoramAMercado/fin-track-backend](https://github.com/JoramAMercado/fin-track-backend)
+- **Frontend**: [github.com/jorammercado/fin-track-frontend](https://github.com/jorammercado/fin-track-frontend)
+- **Backend**:  [github.com/jorammercado/fin-track-backend](https://github.com/jorammercado/fin-track-backend)
 
-## Guest Login
-The application includes a **Guest Login** feature, allowing visitors to explore the full functionality of the site without creating an account. This feature provides a seamless way to navigate the platform and interact with all features using preloaded sample data. It is ideal for demonstrating the application’s capabilities while ensuring the integrity of real user data.
+## Guest Login  
+The application includes a **Guest Login** feature, allowing visitors to explore the full functionality of the platform without creating an account. Upon logging in as a guest, users are provided with **preloaded sample financial data** — including checking, savings, and investment transactions — to simulate real user activity.  
+
+This enables guests to:
+- View and interact with the **Transactions Table** and **Graph**
+- Explore **stock market data** and **financial news**
+- Navigate through user-specific pages (like **Profile**, **Edit Account**, etc.)  
+ 
+This feature is ideal for showcasing the app’s capabilities while ensuring the integrity and privacy of actual user data.
 
 ## Pages
 - **Home**: Provides an overview of the application, welcoming users and highlighting key features.
@@ -1061,7 +1069,7 @@ To run this project, you will need:
 
 ### Installation
 
-1. Fork the repository from [https://github.com/JoramAMercado/fin-track-frontend](https://github.com/JoramAMercado/fin-track-frontend).
+1. Fork the repository from [https://github.com/jorammercado/fin-track-frontend](https://github.com/jorammercado/fin-track-frontend).
 
 2. Then clone such repository:
    ```bash
@@ -1098,4 +1106,4 @@ This project is licensed under the MIT License. See the [LICENSE](https://openso
 ## Contact
 For any inquiries or feedback, please contact:
 
-- Joram Mercado: [GitHub](https://github.com/JoramAMercado), [LinkedIn](https://www.linkedin.com/in/joramamercado)
+- Joram Mercado: [GitHub](https://github.com/jorammercado), [LinkedIn](https://www.linkedin.com/in/jorammercado)
