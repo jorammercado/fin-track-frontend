@@ -7,7 +7,9 @@ export const validatesEmail = (email) => {
     }
 
     if (!emailRegex.test(email)) {
-        emailErrors.push(`Invalid email format. Please enter a valid email address, e.g., example@domain.com.`)
+        emailErrors.push(
+            `Invalid email format. Please enter a valid email address, e.g., example@domain.com.`
+        )
     }
 
     if (email?.length < 5 || email?.length > 150) {

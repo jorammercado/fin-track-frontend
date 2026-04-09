@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const SmallEditButton = styled.button`  
+export const SmallEditButton = styled.button`
     width: 88px;
     height: 40px;
     border: none;
@@ -15,7 +15,7 @@ export const SmallEditButton = styled.button`
     transition: background-color 0.45s ease-in-out;
 
     &:hover {
-        background-color: #36B5E133;
+        background-color: #36b5e133;
         border: 1px solid #07a;
     }
 

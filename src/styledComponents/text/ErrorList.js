@@ -6,7 +6,7 @@ export const ErrorList = styled.ul`
     line-height: 15px;
     text-align: center;
     color: #f2f2f2;
-    width:300px;
+    width: 300px;
     margin-bottom: 50px;
 
     @media screen and (max-width: 480px) {

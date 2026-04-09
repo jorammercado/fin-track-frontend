@@ -24,26 +24,24 @@ export default function UserEditPass({ setCurrentUser, currentUser }) {
             method: 'PUT',
             body: JSON.stringify({
                 password: passwords.password,
-                newPassword: passwords.newPassword
+                newPassword: passwords.newPassword,
             }),
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
             },
         })
-            .then(response => response.json())
+            .then((response) => response.json())
             .then((data) => {
                 if (data?.error) {
                     throw new Error(data?.error)
-                }
-                else if (data.err) {
+                } else if (data.err) {
                     throw new Error(data?.err)
-                }
-                else {
+                } else {
                     Swal.fire({
                         text: `User ${data?.username} successfully updated`,
                         confirmButtonText: 'OK',
-                        confirmButtonColor: '#07a'
+                        confirmButtonColor: '#07a',
                     }).then(() => {
                         setCurrentUser(data)
                         navigate(`/users/${data?.account_id}/profile`)
@@ -54,7 +52,7 @@ export default function UserEditPass({ setCurrentUser, currentUser }) {
                 Swal.fire({
                     text: error?.message,
                     confirmButtonText: 'OK',
-                    confirmButtonColor: '#07a'
+                    confirmButtonColor: '#07a',
                 })
                 console.error(error)
             })
@@ -63,9 +61,9 @@ export default function UserEditPass({ setCurrentUser, currentUser }) {
     const handlePasswordChange = (e) => {
         const { name, value } = e.target
 
-        setPasswords(prev => ({
+        setPasswords((prev) => ({
             ...prev,
-            [name]: value
+            [name]: value,
         }))
     }
 
@@ -75,7 +73,7 @@ export default function UserEditPass({ setCurrentUser, currentUser }) {
             Swal.fire({
                 text: 'New password and confirm password do not match.',
                 confirmButtonText: 'OK',
-                confirmButtonColor: '#07a'
+                confirmButtonColor: '#07a',
             })
         } else {
             editUser()
@@ -86,8 +84,7 @@ export default function UserEditPass({ setCurrentUser, currentUser }) {
 
     return (
         <div className="form-password-edit">
-            <PasswordUpdateBackground >
-
+            <PasswordUpdateBackground>
                 <Form className="form" noValidate onSubmit={handleSubmit}>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="password" className="mb-3__group">
@@ -143,10 +140,8 @@ export default function UserEditPass({ setCurrentUser, currentUser }) {
                     </Row>
                     <br></br>
                     <div className="button-container">
-                        <EditButton type="submit">
-                            Update Password
-                        </EditButton>
-                        <EditButton onClick={handleBack} type="button"  >
+                        <EditButton type="submit">Update Password</EditButton>
+                        <EditButton onClick={handleBack} type="button">
                             Back
                         </EditButton>
                     </div>

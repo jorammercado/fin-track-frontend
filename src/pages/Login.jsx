@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from 'react-router-dom'
 
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -36,17 +36,15 @@ const Login = ({ setCurrentUser }) => {
         try {
             const res = await axios.post(`${VITE_API_URL}/accounts/login-initiate`, {
                 email,
-                password
+                password,
             })
             setLoading(false)
-            if (res?.data?.error)
-                throw new Error(res?.data?.error)
-            if (res?.data?.err)
-                throw new Error(res?.data?.err)
+            if (res?.data?.error) throw new Error(res?.data?.error)
+            if (res?.data?.err) throw new Error(res?.data?.err)
             Swal.fire({
                 text: `OTP has been sent to your email. Please verify to continue.`,
                 confirmButtonText: 'OK',
-                confirmButtonColor: '#07a'
+                confirmButtonColor: '#07a',
             }).then(() => {
                 setErrors([])
                 navigate(`/users/${res.data.account_id}/verify-otp-login`)
@@ -80,15 +78,13 @@ const Login = ({ setCurrentUser }) => {
         try {
             const res = await axios.post(`${VITE_API_URL}/accounts/guest-login`)
             setLoading(false)
-            if (res.data.error)
-                throw new Error(res.data.error)
-            if (res.data.err)
-                throw new Error(res.data.err)
+            if (res.data.error) throw new Error(res.data.error)
+            if (res.data.err) throw new Error(res.data.err)
 
             Swal.fire({
                 text: `Success! Redirecting to your profile...`,
                 confirmButtonText: 'OK',
-                confirmButtonColor: '#07a'
+                confirmButtonColor: '#07a',
             }).then(() => {
                 setErrors([])
                 setCurrentUser(res.data.guestAccount, res.data.token)
@@ -100,7 +96,7 @@ const Login = ({ setCurrentUser }) => {
             Swal.fire({
                 text: `Unable to login as guest. Redirecting to sign up page...`,
                 confirmButtonText: 'OK',
-                confirmButtonColor: '#07a'
+                confirmButtonColor: '#07a',
             }).then(() => {
                 navigate(`/signup`)
             })
@@ -110,27 +106,41 @@ const Login = ({ setCurrentUser }) => {
     return (
         <div className="login">
             <LoginForm onSubmit={handleSubmit}>
-                {
-                    loading ? <SpinnerSmall /> :
-                        !errors.length ?
-                            <>
-                                <HeaderWrapper>
-                                    <LoginHeader>Login to Your Account</LoginHeader>
-                                </HeaderWrapper>
-                                <FormInput type="text" value={email} onChange={e => setEmail(e.currentTarget.value)} placeholder="Email" />
-                                <FormInput type="password" value={password} onChange={e => setPassword(e.currentTarget.value)} placeholder="Password" />
-                                <LoginButton type="submit" >{'Sign In'}</LoginButton>
-                                <button className="guest-login" type="button" onClick={guestLogin}> Continue as Guest </button>
-                            </> :
-                            <>
-                                <ErrorList>
-                                    {errors.length > 0 ? errors.map((error, i) => <li key={`${i}`}>&nbsp;{error}</li>) : ""}
-                                </ErrorList>
-                                <OkButton onClick={handleOk}>
-                                    OK
-                                </OkButton>
-                            </>
-                }
+                {loading ? (
+                    <SpinnerSmall />
+                ) : !errors.length ? (
+                    <>
+                        <HeaderWrapper>
+                            <LoginHeader>Login to Your Account</LoginHeader>
+                        </HeaderWrapper>
+                        <FormInput
+                            type="text"
+                            value={email}
+                            onChange={(e) => setEmail(e.currentTarget.value)}
+                            placeholder="Email"
+                        />
+                        <FormInput
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.currentTarget.value)}
+                            placeholder="Password"
+                        />
+                        <LoginButton type="submit">{'Sign In'}</LoginButton>
+                        <button className="guest-login" type="button" onClick={guestLogin}>
+                            {' '}
+                            Continue as Guest{' '}
+                        </button>
+                    </>
+                ) : (
+                    <>
+                        <ErrorList>
+                            {errors.length > 0
+                                ? errors.map((error, i) => <li key={`${i}`}>&nbsp;{error}</li>)
+                                : ''}
+                        </ErrorList>
+                        <OkButton onClick={handleOk}>OK</OkButton>
+                    </>
+                )}
             </LoginForm>
         </div>
     )

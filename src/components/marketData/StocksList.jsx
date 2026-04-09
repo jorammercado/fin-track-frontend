@@ -19,7 +19,9 @@ const StocksList = () => {
         const fetchStockData = async () => {
             try {
                 if (!stocksData) {
-                    const response = await fetch(`https://eodhd.com/api/real-time/AAPL?s=MDIV,DVQQ&api_token=${API}&fmt=json`)
+                    const response = await fetch(
+                        `https://eodhd.com/api/real-time/AAPL?s=MDIV,DVQQ&api_token=${API}&fmt=json`
+                    )
                     if (!response.ok) {
                         throw new Error(`HTTP error! Status: ${response.status}`)
                     }
@@ -34,14 +36,16 @@ const StocksList = () => {
         fetchStockData()
     }, [API])
 
-    const handleSort = event => {
+    const handleSort = (event) => {
         event.preventDefault()
 
         const newSortOrder = sortOrder === 'asc' ? 'desc' : 'asc'
         setSortOrder(newSortOrder)
 
         const sortedData = [...stocksData].sort((a, b) =>
-            newSortOrder === 'asc' ? a.ticker.localeCompare(b.ticker) : b.ticker.localeCompare(a.ticker)
+            newSortOrder === 'asc'
+                ? a.ticker.localeCompare(b.ticker)
+                : b.ticker.localeCompare(a.ticker)
         )
 
         setStocksData(sortedData)
@@ -64,14 +68,20 @@ const StocksList = () => {
                             <table className="table table-hover table-responsive table-dark stocks__container__table">
                                 <tbody>
                                     <tr className="stocks__container__table__headers">
-                                        <td className="stocks__container__table__headers__count">Stocks: {stocksData?.length}</td>
-                                        <td colSpan="8" style={{ textAlign: "center" }}>Today</td>
-                                        <td colSpan="6" style={{ textAlign: "center" }}>Previous Day</td>
+                                        <td className="stocks__container__table__headers__count">
+                                            Stocks: {stocksData?.length}
+                                        </td>
+                                        <td colSpan="8" style={{ textAlign: 'center' }}>
+                                            Today
+                                        </td>
+                                        <td colSpan="6" style={{ textAlign: 'center' }}>
+                                            Previous Day
+                                        </td>
                                     </tr>
                                     <tr className="stocks__container__table__headers">
-                                        <td >
+                                        <td>
                                             <SortStocksButton onClick={handleSort} type="button">
-                                                {sortOrder === "asc" ? "\u2191" : "\u2193"}
+                                                {sortOrder === 'asc' ? '\u2191' : '\u2193'}
                                             </SortStocksButton>
                                         </td>
                                         <td>Timestamp</td>

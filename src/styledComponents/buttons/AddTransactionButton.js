@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const AddTransactionButton = styled.button`  
+export const AddTransactionButton = styled.button`
     width: 110px;
     height: 27px;
     border-radius: 4px;
@@ -16,7 +16,7 @@ export const AddTransactionButton = styled.button`
     transition: background-color 0.45s ease-in-out;
 
     &:hover {
-        background-color: #36B5E133;
+        background-color: #36b5e133;
     }
 
     @media (max-width: 570px) {
@@ -33,6 +33,5 @@ export const AddTransactionButton = styled.button`
         width: 85px;
         font-size: 9px;
         padding-bottom: 0px;
-      
     }
 `

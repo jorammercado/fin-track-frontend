@@ -3,9 +3,7 @@ import TransactionsList from '../components/transactions/TransactionsList'
 const Transactions = ({ currentUser }) => {
     return (
         <div>
-            <TransactionsList
-                currentUser={currentUser}
-            />
+            <TransactionsList currentUser={currentUser} />
         </div>
     )
 }

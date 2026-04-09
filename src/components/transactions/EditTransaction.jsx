@@ -37,14 +37,17 @@ const EditTransaction = ({ currentUser }) => {
         }
 
         const token = localStorage.getItem('authToken')
-        fetch(`${API}/accounts/${currentUser.account_id}/transactions/${transaction.transaction_id}`, {
-            method: 'PUT',
-            body: JSON.stringify(transaction),
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-            },
-        })
+        fetch(
+            `${API}/accounts/${currentUser.account_id}/transactions/${transaction.transaction_id}`,
+            {
+                method: 'PUT',
+                body: JSON.stringify(transaction),
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        )
             .then((response) => {
                 if (!response.ok) {
                     return response.json().then((data) => {
@@ -91,16 +94,17 @@ const EditTransaction = ({ currentUser }) => {
             cancelButtonColor: '#07a',
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`${API}/accounts/${currentUser.account_id}/transactions/${transaction.transaction_id}`, httpOptions)
-                    .then(res => res.json())
-                    .then(data => {
+                fetch(
+                    `${API}/accounts/${currentUser.account_id}/transactions/${transaction.transaction_id}`,
+                    httpOptions
+                )
+                    .then((res) => res.json())
+                    .then((data) => {
                         if (data.error) {
                             throw new Error(data.error)
-                        }
-                        else if (data.err) {
+                        } else if (data.err) {
                             throw new Error(data.err)
-                        }
-                        else {
+                        } else {
                             Swal.fire({
                                 text: 'Transaction successfully deleted!',
                                 confirmButtonText: 'OK',
@@ -132,18 +136,14 @@ const EditTransaction = ({ currentUser }) => {
         <div className="form-edit-transaction">
             <EditTransactionBackground>
                 <Form className="form" noValidate onSubmit={handleSubmit}>
-                    <Row className="mb-3" style={{ color: "red" }}>
+                    <Row className="mb-3" style={{ color: 'red' }}>
                         <Form.Group as={Col} className="mb-3__group">
-                            <Form.Label>
-                                Updating TXN ID: &nbsp; {transaction.index}
-                            </Form.Label>
+                            <Form.Label>Updating TXN ID: &nbsp; {transaction.index}</Form.Label>
                         </Form.Group>
                     </Row>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="transaction_type" className="mb-3__group">
-                            <Form.Label>
-                                Transaction Type
-                            </Form.Label>
+                            <Form.Label>Transaction Type</Form.Label>
                             <Form.Select
                                 className="mb-3__group__input"
                                 name="transaction_type"
@@ -151,10 +151,7 @@ const EditTransaction = ({ currentUser }) => {
                                 onChange={handleInputChange}
                             >
                                 {transactionTypes.map((type, index) => (
-                                    <option
-                                        key={index}
-                                        value={type}
-                                    >
+                                    <option key={index} value={type}>
                                         {type.charAt(0).toUpperCase() + type.slice(1)}
                                     </option>
                                 ))}
@@ -165,9 +162,7 @@ const EditTransaction = ({ currentUser }) => {
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="amount" className="mb-3__group">
                             <InputGroup>
-                                <InputGroup.Text className="mb-3__group__icon">
-                                    $
-                                </InputGroup.Text>
+                                <InputGroup.Text className="mb-3__group__icon">$</InputGroup.Text>
                                 <Form.Control
                                     className="mb-3__group__input"
                                     required
@@ -191,14 +186,14 @@ const EditTransaction = ({ currentUser }) => {
                                 onChange={handleInputChange}
                             >
                                 {categories.map((category, index) => (
-                                    <option
-                                        key={index}
-                                        value={category}
-                                    >
+                                    <option key={index} value={category}>
                                         {category
-                                            .split(" ")
-                                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                                            .join(" ")}
+                                            .split(' ')
+                                            .map(
+                                                (word) =>
+                                                    word.charAt(0).toUpperCase() + word.slice(1)
+                                            )
+                                            .join(' ')}
                                     </option>
                                 ))}
                             </Form.Select>
@@ -220,7 +215,11 @@ const EditTransaction = ({ currentUser }) => {
                     </Row>
 
                     <Row className="mb-3">
-                        <Form.Group as={Col} controlId="recurring" className="mb-3__group--recurring">
+                        <Form.Group
+                            as={Col}
+                            controlId="recurring"
+                            className="mb-3__group--recurring"
+                        >
                             <Form.Check
                                 type="checkbox"
                                 name="recurring"
@@ -232,7 +231,11 @@ const EditTransaction = ({ currentUser }) => {
                     </Row>
 
                     <Row className="mb-3">
-                        <Form.Group as={Col} controlId="recurring_frequency" className="mb-3__group">
+                        <Form.Group
+                            as={Col}
+                            controlId="recurring_frequency"
+                            className="mb-3__group"
+                        >
                             <Form.Label>Recurring Frequency</Form.Label>
                             <Form.Select
                                 className="mb-3__group__input"
@@ -242,14 +245,14 @@ const EditTransaction = ({ currentUser }) => {
                                 disabled={!transaction?.recurring}
                             >
                                 {recurringFrequencies.map((frequency, index) => (
-                                    <option
-                                        key={index}
-                                        value={frequency}
-                                    >
+                                    <option key={index} value={frequency}>
                                         {frequency
-                                            .split("-")
-                                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                                            .join("-")}
+                                            .split('-')
+                                            .map(
+                                                (word) =>
+                                                    word.charAt(0).toUpperCase() + word.slice(1)
+                                            )
+                                            .join('-')}
                                     </option>
                                 ))}
                             </Form.Select>
@@ -266,14 +269,13 @@ const EditTransaction = ({ currentUser }) => {
                                 onChange={handleInputChange}
                             >
                                 {riskLevels.map((Level, index) => (
-                                    <option
-                                        key={index}
-                                        value={Level}
-                                    >
-                                        {Level
-                                            .split("/")
-                                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                                            .join("/")}
+                                    <option key={index} value={Level}>
+                                        {Level.split('/')
+                                            .map(
+                                                (word) =>
+                                                    word.charAt(0).toUpperCase() + word.slice(1)
+                                            )
+                                            .join('/')}
                                     </option>
                                 ))}
                             </Form.Select>

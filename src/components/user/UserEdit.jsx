@@ -22,22 +22,20 @@ export default function UserEdit({ setCurrentUser, currentUser }) {
             body: JSON.stringify(user),
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
             },
         })
-            .then(response => response.json())
+            .then((response) => response.json())
             .then((data) => {
                 if (data.error) {
                     throw new Error(data.error)
-                }
-                else if (data.err) {
+                } else if (data.err) {
                     throw new Error(data.err)
-                }
-                else {
+                } else {
                     Swal.fire({
                         text: `Account ${data.username} successfully updated!`,
                         confirmButtonText: 'OK',
-                        confirmButtonColor: '#07a'
+                        confirmButtonColor: '#07a',
                     }).then(() => {
                         setCurrentUser(data)
                         navigate(`/users/${data.account_id}/profile`)
@@ -48,7 +46,7 @@ export default function UserEdit({ setCurrentUser, currentUser }) {
                 Swal.fire({
                     text: error.message,
                     confirmButtonText: 'OK',
-                    confirmButtonColor: '#07a'
+                    confirmButtonColor: '#07a',
                 })
                 console.error(error)
             })
@@ -61,11 +59,10 @@ export default function UserEdit({ setCurrentUser, currentUser }) {
         e.preventDefault()
         editUser()
     }
-    
+
     return (
         <div className="form-edit-user">
-            <EditBackground >
-
+            <EditBackground>
                 <Form className="form" noValidate onSubmit={handleSubmit}>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="username" className="mb-3__group">
@@ -106,7 +103,7 @@ export default function UserEdit({ setCurrentUser, currentUser }) {
                         <Form.Group as={Col} controlId="firstname" className="mb-3__group">
                             <InputGroup>
                                 <InputGroup.Text className="mb-3__group__icon">
-                                    <i className="small-icon" >FN</i>
+                                    <i className="small-icon">FN</i>
                                 </InputGroup.Text>
                                 <Form.Control
                                     className="mb-3__group__input"
@@ -123,7 +120,7 @@ export default function UserEdit({ setCurrentUser, currentUser }) {
                         <Form.Group as={Col} controlId="lastname" className="mb-3__group">
                             <InputGroup>
                                 <InputGroup.Text className="mb-3__group__icon">
-                                    <i className="small-icon" >LN</i>
+                                    <i className="small-icon">LN</i>
                                 </InputGroup.Text>
                                 <Form.Control
                                     className="mb-3__group__input"
@@ -155,10 +152,8 @@ export default function UserEdit({ setCurrentUser, currentUser }) {
                     </Row>
                     <br></br>
                     <div className="button-container">
-                        <EditButton type="submit">
-                            Update Profile
-                        </EditButton>
-                        <EditButton onClick={handleBack} type="button"  >
+                        <EditButton type="submit">Update Profile</EditButton>
+                        <EditButton onClick={handleBack} type="button">
                             Back
                         </EditButton>
                     </div>

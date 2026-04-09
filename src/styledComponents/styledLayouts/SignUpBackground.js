@@ -7,7 +7,7 @@ export const SignUpBackground = styled.div`
     top: 51.5%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #09213A;
+    background: #09213a;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;

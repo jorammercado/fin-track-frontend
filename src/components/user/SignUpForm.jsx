@@ -21,32 +21,30 @@ export default function SignUpForm({ setCurrentUser }) {
         email: '',
         password: '',
         dob: '',
-        registration_date: ''
+        registration_date: '',
     })
-    const [confirmPassword, setConfirmPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState('')
     const navigate = useNavigate()
 
     const addUser = () => {
         fetch(`${API}/accounts`, {
-            method: "POST",
+            method: 'POST',
             body: JSON.stringify(user),
             headers: {
                 'Content-Type': 'application/json',
             },
         })
-            .then(response => response.json())
+            .then((response) => response.json())
             .then((data) => {
                 if (data?.error) {
                     throw new Error(data?.error)
-                }
-                else if (data?.err) {
+                } else if (data?.err) {
                     throw new Error(data?.err)
-                }
-                else {
+                } else {
                     Swal.fire({
                         text: `Account ${data?.createdAccount?.username} successfully created`,
                         confirmButtonText: 'OK',
-                        confirmButtonColor: '#07a'
+                        confirmButtonColor: '#07a',
                     }).then(() => {
                         setCurrentUser(data?.createdAccount, data?.token)
                         navigate(`/users/${data?.createdAccount?.account_id}/profile`)
@@ -58,7 +56,7 @@ export default function SignUpForm({ setCurrentUser }) {
                             email: '',
                             password: '',
                             dob: '',
-                            registration_date: ''
+                            registration_date: '',
                         })
                     })
                 }
@@ -67,13 +65,13 @@ export default function SignUpForm({ setCurrentUser }) {
                 Swal.fire({
                     text: error.message,
                     confirmButtonText: 'OK',
-                    confirmButtonColor: '#07a'
+                    confirmButtonColor: '#07a',
                 })
                 console.error(error)
             })
     }
 
-    const handleInputChange = (event) => handleInput(event, user, setUser, setConfirmPassword )
+    const handleInputChange = (event) => handleInput(event, user, setUser, setConfirmPassword)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -81,7 +79,7 @@ export default function SignUpForm({ setCurrentUser }) {
             Swal.fire({
                 text: 'Passwords do not match. Please try again.',
                 confirmButtonText: 'OK',
-                confirmButtonColor: '#07a'
+                confirmButtonColor: '#07a',
             })
         } else {
             addUser()
@@ -90,14 +88,18 @@ export default function SignUpForm({ setCurrentUser }) {
 
     return (
         <div className="form-new-user">
-            <SignUpBackground >
+            <SignUpBackground>
                 <Form className="form" noValidate onSubmit={handleSubmit}>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="username" className="mb-3__group">
                             <InputGroup>
                                 <InputGroup.Text className="mb-3__group__icon">
                                     <i className="bi bi-person-fill "></i>
-                                    <img className="mb-3__group__icon__asterisk" src={asterisk} alt="asterisk" />
+                                    <img
+                                        className="mb-3__group__icon__asterisk"
+                                        src={asterisk}
+                                        alt="asterisk"
+                                    />
                                 </InputGroup.Text>
                                 <Form.Control
                                     className="mb-3__group__input"
@@ -116,7 +118,11 @@ export default function SignUpForm({ setCurrentUser }) {
                             <InputGroup>
                                 <InputGroup.Text className="mb-3__group__icon">
                                     <i className="bi bi-envelope"></i>
-                                    <img className="mb-3__group__icon__asterisk" src={asterisk} alt="asterisk" />
+                                    <img
+                                        className="mb-3__group__icon__asterisk"
+                                        src={asterisk}
+                                        alt="asterisk"
+                                    />
                                 </InputGroup.Text>
                                 <Form.Control
                                     className="mb-3__group__input"
@@ -133,7 +139,7 @@ export default function SignUpForm({ setCurrentUser }) {
                         <Form.Group as={Col} controlId="firstname" className="mb-3__group">
                             <InputGroup>
                                 <InputGroup.Text className="mb-3__group__icon">
-                                    <i className="mb-3__group__icon__letters" >FN</i>
+                                    <i className="mb-3__group__icon__letters">FN</i>
                                 </InputGroup.Text>
                                 <Form.Control
                                     className="mb-3__group__input"
@@ -150,7 +156,7 @@ export default function SignUpForm({ setCurrentUser }) {
                         <Form.Group as={Col} controlId="lastname" className="mb-3__group">
                             <InputGroup>
                                 <InputGroup.Text className="mb-3__group__icon">
-                                    <i className="mb-3__group__icon__letters" >LN</i>
+                                    <i className="mb-3__group__icon__letters">LN</i>
                                 </InputGroup.Text>
                                 <Form.Control
                                     className="mb-3__group__input"
@@ -185,7 +191,11 @@ export default function SignUpForm({ setCurrentUser }) {
                             <InputGroup>
                                 <InputGroup.Text className="mb-3__group__icon">
                                     <i className="bi bi-shield-lock"></i>
-                                    <img className="mb-3__group__icon__asterisk" src={asterisk} alt="asterisk" />
+                                    <img
+                                        className="mb-3__group__icon__asterisk"
+                                        src={asterisk}
+                                        alt="asterisk"
+                                    />
                                 </InputGroup.Text>
                                 <Form.Control
                                     className="mb-3__group__input"
@@ -203,7 +213,11 @@ export default function SignUpForm({ setCurrentUser }) {
                             <InputGroup>
                                 <InputGroup.Text className="mb-3__group__icon">
                                     <i className="bi bi-shield-lock"></i>
-                                    <img className="mb-3__group__icon__asterisk" src={asterisk} alt="asterisk" />
+                                    <img
+                                        className="mb-3__group__icon__asterisk"
+                                        src={asterisk}
+                                        alt="asterisk"
+                                    />
                                 </InputGroup.Text>
                                 <Form.Control
                                     className="mb-3__group__input"
@@ -216,9 +230,7 @@ export default function SignUpForm({ setCurrentUser }) {
                             </InputGroup>
                         </Form.Group>
                     </Row>
-                    <SignUpButton type="submit">
-                        Create Account
-                    </SignUpButton>
+                    <SignUpButton type="submit">Create Account</SignUpButton>
                 </Form>
             </SignUpBackground>
         </div>

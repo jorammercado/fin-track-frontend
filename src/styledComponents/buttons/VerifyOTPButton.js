@@ -13,15 +13,15 @@ export const VerifyOTPButton = styled.button`
     transition: background-color 0.45s ease-in-out;
 
     &:hover {
-        background-color: #36B5E133;
+        background-color: #36b5e133;
         border: 1px solid #07a;
     }
 
-    @media  (max-width: 360px) {
+    @media (max-width: 360px) {
         width: 225px;
     }
 
-    @media  (max-width: 260px) {
+    @media (max-width: 260px) {
         width: 140px;
     }
 `

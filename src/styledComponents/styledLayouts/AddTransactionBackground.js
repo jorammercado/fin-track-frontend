@@ -7,13 +7,13 @@ export const AddTransactionBackground = styled.div`
     top: 52.5%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #09213A;
+    background: #09213a;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    font-family: "Roboto-Thin";
+    font-family: 'Roboto-Thin';
     color: white;
 
     border-radius: 5px;

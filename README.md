@@ -1,6 +1,6 @@
 # 📈 FinTrack Frontend – Financial Insights and Tracking Application
 
-*A comprehensive platform for managing income, expenses, and investments with real‑time market data.*
+_A comprehensive platform for managing income, expenses, and investments with real‑time market data._
 
 [<img src="./public/images/home.png" height="185px" alt="Home Screenshot">](https://fintrackpro.netlify.app/)
 
@@ -12,22 +12,22 @@ This project demonstrates secure session handling, authentication, modular front
 
 ## 📚 Table of Contents
 
-* [🧰 Tech Stack](#-tech-stack)
-* [🚀 Deployment](#-deployment)
-* [🗂 Repositories](#-repositories)
-* [👤 Guest Login](#-guest-login)
-* [🧾 Pages](#-pages)
-* [✅ Features](#-features)
+- [🧰 Tech Stack](#-tech-stack)
+- [🚀 Deployment](#-deployment)
+- [🗂 Repositories](#-repositories)
+- [👤 Guest Login](#-guest-login)
+- [🧾 Pages](#-pages)
+- [✅ Features](#-features)
+    - [🔐 Session Security](#-session-security)
+    - [💸 Transaction Management](#-transaction-management)
+    - [📧 Multi‑Factor Authentication](#-multi-factor-authentication)
+    - [📄 Pagination](#-pagination)
+    - [📈 Stock Price Integration](#-stock-price-integration)
+    - [📰 Market News](#-market-news)
 
-  * [🔐 Session Security](#-session-security)
-  * [💸 Transaction Management](#-transaction-management)
-  * [📧 Multi‑Factor Authentication](#-multi-factor-authentication)
-  * [📄 Pagination](#-pagination)
-  * [📈 Stock Price Integration](#-stock-price-integration)
-  * [📰 Market News](#-market-news)
-* [⚙️ Getting Started](#-getting-started)
-* [📄 License](#-license)
-* [👤 Contact](#-contact)
+- [⚙️ Getting Started](#-getting-started)
+- [📄 License](#-license)
+- [👤 Contact](#-contact)
 
 ## 🧰 Tech Stack
 
@@ -45,30 +45,30 @@ This project demonstrates secure session handling, authentication, modular front
 
 ## 🗂 Repositories
 
-* **Frontend:** [github.com/jorammercado/fin-track-frontend](https://github.com/jorammercado/fin-track-frontend)
-* **Backend:** [github.com/jorammercado/fin-track-backend](https://github.com/jorammercado/fin-track-backend)
+- **Frontend:** [github.com/jorammercado/fin-track-frontend](https://github.com/jorammercado/fin-track-frontend)
+- **Backend:** [github.com/jorammercado/fin-track-backend](https://github.com/jorammercado/fin-track-backend)
 
 ## 👤 Guest Login
 
 A **Guest Login** option lets visitors explore all major features using preloaded sample data for checking, savings, and investment accounts. Guests can:
 
-* Interact with the transactions table and graph
-* View stock data and news feeds
-* Navigate profile and account pages without affecting real user data
+- Interact with the transactions table and graph
+- View stock data and news feeds
+- Navigate profile and account pages without affecting real user data
 
 This feature demonstrates full functionality while maintaining security and data isolation.
 
 ## 🧾 Pages
 
-* **Home:** Overview and feature highlights.
-* **Login / Sign Up:** Secure authentication.
-* **Verify OTP:** Email‑based verification during login.
-* **Profile / Edit Account / Edit Password:** Manage user settings.
-* **Dashboard:** Summarized account balances.
-* **Transactions:** Interactive table and graph views.
-* **Investments:** Real‑time stock data.
-* **Market News:** Aggregated financial headlines.
-* **404:** Custom error page.
+- **Home:** Overview and feature highlights.
+- **Login / Sign Up:** Secure authentication.
+- **Verify OTP:** Email‑based verification during login.
+- **Profile / Edit Account / Edit Password:** Manage user settings.
+- **Dashboard:** Summarized account balances.
+- **Transactions:** Interactive table and graph views.
+- **Investments:** Real‑time stock data.
+- **Market News:** Aggregated financial headlines.
+- **404:** Custom error page.
 
 ## ✅ Features
 
@@ -76,17 +76,17 @@ This feature demonstrates full functionality while maintaining security and data
 
 JWT‑based authentication manages login state securely:
 
-* Tokens expire after 30 minutes and are purged from localStorage on logout or timeout.
-* Protected and Public routes restrict access contextually.
-* The navigation bar dynamically adjusts based on authentication status.
-* All sensitive data is fetched only after backend verification.
+- Tokens expire after 30 minutes and are purged from localStorage on logout or timeout.
+- Protected and Public routes restrict access contextually.
+- The navigation bar dynamically adjusts based on authentication status.
+- All sensitive data is fetched only after backend verification.
 
 ```javascript
 // Simplified example: Protected Route
 const ProtectedRoute = ({ element: Component }) => {
-  const token = localStorage.getItem('authToken');
-  return token ? <Component /> : <Navigate to="/login" />;
-};
+    const token = localStorage.getItem('authToken')
+    return token ? <Component /> : <Navigate to="/login" />
+}
 ```
 
 Session expiry triggers automatic logout, ensuring secure lifecycle management.
@@ -99,10 +99,12 @@ Displays categorized financial activity with sortable, filterable columns and re
 
 ```javascript
 const handleSortAmount = () => {
-  const sorted = [...allTransactions].sort((a, b) => amountOrder ? b.amount - a.amount : a.amount - b.amount);
-  setAllTransactions(sorted);
-  setAmountOrder(!amountOrder);
-};
+    const sorted = [...allTransactions].sort((a, b) =>
+        amountOrder ? b.amount - a.amount : a.amount - b.amount
+    )
+    setAllTransactions(sorted)
+    setAmountOrder(!amountOrder)
+}
 ```
 
 Users can add, edit, and delete transactions; balances for checking, savings, and investments update automatically.
@@ -111,8 +113,8 @@ Users can add, edit, and delete transactions; balances for checking, savings, an
 
 A D3.js line graph visualizes account balances over time. Interactive features include zoom, brushing, and legend toggling:
 
-* **Legend:** Toggle visibility of individual accounts.
-* **Brushing:** Drag to zoom into specific ranges.
+- **Legend:** Toggle visibility of individual accounts.
+- **Brushing:** Drag to zoom into specific ranges.
 
 This visualization provides immediate insight into financial trends and behavior.
 
@@ -121,9 +123,9 @@ This visualization provides immediate insight into financial trends and behavior
 Implements email‑based OTP verification after successful password validation.
 
 ```javascript
-const otp = Math.floor(100000 + Math.random() * 900000).toString();
-const hashedOtp = await bcrypt.hash(otp, 10);
-await updateAccountMFAOneTimePassword(account_id, hashedOtp, expirationTime);
+const otp = Math.floor(100000 + Math.random() * 900000).toString()
+const hashedOtp = await bcrypt.hash(otp, 10)
+await updateAccountMFAOneTimePassword(account_id, hashedOtp, expirationTime)
 ```
 
 This ensures only verified users can access session tokens, enhancing security beyond standard login.
@@ -133,8 +135,8 @@ This ensures only verified users can access session tokens, enhancing security b
 Pagination improves performance by limiting transactions displayed per page.
 
 ```javascript
-const indexOfLast = currentPage * postsPerPage;
-const currentPosts = allTransactions.slice(indexOfFirst, indexOfLast);
+const indexOfLast = currentPage * postsPerPage
+const currentPosts = allTransactions.slice(indexOfFirst, indexOfLast)
 ```
 
 A reusable Pagination component handles page switching across views.
@@ -145,9 +147,9 @@ Uses Polygon.io API to fetch and display real‑time stock data.
 
 ```javascript
 const fetchStockData = async (symbol) => {
-  const res = await axios.get(`${API_URL}/stocks/${symbol}`);
-  setStockData(res.data);
-};
+    const res = await axios.get(`${API_URL}/stocks/${symbol}`)
+    setStockData(res.data)
+}
 ```
 
 Data is refreshed dynamically to keep market information current.
@@ -158,9 +160,9 @@ Integrates Finnhub.io API for live financial news headlines.
 
 ```javascript
 const fetchNews = async () => {
-  const res = await axios.get(`${API_URL}/news/latest`);
-  setNews(res.data);
-};
+    const res = await axios.get(`${API_URL}/news/latest`)
+    setNews(res.data)
+}
 ```
 
 Provides users with up‑to‑date insights directly within the dashboard.
@@ -170,15 +172,17 @@ Provides users with up‑to‑date insights directly within the dashboard.
 1. Clone both frontend and backend repositories.
 2. Install dependencies:
 
-   ```bash
-   npm install
-   ```
+    ```bash
+    npm install
+    ```
+
 3. Configure environment variables (API keys, database URL, JWT secret).
 4. Run both servers:
 
-   ```bash
-   npm run dev
-   ```
+    ```bash
+    npm run dev
+    ```
+
 5. Visit the frontend URL displayed in the terminal.
 
 ## 📄 License
@@ -188,4 +192,4 @@ Provides users with up‑to‑date insights directly within the dashboard.
 ## 👤 Contact
 
 **Joram Mercado**
-[GitHub](https://github.com/jorammercado) | [LinkedIn](https://www.linkedin.com/in/jorammercado) 
+[GitHub](https://github.com/jorammercado) | [LinkedIn](https://www.linkedin.com/in/jorammercado)

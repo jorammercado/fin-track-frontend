@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const TransactionsButton = styled.button`  
+export const TransactionsButton = styled.button`
     width: 90px;
     height: 25px;
     border-radius: 4px;
@@ -11,12 +11,12 @@ export const TransactionsButton = styled.button`
     margin-left: 1px;
     margin-right: 1px;
     padding: 0px;
-    background-color: #09213A;
+    background-color: #09213a;
     border: 1px solid #07a;
     transition: background-color 0.45s ease-in-out;
 
     &:hover {
-        background-color: #36B5E133;
+        background-color: #36b5e133;
     }
 
     @media (max-width: 570px) {
@@ -33,6 +33,5 @@ export const TransactionsButton = styled.button`
         width: 85px;
         font-size: 9px;
         padding-bottom: 0px;
-      
     }
 `

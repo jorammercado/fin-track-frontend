@@ -1,6 +1,13 @@
 import { jwtDecode } from 'jwt-decode'
 
-export const handleLogin = (user, jwtToken, setCurrentUser, setToken, timeoutIdRef, handleLogout) => {
+export const handleLogin = (
+    user,
+    jwtToken,
+    setCurrentUser,
+    setToken,
+    timeoutIdRef,
+    handleLogout
+) => {
     setCurrentUser(user)
     localStorage.setItem('currentUser', JSON.stringify(user))
     setToken(jwtToken)
@@ -30,13 +37,13 @@ export const handleLogout = (setCurrentUser, setToken, timeoutIdRef, isTimeout =
         return {
             text: 'Your session has timed out. Please log in again.',
             confirmButtonText: 'OK',
-            confirmButtonColor: '#07a'
+            confirmButtonColor: '#07a',
         }
     } else {
         return {
             text: 'You have been successfully logged out.',
             confirmButtonText: 'OK',
-            confirmButtonColor: '#07a'
+            confirmButtonColor: '#07a',
         }
     }
 }

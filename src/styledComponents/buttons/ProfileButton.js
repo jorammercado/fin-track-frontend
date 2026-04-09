@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const ProfileButton = styled.button`  
+export const ProfileButton = styled.button`
     width: 120px;
     height: 35px;
     border: none;
@@ -14,7 +14,7 @@ export const ProfileButton = styled.button`
     transition: background-color 0.45s ease-in-out;
 
     &:hover {
-        background-color: #36B5E133;
+        background-color: #36b5e133;
         border: 1px solid #07a;
     }
 
@@ -32,6 +32,5 @@ export const ProfileButton = styled.button`
         width: 95px;
         font-size: 10px;
         padding-bottom: 0px;
-      
     }
 `

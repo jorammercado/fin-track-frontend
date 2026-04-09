@@ -95,10 +95,7 @@ export default function AddTransactionForm({ currentUser }) {
                                 onChange={handleInputChange}
                             >
                                 {transactionTypes.map((type, index) => (
-                                    <option
-                                        key={index}
-                                        value={type}
-                                    >
+                                    <option key={index} value={type}>
                                         {type.charAt(0).toUpperCase() + type.slice(1)}
                                     </option>
                                 ))}
@@ -109,9 +106,7 @@ export default function AddTransactionForm({ currentUser }) {
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="amount" className="mb-3__group">
                             <InputGroup>
-                                <InputGroup.Text className="mb-3__group__icon">
-                                    $
-                                </InputGroup.Text>
+                                <InputGroup.Text className="mb-3__group__icon">$</InputGroup.Text>
                                 <Form.Control
                                     className="mb-3__group__input"
                                     required
@@ -135,14 +130,14 @@ export default function AddTransactionForm({ currentUser }) {
                                 onChange={handleInputChange}
                             >
                                 {categories.map((category, index) => (
-                                    <option
-                                        key={index}
-                                        value={category}
-                                    >
+                                    <option key={index} value={category}>
                                         {category
-                                            .split(" ")
-                                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                                            .join(" ")}
+                                            .split(' ')
+                                            .map(
+                                                (word) =>
+                                                    word.charAt(0).toUpperCase() + word.slice(1)
+                                            )
+                                            .join(' ')}
                                     </option>
                                 ))}
                             </Form.Select>
@@ -164,7 +159,11 @@ export default function AddTransactionForm({ currentUser }) {
                     </Row>
 
                     <Row className="mb-3">
-                        <Form.Group as={Col} controlId="recurring" className="mb-3__group--recurring">
+                        <Form.Group
+                            as={Col}
+                            controlId="recurring"
+                            className="mb-3__group--recurring"
+                        >
                             <Form.Check
                                 type="checkbox"
                                 name="recurring"
@@ -176,7 +175,11 @@ export default function AddTransactionForm({ currentUser }) {
                     </Row>
 
                     <Row className="mb-3">
-                        <Form.Group as={Col} controlId="recurring_frequency" className="mb-3__group">
+                        <Form.Group
+                            as={Col}
+                            controlId="recurring_frequency"
+                            className="mb-3__group"
+                        >
                             <Form.Label>Recurring Frequency</Form.Label>
                             <Form.Select
                                 className="mb-3__group__input"
@@ -186,14 +189,14 @@ export default function AddTransactionForm({ currentUser }) {
                                 disabled={!transaction.recurring}
                             >
                                 {recurringFrequencies.map((frequency, index) => (
-                                    <option
-                                        key={index}
-                                        value={frequency}
-                                    >
+                                    <option key={index} value={frequency}>
                                         {frequency
-                                            .split("-")
-                                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                                            .join("-")}
+                                            .split('-')
+                                            .map(
+                                                (word) =>
+                                                    word.charAt(0).toUpperCase() + word.slice(1)
+                                            )
+                                            .join('-')}
                                     </option>
                                 ))}
                             </Form.Select>
@@ -210,14 +213,13 @@ export default function AddTransactionForm({ currentUser }) {
                                 onChange={handleInputChange}
                             >
                                 {riskLevels.map((Level, index) => (
-                                    <option
-                                        key={index}
-                                        value={Level}
-                                    >
-                                        {Level
-                                            .split("/")
-                                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                                            .join("/")}
+                                    <option key={index} value={Level}>
+                                        {Level.split('/')
+                                            .map(
+                                                (word) =>
+                                                    word.charAt(0).toUpperCase() + word.slice(1)
+                                            )
+                                            .join('/')}
                                     </option>
                                 ))}
                             </Form.Select>

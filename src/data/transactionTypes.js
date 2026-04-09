@@ -1,6 +1,1 @@
-export const transactionTypes = [
-    'income',
-    'expense',
-    'investment',
-    'deposit'
-]
+export const transactionTypes = ['income', 'expense', 'investment', 'deposit']

@@ -8,7 +8,8 @@ const Profile = ({ currentUser, setCurrentUser, setToken, handleLogout }) => {
                 currentUser={currentUser}
                 setCurrentUser={setCurrentUser}
                 setToken={setToken}
-                handleLogout={handleLogout} />
+                handleLogout={handleLogout}
+            />
         </ProfileWrapper>
     )
 }

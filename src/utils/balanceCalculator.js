@@ -7,21 +7,23 @@ export const calculateBalances = (transactions) => {
         let balanceColumn
 
         if (transaction_type === 'expense') {
-            balanceColumn = category === 'investment'
-                ? 'investments'
-                : category === 'savings'
-                    ? 'savings_account'
-                    : 'checking_account'
+            balanceColumn =
+                category === 'investment'
+                    ? 'investments'
+                    : category === 'savings'
+                      ? 'savings_account'
+                      : 'checking_account'
         } else if (transaction_type === 'investment') {
             balanceColumn = ['retirement', 'savings', 'emergency fund'].includes(category)
                 ? 'savings_account'
                 : 'investments'
         } else if (['deposit', 'income'].includes(transaction_type)) {
-            balanceColumn = category === 'savings'
-                ? 'savings_account'
-                : category === 'investment'
-                    ? 'investments'
-                    : 'checking_account'
+            balanceColumn =
+                category === 'savings'
+                    ? 'savings_account'
+                    : category === 'investment'
+                      ? 'investments'
+                      : 'checking_account'
         }
 
         const updateValue = transaction_type === 'expense' ? -Number(amount) : Number(amount)

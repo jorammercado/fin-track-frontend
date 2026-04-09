@@ -8,9 +8,8 @@
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     margin-top: 45px;
     margin-bottom: 10px;
-    background-color: #09213A;
+    background-color: #09213a;
     font-family: 'Roboto-Thin';
-    
 
     @media (max-width: 425px) {
         max-height: 77vh;
@@ -25,13 +24,11 @@
         width: 100%;
 
         th {
-
             font-size: 17px;
             text-align: left;
             color: white !important;
-            background-color: #09213A !important;
+            background-color: #09213a !important;
         }
-
 
         &__row-content {
             display: flex;
@@ -41,7 +38,6 @@
             padding-top: 2px;
             padding-bottom: 2px;
             margin-left: 20px;
-
 
             @media (max-width: 570px) {
                 font-size: 15px;
@@ -62,7 +58,6 @@
             @media (max-width: 360px) {
                 font-size: 11px;
             }
-
 
             &__label {
                 flex: 1;
@@ -85,10 +80,6 @@
                     flex: 1;
                 }
             }
-
-
         }
-
     }
 }
-

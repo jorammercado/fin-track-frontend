@@ -13,7 +13,7 @@
     margin: -14px 0px !important;
     min-width: 310px;
 
-    @media(max-width: 460px) {
+    @media (max-width: 460px) {
         min-width: auto;
     }
 
@@ -23,7 +23,7 @@
             border-top-right-radius: 3px !important;
             border-bottom-right-radius: 3px !important;
 
-            &::placeholder{
+            &::placeholder {
                 font-family: 'Roboto-Thin';
                 color: black !important;
             }
@@ -35,7 +35,7 @@
             &__letters {
                 font-size: 13px;
             }
-            &__asterisk{
+            &__asterisk {
                 height: 6px;
                 margin-right: -6px;
                 margin-bottom: 18px;

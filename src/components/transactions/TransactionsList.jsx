@@ -14,7 +14,7 @@ import {
     handleSortRecurringFreq as handleSortRecurringFreqHandler,
     handleSortRiskLevel as handleSortRiskLevelHandler,
     handleSortIsPlanned as handleSortIsPlanneHandler,
-    handleSortDate as handleSortDateHandler
+    handleSortDate as handleSortDateHandler,
 } from '../../utils/sorting'
 
 import {
@@ -22,7 +22,7 @@ import {
     TransactionsButton,
     TransactionsButtonDate,
     TransactionsButtonDisabled,
-    TransactionsButtonDisabledBalances
+    TransactionsButtonDisabledBalances,
 } from '../../styledComponents/buttons'
 import './TransactionsList.scss'
 
@@ -35,19 +35,21 @@ export default function TransactionsList({ currentUser }) {
     const [investmentBalance, setInvestmentBalance] = useState([])
     const navigate = useNavigate()
 
-    const [allTransactions, setAllTransactions] = useState([{
-        transaction_id: 0,
-        account_id: account_id,
-        transaction_type: 'income',
-        amount: 0,
-        category: 'other',
-        description: '',
-        recurring: false,
-        recurring_frequency: 'one-time',
-        risk_level: 'n/a',
-        is_planned: false,
-        created: new Date()
-    }])
+    const [allTransactions, setAllTransactions] = useState([
+        {
+            transaction_id: 0,
+            account_id: account_id,
+            transaction_type: 'income',
+            amount: 0,
+            category: 'other',
+            description: '',
+            recurring: false,
+            recurring_frequency: 'one-time',
+            risk_level: 'n/a',
+            is_planned: false,
+            created: new Date(),
+        },
+    ])
     const [allTransactionsDateOrder, setAllTransactionsDateOrder] = useState([])
     const [typeOrder, setTypeOrder] = useState(false)
     const [amountOrder, setAmountOrder] = useState(false)
@@ -58,51 +60,77 @@ export default function TransactionsList({ currentUser }) {
     const [isPlannedOrder, setIsPlannedOrder] = useState(false)
     const [dateOrder, setDateOrder] = useState(false)
 
-    const handleSortType = event => {
-        handleSortTypeHandler(
-            event, allTransactions, setAllTransactions, typeOrder, setTypeOrder
-        )
+    const handleSortType = (event) => {
+        handleSortTypeHandler(event, allTransactions, setAllTransactions, typeOrder, setTypeOrder)
     }
 
-    const handleSortAmount = event => {
+    const handleSortAmount = (event) => {
         handleSortAmountHandler(
-            event, allTransactions, setAllTransactions, amountOrder, setAmountOrder
+            event,
+            allTransactions,
+            setAllTransactions,
+            amountOrder,
+            setAmountOrder
         )
     }
 
-    const handleSortCategory = event => {
+    const handleSortCategory = (event) => {
         handleSortCategoryHandler(
-            event, allTransactions, setAllTransactions, categoryOrder, setCategoryOrder
+            event,
+            allTransactions,
+            setAllTransactions,
+            categoryOrder,
+            setCategoryOrder
         )
     }
 
-    const handleSortRecurring = event => {
+    const handleSortRecurring = (event) => {
         handleSortRecurringHandler(
-            event, allTransactions, setAllTransactions, recurringOrder, setRecurringOrder
+            event,
+            allTransactions,
+            setAllTransactions,
+            recurringOrder,
+            setRecurringOrder
         )
     }
 
-    const handleSortRecurringFreq = event => {
+    const handleSortRecurringFreq = (event) => {
         handleSortRecurringFreqHandler(
-            event, allTransactions, setAllTransactions, recurringOrderFreq, setRecurringOrderFreq
+            event,
+            allTransactions,
+            setAllTransactions,
+            recurringOrderFreq,
+            setRecurringOrderFreq
         )
     }
 
-    const handleSortRiskLevel = event => {
+    const handleSortRiskLevel = (event) => {
         handleSortRiskLevelHandler(
-            event, allTransactions, setAllTransactions, riskLevelOrder, setRiskLevelOrder
+            event,
+            allTransactions,
+            setAllTransactions,
+            riskLevelOrder,
+            setRiskLevelOrder
         )
     }
 
-    const handleSortIsPlanned = event => {
+    const handleSortIsPlanned = (event) => {
         handleSortIsPlanneHandler(
-            event, allTransactions, setAllTransactions, isPlannedOrder, setIsPlannedOrder
+            event,
+            allTransactions,
+            setAllTransactions,
+            isPlannedOrder,
+            setIsPlannedOrder
         )
     }
 
-    const handleSortDate = event => {
+    const handleSortDate = (event) => {
         handleSortDateHandler(
-            event, allTransactionsDateOrder, setAllTransactions, dateOrder, setDateOrder
+            event,
+            allTransactionsDateOrder,
+            setAllTransactions,
+            dateOrder,
+            setDateOrder
         )
     }
 
@@ -111,15 +139,17 @@ export default function TransactionsList({ currentUser }) {
         fetch(`${API}/accounts/${account_id}/transactions`, {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ account: currentUser })
+            body: JSON.stringify({ account: currentUser }),
         })
             .then((response) => response.json())
             .then((data) => {
                 setAllTransactions(data?.sort((a, b) => a?.transaction_id - b?.transaction_id))
-                setAllTransactionsDateOrder(data?.sort((a, b) => a?.transaction_id - b?.transaction_id))
+                setAllTransactionsDateOrder(
+                    data?.sort((a, b) => a?.transaction_id - b?.transaction_id)
+                )
 
                 const { checking, savings, investments } = calculateBalances(data)
                 setCheckingBalance(checking)
@@ -155,7 +185,10 @@ export default function TransactionsList({ currentUser }) {
                 <table className="table table-hover table-responsive table-dark transactions__container__table table-bordered">
                     <tbody>
                         <tr className="transactions__container__table__transactioncount">
-                            <td colSpan={11} className="transactions__container__table__transactioncount__count">
+                            <td
+                                colSpan={11}
+                                className="transactions__container__table__transactioncount__count"
+                            >
                                 Tot: {allTransactions.length}
                             </td>
                         </tr>
@@ -163,53 +196,51 @@ export default function TransactionsList({ currentUser }) {
                             <td className="transactions__container__table__headers__count">
                                 TXN ID:
                             </td>
-                            <td >
+                            <td>
                                 <TransactionsButton onClick={handleSortType}>
                                     Type
                                 </TransactionsButton>
                             </td>
-                            <td >
+                            <td>
                                 <TransactionsButton onClick={handleSortAmount}>
                                     Amount
                                 </TransactionsButton>
                             </td>
-                            <td >
+                            <td>
                                 <TransactionsButton onClick={handleSortCategory}>
                                     Category
                                 </TransactionsButton>
                             </td>
-                            <td >
-                                <TransactionsButtonDisabled >
-                                    Description
-                                </TransactionsButtonDisabled>
+                            <td>
+                                <TransactionsButtonDisabled>Description</TransactionsButtonDisabled>
                             </td>
-                            <td >
+                            <td>
                                 <TransactionsButton onClick={handleSortRecurring}>
                                     Recurring
                                 </TransactionsButton>
                             </td>
-                            <td >
+                            <td>
                                 <TransactionsButton onClick={handleSortRecurringFreq}>
                                     Recurring Freq.
                                 </TransactionsButton>
                             </td>
-                            <td >
+                            <td>
                                 <TransactionsButton onClick={handleSortRiskLevel}>
                                     Risk Level
                                 </TransactionsButton>
                             </td>
-                            <td >
+                            <td>
                                 <TransactionsButton onClick={handleSortIsPlanned}>
                                     Is Planned
                                 </TransactionsButton>
                             </td>
-                            <td >
+                            <td>
                                 <TransactionsButtonDate onClick={handleSortDate}>
                                     Date/Time Added
                                 </TransactionsButtonDate>
                             </td>
                             <td className="transactions__container__table__headers__balances">
-                                <TransactionsButtonDisabledBalances >
+                                <TransactionsButtonDisabledBalances>
                                     Balances (as of txn. logged)
                                 </TransactionsButtonDisabledBalances>
                             </td>
@@ -234,7 +265,11 @@ export default function TransactionsList({ currentUser }) {
                             <td colSpan="11">
                                 <AddTransactionButton
                                     type="button"
-                                    onClick={() => navigate(`/users/${currentUser?.account_id}/profile/transactions/add`)}
+                                    onClick={() =>
+                                        navigate(
+                                            `/users/${currentUser?.account_id}/profile/transactions/add`
+                                        )
+                                    }
                                 >
                                     Add Transaction
                                 </AddTransactionButton>
@@ -247,7 +282,7 @@ export default function TransactionsList({ currentUser }) {
                     currentPage={currentPage}
                     totalCount={allTransactions.length}
                     pageSize={PageSize}
-                    onPageChange={page => setCurrentPage(page)}
+                    onPageChange={(page) => setCurrentPage(page)}
                 />
             </section>
         </div>

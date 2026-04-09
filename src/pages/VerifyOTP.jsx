@@ -37,15 +37,13 @@ const VerifyOTP = ({ setCurrentUser }) => {
         try {
             const res = await axios.post(`${VITE_API_URL}/accounts/verify-otp`, { account_id, otp })
             setLoading(false)
-            if (res.data.error)
-                throw new Error(res.data.error)
-            if (res.data.err)
-                throw new Error(res.data.err)
+            if (res.data.error) throw new Error(res.data.error)
+            if (res.data.err) throw new Error(res.data.err)
 
             Swal.fire({
                 text: `Success! Redirecting to your profile...`,
                 confirmButtonText: 'OK',
-                confirmButtonColor: '#07a'
+                confirmButtonColor: '#07a',
             }).then(() => {
                 setErrors([])
                 setCurrentUser(res.data.account, res.data.token)
@@ -56,7 +54,7 @@ const VerifyOTP = ({ setCurrentUser }) => {
             Swal.fire({
                 text: `Incorrect OTP! Redirecting to login page...`,
                 confirmButtonText: 'OK',
-                confirmButtonColor: '#07a'
+                confirmButtonColor: '#07a',
             }).then(() => {
                 navigate(`/login`)
             })
@@ -72,23 +70,31 @@ const VerifyOTP = ({ setCurrentUser }) => {
     return (
         <div className="verify-otp">
             <VerifyOTPForm onSubmit={handleSubmit}>
-                {
-                    loading ? <SpinnerSmall /> :
-                        !errors.length ?
-                            <>
-                                <HeaderWrapper>
-                                    <VerifyOTPHeader>Verify OTP</VerifyOTPHeader>
-                                </HeaderWrapper>
-                                <FormInput type="text" value={otp} onChange={e => setOtp(e.currentTarget.value)} placeholder="Enter OTP" />
-                                <VerifyOTPButton>{'Verify OTP'}</VerifyOTPButton>
-                            </> :
-                            <>
-                                <ErrorList>
-                                    {errors.map((error, i) => <li key={i}>&nbsp;{error}</li>)}
-                                </ErrorList>
-                                <OkButton onClick={handleOk}>OK</OkButton>
-                            </>
-                }
+                {loading ? (
+                    <SpinnerSmall />
+                ) : !errors.length ? (
+                    <>
+                        <HeaderWrapper>
+                            <VerifyOTPHeader>Verify OTP</VerifyOTPHeader>
+                        </HeaderWrapper>
+                        <FormInput
+                            type="text"
+                            value={otp}
+                            onChange={(e) => setOtp(e.currentTarget.value)}
+                            placeholder="Enter OTP"
+                        />
+                        <VerifyOTPButton>{'Verify OTP'}</VerifyOTPButton>
+                    </>
+                ) : (
+                    <>
+                        <ErrorList>
+                            {errors.map((error, i) => (
+                                <li key={i}>&nbsp;{error}</li>
+                            ))}
+                        </ErrorList>
+                        <OkButton onClick={handleOk}>OK</OkButton>
+                    </>
+                )}
             </VerifyOTPForm>
         </div>
     )

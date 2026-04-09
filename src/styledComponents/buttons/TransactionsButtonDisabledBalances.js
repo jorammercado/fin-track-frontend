@@ -1,17 +1,17 @@
 import styled from 'styled-components'
 
-export const TransactionsButtonDisabledBalances = styled.button`  
+export const TransactionsButtonDisabledBalances = styled.button`
     width: 90px;
     height: 38px;
     border-radius: 4px;
     font-size: 12px;
     font-family: 'Roboto-Thin';
     color: white;
-    cursor: default !important; 
+    cursor: default !important;
     margin-left: 1px;
     margin-right: 1px;
     padding: 0px;
-    background-color: #09213A;
+    background-color: #09213a;
     border: 1px solid #07a;
     transition: background-color 0.45s ease-in-out;
 
@@ -29,6 +29,5 @@ export const TransactionsButtonDisabledBalances = styled.button`
         width: 85px;
         font-size: 9px;
         padding-bottom: 0px;
-      
     }
 `

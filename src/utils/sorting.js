@@ -41,8 +41,7 @@ export const handleSortCategory = (
     allTransactions,
     setAllTransactions,
     categoryOrder,
-    setCategoryOrder,
-
+    setCategoryOrder
 ) => {
     event.preventDefault()
     const sortedTransactions = [...allTransactions].sort((a, b) => {
@@ -140,9 +139,7 @@ export const handleSortDate = (
     setDateOrder
 ) => {
     event.preventDefault()
-    if (dateOrder)
-        setAllTransactions([...allTransactionsDateOrder])
-    else
-        setAllTransactions([...allTransactionsDateOrder].reverse())
+    if (dateOrder) setAllTransactions([...allTransactionsDateOrder])
+    else setAllTransactions([...allTransactionsDateOrder].reverse())
     setDateOrder(!dateOrder)
 }

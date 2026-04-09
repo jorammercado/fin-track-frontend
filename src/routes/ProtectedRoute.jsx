@@ -5,18 +5,20 @@ const ProtectedRoute = ({
     currentUser,
     setCurrentUser,
     setToken,
-    handleLogout }) => {
-
+    handleLogout,
+}) => {
     const token = localStorage.getItem('authToken')
 
-    return token ?
+    return token ? (
         <Component
             currentUser={currentUser}
             setCurrentUser={setCurrentUser}
             setToken={setToken}
             handleLogout={handleLogout}
-        /> :
+        />
+    ) : (
         <Navigate to="/login" />
+    )
 }
 
 export default ProtectedRoute

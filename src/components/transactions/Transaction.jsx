@@ -8,23 +8,42 @@ function Transaction({ transaction, index, checking, savings, investment, curren
     const estTime = createdAt.toLocaleTimeString('en-US', options)
     const enhancedTransaction = { ...transaction, index: index + 1 }
     return (
-        <tr className="transactions__container__table__row-values"
-            onClick={() => navigate(`/users/${currentUser.account_id}/profile/transactions/edit`,
-                {
-                    state: { transaction: enhancedTransaction }
-                }
-            )}
+        <tr
+            className="transactions__container__table__row-values"
+            onClick={() =>
+                navigate(`/users/${currentUser.account_id}/profile/transactions/edit`, {
+                    state: { transaction: enhancedTransaction },
+                })
+            }
         >
             <td className="transactions__container__table__row-values__cell">{index + 1}</td>
-            <td className="transactions__container__table__row-values__cell">{transaction.transaction_type}</td>
-            <td className="transactions__container__table__row-values__cell">{transaction.amount}</td>
-            <td className="transactions__container__table__row-values__cell--category">{transaction.category}</td>
-            <td className="transactions__container__table__row-values__cell--description">{transaction.description}</td>
-            <td className="transactions__container__table__row-values__cell">{String(transaction.recurring)}</td>
-            <td className="transactions__container__table__row-values__cell">{transaction.recurring_frequency}</td>
-            <td className="transactions__container__table__row-values__cell">{transaction.risk_level}</td>
-            <td className="transactions__container__table__row-values__cell">{String(transaction.is_planned)}</td>
-            <td className="transactions__container__table__row-values__cell--date">{estDate} <br></br> {estTime} EST</td>
+            <td className="transactions__container__table__row-values__cell">
+                {transaction.transaction_type}
+            </td>
+            <td className="transactions__container__table__row-values__cell">
+                {transaction.amount}
+            </td>
+            <td className="transactions__container__table__row-values__cell--category">
+                {transaction.category}
+            </td>
+            <td className="transactions__container__table__row-values__cell--description">
+                {transaction.description}
+            </td>
+            <td className="transactions__container__table__row-values__cell">
+                {String(transaction.recurring)}
+            </td>
+            <td className="transactions__container__table__row-values__cell">
+                {transaction.recurring_frequency}
+            </td>
+            <td className="transactions__container__table__row-values__cell">
+                {transaction.risk_level}
+            </td>
+            <td className="transactions__container__table__row-values__cell">
+                {String(transaction.is_planned)}
+            </td>
+            <td className="transactions__container__table__row-values__cell--date">
+                {estDate} <br></br> {estTime} EST
+            </td>
             <td className="transactions__container__table__row-values__cell--balances">
                 checking: &nbsp; {checking?.[index + 1]}
                 <br></br>

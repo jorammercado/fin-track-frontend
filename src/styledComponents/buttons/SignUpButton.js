@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const SignUpButton = styled.button`  
+export const SignUpButton = styled.button`
     width: 150px;
     height: 45px;
     background: #07a;
@@ -14,7 +14,7 @@ export const SignUpButton = styled.button`
     transition: background-color 0.45s ease-in-out;
 
     &:hover {
-        background-color: #36B5E133;
+        background-color: #36b5e133;
         border: 1px solid #07a;
     }
 

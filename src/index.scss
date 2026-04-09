@@ -1,28 +1,28 @@
 @font-face {
-	font-family: 'AvenirNextLTPro-Medium';
-	src: url('../src/assets/fonts/AvenirNextLTPro-Medium.otf') format('opentype');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'AvenirNextLTPro-Medium';
+    src: url('../src/assets/fonts/AvenirNextLTPro-Medium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
-	font-family: 'Roboto-Regular';
-	src: url('../src/assets/fonts/Roboto-Regular.ttf') format('truetype');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'Roboto-Regular';
+    src: url('../src/assets/fonts/Roboto-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
-	font-family: 'Roboto-Thin';
-	src: url('../src/assets/fonts/Roboto-Thin.ttf') format('truetype');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'Roboto-Thin';
+    src: url('../src/assets/fonts/Roboto-Thin.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 body {
-	font-family: 'Roboto-Regular', 'AvenirNextLTPro-Medium', Helvetica, sans-serif;
-	background-color: #f0f5f8;
-	color: #252525;
+    font-family: 'Roboto-Regular', 'AvenirNextLTPro-Medium', Helvetica, sans-serif;
+    background-color: #f0f5f8;
+    color: #252525;
 }
 
 .error:after,
@@ -39,37 +39,37 @@ body {
 .stocks-wrapper:after,
 .form-add-transaction:after,
 .construction:after {
-	animation: overlay-hide 0.35s ease-in forwards;
-	background: #ffffff;
-	content: '';
-	display: block;
-	height: 100%;
-	left: 0;
-	opacity: 0;
-	position: fixed;
-	top: 0;
-	width: 100%;
-	z-index: -1;
+    animation: overlay-hide 0.35s ease-in forwards;
+    background: #ffffff;
+    content: '';
+    display: block;
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: -1;
 }
 
 @keyframes overlay-hide {
-	0% {
-		opacity: 1;
-		z-index: 100000;
-	}
+    0% {
+        opacity: 1;
+        z-index: 100000;
+    }
 
-	15% {
-		opacity: 1;
-		z-index: 100000;
-	}
+    15% {
+        opacity: 1;
+        z-index: 100000;
+    }
 
-	99% {
-		opacity: 0;
-		z-index: 100000;
-	}
+    99% {
+        opacity: 0;
+        z-index: 100000;
+    }
 
-	100% {
-		opacity: 0;
-		z-index: -1;
-	}
+    100% {
+        opacity: 0;
+        z-index: -1;
+    }
 }

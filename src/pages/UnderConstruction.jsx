@@ -11,7 +11,10 @@ const UnderConstruction = () => {
                 <img src={cone} />
                 <p className="error__message fs-4 text-secondary">Page Under Construction.</p>
                 <div className="error__button">
-                    <Link to="/" replace> <FourOFourButton>Go Back Home</FourOFourButton></Link>
+                    <Link to="/" replace>
+                        {' '}
+                        <FourOFourButton>Go Back Home</FourOFourButton>
+                    </Link>
                 </div>
             </div>
         </div>

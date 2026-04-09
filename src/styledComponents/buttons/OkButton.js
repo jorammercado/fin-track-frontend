@@ -9,12 +9,12 @@ export const OkButton = styled.button`
     border-radius: 5px;
     font-size: 15px;
     line-height: 23px;
-    color: #FFFFFF;
+    color: #ffffff;
     cursor: pointer;
     transition: background-color 0.45s ease-in-out;
 
     &:hover {
-        background-color: #36B5E133;
+        background-color: #36b5e133;
         border: 1px solid #07a;
     }
 
@@ -22,7 +22,7 @@ export const OkButton = styled.button`
         margin-bottom: -25px;
     }
 
-    @media  (max-width: 360px) {
+    @media (max-width: 360px) {
         width: 225px;
     }
 

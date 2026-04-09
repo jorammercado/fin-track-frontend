@@ -22,7 +22,6 @@
             @media (max-width: 300px) {
                 font-size: 20px;
             }
-
         }
     }
 
@@ -54,13 +53,13 @@
         }
 
         &__table {
-            background-color: #09213A;
+            background-color: #09213a;
             width: 100%;
             table-layout: auto;
             overflow-x: auto;
 
             td {
-                background-color: #09213A !important;
+                background-color: #09213a !important;
             }
 
             &__headers {

@@ -1,6 +1,1 @@
-export const riskLevels = [
-    'n/a',
-    'low',
-    'moderate',
-    'high'
-]
+export const riskLevels = ['n/a', 'low', 'moderate', 'high']
