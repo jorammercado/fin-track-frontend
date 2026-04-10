@@ -28,7 +28,7 @@ import NavBar from './layout/NavBar'
 import Footer from './layout/Footer'
 
 import { handleLogin as loginHandler, handleLogout as logoutHandler } from './utils/auth'
-
+import 'sweetalert2/dist/sweetalert2.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import './App.scss'
