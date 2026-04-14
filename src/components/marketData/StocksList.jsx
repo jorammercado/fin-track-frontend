@@ -9,7 +9,7 @@ import { tickers } from '../../data/tickers'
 import { tickersMax20 } from '../../data/tickersMax20'
 import './StocksList.scss'
 
-const API = import.meta.env.VITE_EODHD_API_TOKEN
+const API = import.meta.env.VITE_POLYGON_API_KEY
 
 const StocksList = () => {
     const [stocksData, setStocksData] = useState(null)
@@ -20,13 +20,13 @@ const StocksList = () => {
             try {
                 if (!stocksData) {
                     const response = await fetch(
-                        `https://eodhd.com/api/real-time/AAPL?s=MDIV,DVQQ&api_token=${API}&fmt=json`
+                        `https://api.massive.com/v2/snapshot/locale/us/markets/stocks/tickers?apiKey=${API}`
                     )
                     if (!response.ok) {
                         throw new Error(`HTTP error! Status: ${response.status}`)
                     }
                     const data = await response.json()
-                    setStocksData(data)
+                    setStocksData(data.tickers)
                 }
             } catch (error) {
                 console.error('Error fetching stock data:', error)
@@ -84,7 +84,6 @@ const StocksList = () => {
                                                 {sortOrder === 'asc' ? '\u2191' : '\u2193'}
                                             </SortStocksButton>
                                         </td>
-                                        <td>Timestamp</td>
                                         <td>Change</td>
                                         <td>Change %</td>
                                         <td>Open </td>
@@ -92,10 +91,16 @@ const StocksList = () => {
                                         <td>Low </td>
                                         <td>Close </td>
                                         <td>Volume </td>
-                                        <td>Previous Close </td>
+                                        <td>VWAP </td>
+                                        <td>Open </td>
+                                        <td>High </td>
+                                        <td>Low </td>
+                                        <td>Close </td>
+                                        <td>Volume </td>
+                                        <td>VWAP </td>
                                     </tr>
                                     {currentTableData?.map((stock) => (
-                                        <Stock key={stock.code} stock={stock} />
+                                        <Stock key={stock.ticker} stock={stock} />
                                     ))}
                                 </tbody>
                             </table>
